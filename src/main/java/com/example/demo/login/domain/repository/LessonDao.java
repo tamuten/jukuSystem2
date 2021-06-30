@@ -27,4 +27,8 @@ public class LessonDao {
 	public List<Lesson> selectMany() {
 		return mapper.selectMany();
 	}
+
+	public Lesson selectOne(Integer lessonId) {
+		return mapper.selectOne(lessonId);
+	}
 }

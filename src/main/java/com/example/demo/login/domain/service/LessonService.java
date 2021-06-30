@@ -31,4 +31,9 @@ public class LessonService {
 	public List<Lesson> selectMany() {
 		return lessonDao.selectMany();
 	}
+
+	public Lesson selectOne(String lessonId) {
+
+		return lessonDao.selectOne(Integer.parseInt(lessonId));
+	}
 }

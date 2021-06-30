@@ -10,7 +10,8 @@ import com.example.demo.login.domain.model.Lesson;
 public interface LessonMapper {
 	public boolean insert(Lesson lesson);
 
-	public Lesson selectOne(String id);
+	public Lesson selectOne(Integer id);
 
 	public List<Lesson> selectMany();
+
 }

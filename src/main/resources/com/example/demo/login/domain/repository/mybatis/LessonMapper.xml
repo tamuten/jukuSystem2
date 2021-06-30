@@ -38,4 +38,16 @@ INSERT
 			FROM
 				lesson
 		</select>
+		<select id="selectOne" parameterType="int"
+		resultType="com.example.demo.login.domain.model.Lesson">
+		SELECT
+				id
+				,name
+				,alias
+				,time
+		FROM
+			lesson
+		WHERE
+			id = #{ lessonId }
+	</select>
 		</mapper>
