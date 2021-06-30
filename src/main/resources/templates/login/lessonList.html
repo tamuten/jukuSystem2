@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"></meta>
+</head>
+<body>
+    <!-- ポイント：th:fragment -->
+    <div th:fragment="lessonList_contents">
+        <div class="page-header">
+            <h1>授業一覧</h1>
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+			<tr>
+				<th class="info col-sm-2">授業ID</th>
+				<th class="info col-sm-2">授業名</th>
+				<th class="info col-sm-2">別名</th>
+				<th class="info col-sm-2">時間</th>
+				<th class="info col-sm-2"></th>
+			</tr>
+			<tr th:each="lesson : ${lessonList}">
+				<td th:text="${lesson.id}"></td>
+				<td th:text="${lesson.name}"></td>
+				<td th:text="${lesson.alias}"></td>
+				<td th:text="${lesson.time}"></td>
+				<td>
+					<a class="btn btn-primary"
+					th:href="@{'/lessonDetail/' + ${lesson.id}}">詳細</a>
+				</td>
+			</tr>
+		</table>
+    </div>
+</body>
+</html>

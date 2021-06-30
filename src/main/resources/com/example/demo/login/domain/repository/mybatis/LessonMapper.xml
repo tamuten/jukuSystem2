@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- <mapper> -->
+<mapper namespace="com.example.demo.login.domain.repository.mybatis.LessonMapper">
+	<resultMap type="com.example.demo.login.domain.model.Lesson"
+		id="lesson">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="alias" property="alias" />
+		<result column="time" property="time" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.example.demo.login.domain.model.Lesson">
+INSERT
+    INTO
+        lesson(
+            id
+            ,name
+            ,alias
+            ,time
+        )
+    VALUES
+        (
+            #{ id }
+            ,#{ name }
+            ,#{ alias }
+            ,#{ time }
+        )
+		</insert>
+		<select id="selectMany" resultMap="lesson">
+			SELECT
+				id
+				,name
+				,alias
+				,time
+			FROM
+				lesson
+		</select>
+		</mapper>
