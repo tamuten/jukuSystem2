@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Lesson {
-	private Integer id;
+	private String id;
 	private String name;
 	private String alias;
 	private Integer time;

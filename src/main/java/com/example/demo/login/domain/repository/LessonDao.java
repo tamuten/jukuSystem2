@@ -28,7 +28,7 @@ public class LessonDao {
 		return mapper.selectMany();
 	}
 
-	public Lesson selectOne(Integer lessonId) {
+	public Lesson selectOne(String lessonId) {
 		return mapper.selectOne(lessonId);
 	}
 }

@@ -10,8 +10,12 @@ import com.example.demo.login.domain.model.Lesson;
 public interface LessonMapper {
 	public boolean insert(Lesson lesson);
 
-	public Lesson selectOne(Integer id);
+	public Lesson selectOne(String id);
 
 	public List<Lesson> selectMany();
+
+	public void updateOne(String lessonId);
+
+	public void deleteOne(String lessonId);
 
 }

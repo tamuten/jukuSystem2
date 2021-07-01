@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<!-- <mapper> -->
-<mapper namespace="com.example.demo.login.domain.repository.mybatis.LessonMapper">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.LessonMapper">
 	<resultMap type="com.example.demo.login.domain.model.Lesson"
 		id="lesson">
 		<id column="id" property="id" />
@@ -13,41 +14,56 @@
 
 	<insert id="insert"
 		parameterType="com.example.demo.login.domain.model.Lesson">
-INSERT
-    INTO
-        lesson(
-            id
-            ,name
-            ,alias
-            ,time
-        )
-    VALUES
-        (
-            #{ id }
-            ,#{ name }
-            ,#{ alias }
-            ,#{ time }
-        )
-		</insert>
-		<select id="selectMany" resultMap="lesson">
-			SELECT
-				id
-				,name
-				,alias
-				,time
-			FROM
-				lesson
-		</select>
-		<select id="selectOne" parameterType="int"
+		INSERT
+		INTO
+		lesson(
+		id
+		,name
+		,alias
+		,time
+		)
+		VALUES
+		(
+		#{ id }
+		,#{ name }
+		,#{ alias }
+		,#{ time }
+		)
+	</insert>
+	<select id="selectMany" resultMap="lesson">
+		SELECT
+		id
+		,name
+		,alias
+		,time
+		FROM
+		lesson
+	</select>
+	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Lesson">
 		SELECT
-				id
-				,name
-				,alias
-				,time
+		id
+		,name
+		,alias
+		,time
 		FROM
-			lesson
+		lesson
 		WHERE
-			id = #{ lessonId }
+		id = #{ lessonId }
 	</select>
-		</mapper>
+	<update id="updateOne"
+		parameterType="com.example.demo.login.domain.model.Lesson">
+		UPDATE
+		lesson
+		SET
+		name = #{ name }
+		,alias = #{ alias }
+		,time =#{ time }
+		WHERE
+		id =#{ lessonId }
+	</update>
+	<delete id="deleteOne"
+		parameterType="com.example.demo.login.domain.model.Lesson">
+		DELETE FROM lesson WHERE id =#{ lessonId }
+	</delete>
+</mapper>

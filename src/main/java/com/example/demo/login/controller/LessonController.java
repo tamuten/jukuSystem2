@@ -21,15 +21,32 @@ public class LessonController {
 	@Autowired
 	private LessonService service;
 
-	@GetMapping("/lesson")
-	public String index(@ModelAttribute LessonForm form) {
-		return "lesson";
+	/**
+	 *	授業新規登録画面を表示
+	 *
+	 * @param form
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/lessonDetail/new")
+	public String index(@ModelAttribute LessonForm form, Model model) {
+		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+		return "login/homeLayout";
 	}
 
+	/**
+	 * 授業登録処理
+	 *
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/lesson/register")
 	public String register(@ModelAttribute @Validated LessonForm form, BindingResult result, Model model) {
+		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
 		if (result.hasErrors()) {
-			return "lesson";
+			return "login/homeLayout";
 		}
 		Lesson lesson = new Lesson();
 		BeanUtils.copyProperties(form, lesson);
@@ -38,7 +55,7 @@ public class LessonController {
 
 		BeanUtils.copyProperties(lesson, form);
 		model.addAttribute("message", "登録が完了しました。");
-		return "lesson";
+		return "login/homeLayout";
 	}
 
 	//	@GetMapping("/lesson/list")
@@ -62,11 +79,8 @@ public class LessonController {
 		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
 
 		if (StringUtils.isNotEmpty(lessonId)) {
-			//			User user = userService.selectOne(userId);
 			Lesson lesson = service.selectOne(lessonId);
-
 			BeanUtils.copyProperties(lesson, form);
-
 			model.addAttribute("signupForm", form);
 		}
 

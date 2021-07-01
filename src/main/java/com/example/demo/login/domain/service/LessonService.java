@@ -19,9 +19,10 @@ public class LessonService {
 	@Autowired
 	private SequenceDao sequenceDao;
 
-	public int getNextId() {
+	public String getNextId() {
 		int nextId = sequenceDao.getSequence(Sequence.LESSON);
-		return nextId;
+		// ゼロ埋めして返却する
+		return String.format("%08d", nextId);
 	}
 
 	public void insertOne(Lesson lesson) {
@@ -34,6 +35,6 @@ public class LessonService {
 
 	public Lesson selectOne(String lessonId) {
 
-		return lessonDao.selectOne(Integer.parseInt(lessonId));
+		return lessonDao.selectOne(lessonId);
 	}
 }
