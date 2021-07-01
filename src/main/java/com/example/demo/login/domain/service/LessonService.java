@@ -21,7 +21,7 @@ public class LessonService {
 
 	public String getNextId() {
 		int nextId = sequenceDao.getSequence(Sequence.LESSON);
-		// ゼロ埋めして返却する
+		// 8桁ゼロ埋めして返却
 		return String.format("%08d", nextId);
 	}
 
