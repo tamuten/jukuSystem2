@@ -84,13 +84,13 @@
 						</tr> -->
 					</table>
 					<!-- 登録 -->
-					<button class="btn btn-primary btn-lg pull-right" type="submit"
+					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right" type="submit"
 						name="register">登録</button>
 					<!-- 更新 -->
-					<button class="btn btn-primary btn-lg pull-right" id="updateBtn" type="button"
+					<button th:unless="${isNew}" class="btn btn-primary btn-lg pull-right" id="updateBtn" type="button"
 						name="update">更新</button>
 					<!-- 削除 -->
-					<button class="btn btn-danger btn-lg" type="button" name="delete">削除</button>
+					<button th:unless="${isNew}" class="btn btn-danger btn-lg" type="button" name="delete">削除</button>
 				</form>
 			</div>
 		</div>

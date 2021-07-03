@@ -31,6 +31,7 @@ public class LessonController {
 	@GetMapping("/lessonDetail/new")
 	public String index(@ModelAttribute LessonForm form, Model model) {
 		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+		model.addAttribute("isNew", true);
 		return "login/homeLayout";
 	}
 
@@ -46,6 +47,7 @@ public class LessonController {
 	public String register(@ModelAttribute @Validated LessonForm form, BindingResult result, Model model) {
 		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
 		if (result.hasErrors()) {
+			model.addAttribute("isNew", true);
 			return "login/homeLayout";
 		}
 		Lesson lesson = new Lesson();
@@ -54,6 +56,7 @@ public class LessonController {
 		service.insertOne(lesson);
 
 		BeanUtils.copyProperties(lesson, form);
+		model.addAttribute("isNew", false);
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
 	}
@@ -77,6 +80,7 @@ public class LessonController {
 	public String getUserDetail(@ModelAttribute LessonForm form, Model model, @PathVariable("id") String lessonId) {
 		System.out.println("lessonId = " + lessonId);
 		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+		model.addAttribute("isNew", false);
 
 		if (StringUtils.isNotEmpty(lessonId)) {
 			Lesson lesson = service.selectOne(lessonId);
