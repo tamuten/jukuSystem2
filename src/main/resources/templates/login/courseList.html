@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<!-- ポイント：th:fragment -->
+	<div th:fragment="courseList_contents">
+		<div class="page-header">
+			<h1>コース一覧</h1>
+		</div>
+		<button class="btn btn-primary pull-right"
+			th:href="@{'/courseDetail/new'}">新規登録</button>
+		<div class="list">
+			<table class="table table-bordered table-hover table-striped">
+				<tr>
+					<th class="info col-sm-1">コースID</th>
+					<th class="info col-sm-2">コース名</th>
+					<th class="info col-sm-1">別名</th>
+					<th class="info col-sm-1">月謝</th>
+					<th class="info col-sm-1">授業１</th>
+					<th class="info col-sm-1">授業２</th>
+					<th class="info col-sm-1">授業３</th>
+					<th class="info col-sm-1">授業４</th>
+					<th class="info col-sm-1"></th>
+				</tr>
+				<tr th:each="course : ${courseList}">
+					<td th:text="${course.id}"></td>
+					<td th:text="${course.name}"></td>
+					<td th:text="${course.alias}"></td>
+					<td th:text="${course.fee}"></td>
+					<td th:text="${course.lesson1}"></td>
+					<td th:text="${course.lesson2}"></td>
+					<td th:text="${course.lesson3}"></td>
+					<td th:text="${course.lesson4}"></td>
+					<td><a class="btn btn-primary"
+						th:href="@{'/courseDetail/' + ${course.id}}">詳細</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

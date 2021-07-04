@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Lesson;
+import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.LessonService;
 
 @Controller
@@ -16,6 +18,8 @@ public class HomeController {
 
 	@Autowired
 	LessonService lessonService;
+	@Autowired
+	CourseService courseService;
 
 	//ユーザー一覧画面のGET用メソッド.
 	@GetMapping("/home")
@@ -48,6 +52,16 @@ public class HomeController {
 		//授業一覧の取得
 		List<Lesson> lessonList = lessonService.selectMany();
 		model.addAttribute("lessonList", lessonList);
+
+		return "login/homeLayout";
+	}
+
+	@GetMapping("/courseList")
+	public String getCourseList(Model model) {
+		model.addAttribute("contents", "login/courseList :: courseList_contents");
+
+		List<Course> courseList = courseService.selectMany();
+		model.addAttribute("courseList", courseList);
 
 		return "login/homeLayout";
 	}

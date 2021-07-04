@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.login.controller.form.LessonForm;
-import com.example.demo.login.domain.model.Lesson;
-import com.example.demo.login.domain.service.LessonService;
+import com.example.demo.login.controller.form.CourseForm;
+import com.example.demo.login.domain.model.Course;
+import com.example.demo.login.domain.service.CourseService;
 
 @Controller
-public class LessonController {
+public class CourseController {
 	@Autowired
-	private LessonService service;
+	private CourseService service;
 
 	/**
 	 *	授業新規登録画面を表示
@@ -28,9 +28,9 @@ public class LessonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/lessonDetail/new")
-	public String index(@ModelAttribute LessonForm form, Model model) {
-		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+	@GetMapping("/courseDetail/new")
+	public String index(@ModelAttribute CourseForm form, Model model) {
+		model.addAttribute("contents", "login/courseDetail :: courseDetail_contents");
 		model.addAttribute("isNew", true);
 		return "login/homeLayout";
 	}
@@ -43,19 +43,19 @@ public class LessonController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/lesson/register")
-	public String register(@ModelAttribute @Validated LessonForm form, BindingResult result, Model model) {
-		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+	@PostMapping("/course/register")
+	public String register(@ModelAttribute @Validated CourseForm form, BindingResult result, Model model) {
+		model.addAttribute("contents", "login/courseDetail :: courseDetail_contents");
 		if (result.hasErrors()) {
 			model.addAttribute("isNew", true);
 			return "login/homeLayout";
 		}
-		Lesson lesson = new Lesson();
-		BeanUtils.copyProperties(form, lesson);
-		lesson.setId(service.getNextId());
-		service.insertOne(lesson);
+		Course course = new Course();
+		BeanUtils.copyProperties(form, course);
+		course.setId(service.getNextId());
+		service.insertOne(course);
 
-		BeanUtils.copyProperties(lesson, form);
+		BeanUtils.copyProperties(course, form);
 		model.addAttribute("isNew", false);
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
@@ -66,22 +66,21 @@ public class LessonController {
 	 *
 	 * @param form
 	 * @param model
-	 * @param lessonId
+	 * @param id
 	 * @return
 	 */
-	@GetMapping("/lessonDetail/{id:.+}")
-	public String getUserDetail(@ModelAttribute LessonForm form, Model model, @PathVariable("id") String lessonId) {
-		System.out.println("lessonId = " + lessonId);
-		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+	@GetMapping("/courseDetail/{id:.+}")
+	public String getUserDetail(@ModelAttribute CourseForm form, Model model, @PathVariable("id") String id) {
+		System.out.println("courseId = " + id);
+		model.addAttribute("contents", "login/courseDetail :: courseDetail_contents");
 		model.addAttribute("isNew", false);
 
-		if (StringUtils.isNotEmpty(lessonId)) {
-			Lesson lesson = service.selectOne(lessonId);
-			BeanUtils.copyProperties(lesson, form);
+		if (StringUtils.isNotEmpty(id)) {
+			Course course = service.selectOne(id);
+			BeanUtils.copyProperties(course, form);
 			model.addAttribute("signupForm", form);
 		}
 
 		return "login/homeLayout";
 	}
-
 }

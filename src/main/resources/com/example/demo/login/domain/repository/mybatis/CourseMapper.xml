@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.CourseMapper">
+	<resultMap type="com.example.demo.login.domain.model.Course"
+		id="course">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="alias" property="alias" />
+		<result column="fee" property="fee" />
+		<result column="lesson1" property="lesson1" />
+		<result column="lesson2" property="lesson2" />
+		<result column="lesson3" property="lesson3" />
+		<result column="lesson4" property="lesson4" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.example.demo.login.domain.model.Course">
+		INSERT
+		INTO
+		course(
+		id
+		,name
+		,alias
+		,fee
+		,lesson1
+		,lesson2
+		,lesson3
+		,lesson4
+		)
+		VALUES
+		(
+		#{ id }
+		,#{ name }
+		,#{ alias }
+		,#{ fee }
+		,#{ lesson1 }
+		,#{ lesson2 }
+		,#{ lesson3 }
+		,#{ lesson4 }
+		)
+	</insert>
+	<select id="selectMany" resultMap="course">
+		SELECT
+		id
+		,name
+		,alias
+		,fee
+		,lesson1
+		,lesson2
+		,lesson3
+		,lesson4
+		FROM
+		course
+	</select>
+	<select id="selectOne" parameterType="string"
+		resultType="com.example.demo.login.domain.model.Course">
+		SELECT
+		id
+		,name
+		,alias
+		,fee
+		,lesson1
+		,lesson2
+		,lesson3
+		,lesson4
+		FROM
+		course
+		WHERE
+		id = #{ id }
+	</select>
+	<update id="updateOne"
+		parameterType="com.example.demo.login.domain.model.Course">
+		UPDATE
+		course
+		SET
+		name = #{ name }
+		,alias = #{ alias }
+		,fee =#{ fee }
+		,lesson1 =#{ lesson1 }
+		,lesson2 =#{ lesson2 }
+		,lesson3 =#{ lesson3 }
+		,lesson4 =#{ lesson4 }
+		WHERE
+		id =#{ id }
+	</update>
+	<delete id="deleteOne"
+		parameterType="com.example.demo.login.domain.model.Course">
+		DELETE FROM course WHERE id =#{ id }
+	</delete>
+</mapper>
