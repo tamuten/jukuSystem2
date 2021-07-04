@@ -38,6 +38,8 @@
 		,time
 		FROM
 		lesson
+		ORDER BY
+		id ASC
 	</select>
 	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Lesson">
@@ -60,10 +62,10 @@
 		,alias = #{ alias }
 		,time =#{ time }
 		WHERE
-		id =#{ lessonId }
+		id =#{ id }
 	</update>
 	<delete id="deleteOne"
 		parameterType="com.example.demo.login.domain.model.Lesson">
-		DELETE FROM lesson WHERE id =#{ lessonId }
+		DELETE FROM lesson WHERE id =#{ id }
 	</delete>
 </mapper>

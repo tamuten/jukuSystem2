@@ -1,6 +1,10 @@
 package com.example.demo.login.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.CourseForm;
 import com.example.demo.login.domain.model.Course;
+import com.example.demo.login.domain.model.Lesson;
 import com.example.demo.login.domain.service.CourseService;
+import com.example.demo.login.domain.service.LessonService;
 
 @Controller
 public class CourseController {
+	final static Logger logger = LoggerFactory.getLogger(CourseController.class);
+
 	@Autowired
 	private CourseService service;
+	@Autowired
+	private LessonService lessonService;
 
 	/**
 	 *	授業新規登録画面を表示
@@ -30,8 +40,11 @@ public class CourseController {
 	 */
 	@GetMapping("/courseDetail/new")
 	public String index(@ModelAttribute CourseForm form, Model model) {
+		logger.debug("Course + signup");
 		model.addAttribute("contents", "login/courseDetail :: courseDetail_contents");
 		model.addAttribute("isNew", true);
+		List<Lesson> lesson = lessonService.selectMany();
+		model.addAttribute("lesson", lesson);
 		return "login/homeLayout";
 	}
 
@@ -62,7 +75,7 @@ public class CourseController {
 	}
 
 	/**
-	 * 授業詳細画面を表示
+	 * コース詳細画面を表示
 	 *
 	 * @param form
 	 * @param model
@@ -71,7 +84,8 @@ public class CourseController {
 	 */
 	@GetMapping("/courseDetail/{id:.+}")
 	public String getUserDetail(@ModelAttribute CourseForm form, Model model, @PathVariable("id") String id) {
-		System.out.println("courseId = " + id);
+		logger.debug("Course + detail");
+		logger.debug("courseId = " + id);
 		model.addAttribute("contents", "login/courseDetail :: courseDetail_contents");
 		model.addAttribute("isNew", false);
 
@@ -80,6 +94,8 @@ public class CourseController {
 			BeanUtils.copyProperties(course, form);
 			model.addAttribute("signupForm", form);
 		}
+		List<Lesson> lesson = lessonService.selectMany();
+		model.addAttribute("lesson", lesson);
 
 		return "login/homeLayout";
 	}

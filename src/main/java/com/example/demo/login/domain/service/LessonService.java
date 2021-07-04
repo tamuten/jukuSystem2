@@ -37,4 +37,12 @@ public class LessonService {
 
 		return lessonDao.selectOne(lessonId);
 	}
+
+	public void updateOne(Lesson lesson) {
+		lessonDao.updateOne(lesson);
+	}
+
+	public void deleteOne(String id) {
+		lessonDao.deleteOne(id);
+	}
 }

@@ -31,4 +31,12 @@ public class LessonDao {
 	public Lesson selectOne(String lessonId) {
 		return mapper.selectOne(lessonId);
 	}
+
+	public void updateOne(Lesson lesson) {
+		mapper.updateOne(lesson);
+	}
+
+	public void deleteOne(String id) {
+		mapper.deleteOne(id);
+	}
 }

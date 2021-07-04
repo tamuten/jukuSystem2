@@ -54,6 +54,8 @@
 		,lesson4
 		FROM
 		course
+		ORDER BY
+		id ASC
 	</select>
 	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Course">

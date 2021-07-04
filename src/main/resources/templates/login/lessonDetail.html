@@ -84,16 +84,38 @@
 						</tr> -->
 					</table>
 					<!-- 登録 -->
-					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right" type="submit"
-						name="register">登録</button>
+					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
+						type="submit" name="register">登録</button>
 					<!-- 更新 -->
-					<button th:unless="${isNew}" class="btn btn-primary btn-lg pull-right" id="updateBtn" type="button"
-						name="update">更新</button>
+					<button th:unless="${isNew}"
+						class="btn btn-primary btn-lg pull-right" id="updateBtn"
+						type="button" name="update">更新</button>
 					<!-- 削除 -->
-					<button th:unless="${isNew}" class="btn btn-danger btn-lg" type="button" name="delete">削除</button>
+					<button th:unless="${isNew}" class="btn btn-danger btn-lg"
+						id="deleteBtn" type="button" name="delete">削除</button>
 				</form>
 			</div>
 		</div>
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			$(function() {
+				$("#updateBtn").on('click', function() {
+					if (confirm('更新してよろしいですか？')) {
+						$('form').attr('action', '/lesson/update');
+						$('form').submit();
+					}
+				});
+
+				$('#deleteBtn').on('click', function(){
+					if(confirm('削除してよろしいですか？')){
+						$('form').attr('action', '/lesson/delete');
+						$('form').submit();
+					}
+				});
+			})
+			/*]]>*/
+		</script>
 	</div>
 </body>
+
 </html>

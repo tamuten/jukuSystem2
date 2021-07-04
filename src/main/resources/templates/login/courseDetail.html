@@ -48,12 +48,12 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active">月謝</th>
+							<th class="active">月額学費（税込）</th>
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('fee')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{fee}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('fee')}"
+									<input type="text" class="form-control" th:field="*{fee}" /> <span
+										class="text-danger" th:if="${#fields.hasErrors('fee')}"
 										th:errors="*{fee}"> fee error </span>
 								</div>
 							</td>
@@ -63,9 +63,14 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('lesson1')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{lesson1}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('lesson1')}"
-										th:errors="*{lesson1}"> lesson1 error </span>
+									<select class="form-control">
+										<option value="">---</option>
+										<option th:each="item : ${lesson}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{lesson1}">pulldown</option>
+									</select> <!-- <input type="text" class="form-control" th:field="*{lesson1}" /> -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('lesson1')}" th:errors="*{lesson1}">
+										lesson1 error </span>
 								</div>
 							</td>
 						</tr>
@@ -74,9 +79,15 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('lesson2')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{lesson2}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('lesson2')}"
-										th:errors="*{lesson2}"> lesson2 error </span>
+									<select class="form-control">
+										<option value="">---</option>
+										<option th:each="item : ${lesson}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{lesson2}">pulldown</option>
+									</select>
+									<!-- <input type="text" class="form-control" th:field="*{lesson2}" /> -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('lesson2')}" th:errors="*{lesson2}">
+										lesson2 error </span>
 								</div>
 							</td>
 						</tr>
@@ -85,9 +96,15 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('lesson3')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{lesson3}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('lesson3')}"
-										th:errors="*{lesson3}"> lesson3 error </span>
+									<select class="form-control">
+										<option value="">---</option>
+										<option th:each="item : ${lesson}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{lesson3}">pulldown</option>
+									</select>
+									<!-- <input type="text" class="form-control" th:field="*{lesson3}" /> -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('lesson3')}" th:errors="*{lesson3}">
+										lesson3 error </span>
 								</div>
 							</td>
 						</tr>
@@ -96,21 +113,29 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('lesson4')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{lesson4}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('lesson4')}"
-										th:errors="*{lesson4}"> lesson4 error </span>
+									<select class="form-control">
+										<option value="">---</option>
+										<option th:each="item : ${lesson}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{lesson4}">pulldown</option>
+									</select>
+									<!-- <input type="text" class="form-control" th:field="*{lesson4}" /> -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('lesson4')}" th:errors="*{lesson4}">
+										lesson4 error </span>
 								</div>
 							</td>
 						</tr>
 					</table>
 					<!-- 登録 -->
-					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right" type="submit"
-						name="register">登録</button>
+					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
+						type="submit" name="register">登録</button>
 					<!-- 更新 -->
-					<button th:unless="${isNew}" class="btn btn-primary btn-lg pull-right" id="updateBtn" type="button"
-						name="update">更新</button>
+					<button th:unless="${isNew}"
+						class="btn btn-primary btn-lg pull-right" id="updateBtn"
+						type="button" name="update">更新</button>
 					<!-- 削除 -->
-					<button th:unless="${isNew}" class="btn btn-danger btn-lg" type="button" name="delete">削除</button>
+					<button th:unless="${isNew}" class="btn btn-danger btn-lg"
+						type="button" name="delete">削除</button>
 				</form>
 			</div>
 		</div>

@@ -84,4 +84,30 @@ public class LessonController {
 		return "login/homeLayout";
 	}
 
+	@PostMapping("/lesson/update")
+	public String updateOne(@ModelAttribute @Validated LessonForm form, BindingResult result, Model model) {
+		model.addAttribute("contents", "login/lessonDetail :: lessonDetail_contents");
+		model.addAttribute("isNew", false);
+		if (result.hasErrors()) {
+			return "login/homeLayout";
+		}
+		Lesson lesson = new Lesson();
+		BeanUtils.copyProperties(form, lesson);
+		service.updateOne(lesson);
+
+		BeanUtils.copyProperties(lesson, form);
+		model.addAttribute("message", "更新が完了しました。");
+		return "login/homeLayout";
+	}
+
+	@PostMapping("/lesson/delete")
+	public String deleteOne(@ModelAttribute LessonForm form, Model model) {
+		model.addAttribute("contents", "login/lessonList :: lessonList_contents");
+		String id = form.getId();
+		service.deleteOne(id);
+
+		model.addAttribute("message", "削除が完了しました。");
+		return "login/homeLayout";
+	}
+
 }

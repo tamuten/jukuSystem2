@@ -14,7 +14,7 @@ public interface LessonMapper {
 
 	public List<Lesson> selectMany();
 
-	public void updateOne(String lessonId);
+	public void updateOne(Lesson lesson);
 
 	public void deleteOne(String lessonId);
 
