@@ -73,13 +73,13 @@ public class HomeController {
 	}
 
 	// 生徒一覧の表示
-	@GetMapping("/studentList")
-	public String getStudentList(Model model) {
-		model.addAttribute("contents", "login/studentList :: studentList_contents");
-
-		// 生徒情報取得
-		// モデルに登録
-
-		return "login/homeLayout";
-	}
+	//	@GetMapping("/studentList")
+	//	public String getStudentList(Model model) {
+	//		model.addAttribute("contents", "login/studentList :: studentList_contents");
+	//
+	//		// 生徒情報取得
+	//		// モデルに登録
+	//
+	//		return "login/homeLayout";
+	//	}
 }
