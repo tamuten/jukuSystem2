@@ -56,12 +56,29 @@ public class HomeController {
 		return "login/homeLayout";
 	}
 
+	/**
+	 * コース一覧の表示
+	 *
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/courseList")
 	public String getCourseList(Model model) {
 		model.addAttribute("contents", "login/courseList :: courseList_contents");
 
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
+
+		return "login/homeLayout";
+	}
+
+	// 生徒一覧の表示
+	@GetMapping("/studentList")
+	public String getStudentList(Model model) {
+		model.addAttribute("contents", "login/studentList :: studentList_contents");
+
+		// 生徒情報取得
+		// モデルに登録
 
 		return "login/homeLayout";
 	}
