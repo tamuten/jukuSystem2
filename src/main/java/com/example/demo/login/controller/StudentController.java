@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.StudentForm;
 import com.example.demo.login.domain.model.Course;
+import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Student;
+import com.example.demo.login.domain.service.ComboboxService;
 import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.StudentService;
 
@@ -30,6 +32,8 @@ public class StudentController {
 	private CourseService courseService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ComboboxService comboboxService;
 
 	@GetMapping("/studentList")
 	public String index(Model model) {
@@ -54,11 +58,11 @@ public class StudentController {
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
 		model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
+		List<Grade> gradeList = comboboxService.findGrade();
+		model.addAttribute("gradeList", gradeList);
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
-//		model.addAttribute("isNew", true);
-		//		List<Lesson> lesson = lessonService.selectMany();
-		//		model.addAttribute("lesson", lesson);
+
 		return "login/homeLayout";
 	}
 
@@ -72,9 +76,14 @@ public class StudentController {
 	 */
 	@PostMapping("/student/register")
 	public String register(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
+
 		if (result.hasErrors()) {
-//			model.addAttribute("isNew", true);
+			//			model.addAttribute("isNew", true);
+			List<Grade> gradeList = comboboxService.findGrade();
+			model.addAttribute("gradeList", gradeList);
+			List<Course> courseList = courseService.selectMany();
+			model.addAttribute("courseList", courseList);
+			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
 			return "login/homeLayout";
 		}
 		Student student = new Student();
@@ -85,7 +94,13 @@ public class StudentController {
 		studentService.insertOne(student);
 
 		BeanUtils.copyProperties(student, form);
-//		model.addAttribute("isNew", false);
+		//		model.addAttribute("isNew", false);
+
+		List<Grade> gradeList = comboboxService.findGrade();
+		model.addAttribute("gradeList", gradeList);
+		List<Course> courseList = courseService.selectMany();
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
 	}
@@ -103,27 +118,36 @@ public class StudentController {
 		//		logger.debug("Course + detail");
 		//		logger.debug("courseId = " + id);
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-//		model.addAttribute("isNew", false);
+		//		model.addAttribute("isNew", false);
 
 		if (StringUtils.isNotEmpty(id)) {
-			//			Course course = service.selectOne(id);
-			//			BeanUtils.copyProperties(course, form);
-			//			model.addAttribute("signupForm", form);
 			Student student = studentService.selectOne(id);
 			BeanUtils.copyProperties(student, form);
 		}
-		//		List<Lesson> lesson = lessonService.selectMany();
-		//		model.addAttribute("lesson", lesson);
 
+		List<Grade> gradeList = comboboxService.findGrade();
+		model.addAttribute("gradeList", gradeList);
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
 		return "login/homeLayout";
 	}
 
-	@PostMapping( value="/studentDetail", params = "update")
+	/**
+	 * 生徒情報を更新
+	 *
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(value = "/studentDetail", params = "update")
 	public String update(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
+			List<Grade> gradeList = comboboxService.findGrade();
+			model.addAttribute("gradeList", gradeList);
+			List<Course> courseList = courseService.selectMany();
+			model.addAttribute("courseList", courseList);
 			return "login/homeLayout";
 		}
 
@@ -133,11 +157,22 @@ public class StudentController {
 		// update
 		studentService.updateOne(student);
 
+		List<Grade> gradeList = comboboxService.findGrade();
+		model.addAttribute("gradeList", gradeList);
+		List<Course> courseList = courseService.selectMany();
+		model.addAttribute("courseList", courseList);
 		model.addAttribute("message", "更新が完了しました。");
 		return "login/homeLayout";
 	}
 
-	@PostMapping(value="/student", params = "delete")
+	/**
+	 * 生徒情報を削除
+	 *
+	 * @param form
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(value = "/student", params = "delete")
 	public String delete(@ModelAttribute StudentForm form, Model model) {
 		model.addAttribute("contents", "login/studentList :: studentList_contents");
 		// delete

@@ -10,13 +10,13 @@
 		<result column="name" property="name" />
 		<result column="grade" property="grade" />
 		<result column="school" property="school" />
-		<result column="parentsName" property="parentsName" />
-		<result column="phoneNumber" property="phoneNumber" />
-		<result column="mailAddress" property="mailAddress" />
+		<result column="parents_name" property="parentsName" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="mail_address" property="mailAddress" />
 		<result column="address" property="address" />
 		<result column="course" property="course" />
-		<result column="registeredDatetime" property="registeredDatetime" />
-		<result column="updateDatetime" property="updateDatetime" />
+		<result column="registered_datetime" property="registeredDatetime" />
+		<result column="update_datetime" property="updateDatetime" />
 	</resultMap>
 
 	<insert id="insert"
@@ -28,13 +28,13 @@
 		,name
 		,grade
 		,school
-		,parentsName
-		,phoneNumber
-		,mailAddress
+		,parents_name
+		,phone_number
+		,mail_address
 		,address
 		,course
-		,registeredDatetime
-		,updateDatetime
+		,registered_datetime
+		,update_datetime
 		)
 		VALUES
 		(
@@ -76,12 +76,12 @@
 		name = #{ name }
 		,grade = #{ grade }
 		,school = #{ school }
-		,parentsName = #{ parentsName }
-		,phoneNumber = #{ phoneNumber }
-		,mailAddress = #{ mailAddress }
+		,parents_name = #{ parentsName }
+		,phone_number = #{ phoneNumber }
+		,mail_address = #{ mailAddress }
 		,address = #{ address }
 		,course = #{ course }
-		,updateDatetime = CURRENT_TIMESTAMP
+		,update_datetime = CURRENT_TIMESTAMP
 		WHERE
 		id =#{ id }
 	</update>
