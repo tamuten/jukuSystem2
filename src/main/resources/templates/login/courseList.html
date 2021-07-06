@@ -18,7 +18,7 @@
 					<th class="info col-sm-1">コースID</th>
 					<th class="info col-sm-2">コース名</th>
 					<th class="info col-sm-1">別名</th>
-					<th class="info col-sm-1">月額学費（税込）</th>
+					<th class="info col-sm-1">月額学費<span class="zeikomi">（税込）</span></th>
 					<th class="info col-sm-1">授業１</th>
 					<th class="info col-sm-1">授業２</th>
 					<th class="info col-sm-1">授業３</th>
@@ -29,7 +29,7 @@
 					<td th:text="${course.id}"></td>
 					<td th:text="${course.name}"></td>
 					<td th:text="${course.alias}"></td>
-					<td th:text="${course.fee}"></td>
+					<td th:text="${#numbers.formatInteger(course.fee, 1, 'COMMA') + '円'}"></td>
 					<td th:text="${course.lesson1}"></td>
 					<td th:text="${course.lesson2}"></td>
 					<td th:text="${course.lesson3}"></td>

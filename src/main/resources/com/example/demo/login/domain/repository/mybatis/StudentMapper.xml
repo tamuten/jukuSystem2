@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.StudentMapper">
+	<resultMap type="com.example.demo.login.domain.model.Student"
+		id="student">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="grade" property="grade" />
+		<result column="school" property="school" />
+		<result column="parentsName" property="parentsName" />
+		<result column="phoneNumber" property="phoneNumber" />
+		<result column="mailAddress" property="mailAddress" />
+		<result column="address" property="address" />
+		<result column="course" property="course" />
+		<result column="registeredDatetime" property="registeredDatetime" />
+		<result column="updateDatetime" property="updateDatetime" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.example.demo.login.domain.model.Student">
+		INSERT
+		INTO
+		student(
+		id
+		,name
+		,grade
+		,school
+		,parentsName
+		,phoneNumber
+		,mailAddress
+		,address
+		,course
+		,registeredDatetime
+		,updateDatetime
+		)
+		VALUES
+		(
+		#{ id }
+		,#{ name }
+		,#{ grade }
+		,#{ school }
+		,#{ parentsName }
+		,#{ phoneNumber }
+		,#{ mailAddress }
+		,#{ address }
+		,#{ course }
+		,current_timestamp
+		,null
+		)
+	</insert>
+	<select id="findAll" resultMap="student">
+		SELECT
+		*
+		FROM
+		student
+		ORDER BY
+		id ASC
+	</select>
+	<select id="selectOne" parameterType="string"
+		resultType="com.example.demo.login.domain.model.Student">
+		SELECT
+		*
+		FROM
+		student
+		WHERE
+		id = #{ id }
+	</select>
+	<update id="updateOne"
+		parameterType="com.example.demo.login.domain.model.Student">
+		UPDATE
+		student
+		SET
+		name = #{ name }
+		,grade = #{ grade }
+		,school = #{ school }
+		,parentsName = #{ parentsName }
+		,phoneNumber = #{ phoneNumber }
+		,mailAddress = #{ mailAddress }
+		,address = #{ address }
+		,course = #{ course }
+		,updateDatetime = CURRENT_TIMESTAMP
+		WHERE
+		id =#{ id }
+	</update>
+	<delete id="deleteOne"
+		parameterType="com.example.demo.login.domain.model.Student">
+		DELETE FROM student WHERE id =#{ id }
+	</delete>
+</mapper>

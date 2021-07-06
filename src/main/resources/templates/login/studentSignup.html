@@ -3,14 +3,14 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>生徒情報詳細</title>
+<title>生徒情報登録</title>
 </head>
 <body>
 	<div th:fragment="studentSignup_contents">
 		<div class="row">
 			<div class="col-sm-5">
 				<div class="page-header">
-					<h1>生徒情報詳細</h1>
+					<h1>生徒情報登録</h1>
 				</div>
 				<form method="post" th:action="@{/student/register}"
 					th:object="${studentForm}">
@@ -121,7 +121,7 @@
 						</tr>
 					</table>
 					<!-- 登録 -->
-					<button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
+					<button class="btn btn-primary btn-lg pull-right"
 						type="submit" name="register">登録</button>
 					<!-- 					更新
 					<button th:unless="${isNew}"

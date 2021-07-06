@@ -1,5 +1,7 @@
 package com.example.demo.login.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import com.example.demo.login.controller.form.StudentForm;
 import com.example.demo.login.domain.model.Student;
 import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.LessonService;
+import com.example.demo.login.domain.service.StudentService;
 
 @Controller
 public class StudentController {
@@ -27,13 +30,17 @@ public class StudentController {
 	private CourseService service;
 	@Autowired
 	private LessonService lessonService;
+	@Autowired
+	private StudentService studentService;
 
 	@GetMapping("/studentList")
 	public String index(Model model) {
-		model.addAttribute("countents", "login/studentList :: studentList_contents");
+		model.addAttribute("contents", "login/studentList :: studentList_contents");
 
 		// 生徒一覧の取得
+		List<Student> studentList = studentService.findAll();
 		// モデルに登録
+		model.addAttribute("studentList", studentList);
 
 		return "login/homeLayout";
 	}
@@ -45,11 +52,11 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/studentDetail/signup")
+	@GetMapping("/student/signup")
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
 		model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
-		model.addAttribute("isNew", true);
+//		model.addAttribute("isNew", true);
 		//		List<Lesson> lesson = lessonService.selectMany();
 		//		model.addAttribute("lesson", lesson);
 		return "login/homeLayout";
@@ -67,16 +74,18 @@ public class StudentController {
 	public String register(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		if (result.hasErrors()) {
-			model.addAttribute("isNew", true);
+//			model.addAttribute("isNew", true);
 			return "login/homeLayout";
 		}
-		Student course = new Student();
-		BeanUtils.copyProperties(form, course);
+		Student student = new Student();
+		BeanUtils.copyProperties(form, student);
 		//		course.setId(service.getNextId());
+		student.setId(studentService.getNextId());
 		//		service.insertOne(course);
+		studentService.insertOne(student);
 
-		BeanUtils.copyProperties(course, form);
-		model.addAttribute("isNew", false);
+		BeanUtils.copyProperties(student, form);
+//		model.addAttribute("isNew", false);
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
 	}
@@ -94,12 +103,14 @@ public class StudentController {
 		//		logger.debug("Course + detail");
 		//		logger.debug("courseId = " + id);
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		model.addAttribute("isNew", false);
+//		model.addAttribute("isNew", false);
 
 		if (StringUtils.isNotEmpty(id)) {
 			//			Course course = service.selectOne(id);
 			//			BeanUtils.copyProperties(course, form);
 			//			model.addAttribute("signupForm", form);
+			Student student = studentService.selectOne(id);
+			BeanUtils.copyProperties(student, form);
 		}
 		//		List<Lesson> lesson = lessonService.selectMany();
 		//		model.addAttribute("lesson", lesson);
@@ -107,8 +118,30 @@ public class StudentController {
 		return "login/homeLayout";
 	}
 
-	@PostMapping("/student/update")
+	@PostMapping( value="/studentDetail", params = "update")
 	public String update(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
+		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
+		if(result.hasErrors()) {
+			return "login/homeLayout";
+		}
+
+		Student student = new Student();
+		BeanUtils.copyProperties(form, student);
+
+		// update
+		studentService.updateOne(student);
+
+		model.addAttribute("message", "更新が完了しました。");
+		return "login/homeLayout";
+	}
+
+	@PostMapping(value="/student", params = "delete")
+	public String delete(@ModelAttribute StudentForm form, Model model) {
+		model.addAttribute("contents", "login/studentList :: studentList_contents");
+		// delete
+		studentService.deleteOne(form.getId());
+
+		model.addAttribute("message", "削除が完了しました。");
 		return "login/homeLayout";
 	}
 }
