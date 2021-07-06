@@ -112,7 +112,12 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{course}" />
+									<select class="form-control">
+										<option value="">---</option>
+										<option th:each="item : ${courseList}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
+									</select>
+									<!-- <input type="text" class="form-control" th:field="*{course}" /> -->
 									<span class="text-danger"
 										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
 										course error </span>

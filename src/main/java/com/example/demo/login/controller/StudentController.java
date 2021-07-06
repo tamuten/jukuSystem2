@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.StudentForm;
+import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Student;
 import com.example.demo.login.domain.service.CourseService;
-import com.example.demo.login.domain.service.LessonService;
 import com.example.demo.login.domain.service.StudentService;
 
 @Controller
@@ -27,9 +27,7 @@ public class StudentController {
 	final static Logger logger = LoggerFactory.getLogger(CourseController.class);
 
 	@Autowired
-	private CourseService service;
-	@Autowired
-	private LessonService lessonService;
+	private CourseService courseService;
 	@Autowired
 	private StudentService studentService;
 
@@ -56,6 +54,8 @@ public class StudentController {
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
 		model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
+		List<Course> courseList = courseService.selectMany();
+		model.addAttribute("courseList", courseList);
 //		model.addAttribute("isNew", true);
 		//		List<Lesson> lesson = lessonService.selectMany();
 		//		model.addAttribute("lesson", lesson);
@@ -115,6 +115,8 @@ public class StudentController {
 		//		List<Lesson> lesson = lessonService.selectMany();
 		//		model.addAttribute("lesson", lesson);
 
+		List<Course> courseList = courseService.selectMany();
+		model.addAttribute("courseList", courseList);
 		return "login/homeLayout";
 	}
 

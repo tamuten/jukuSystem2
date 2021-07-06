@@ -17,14 +17,14 @@
 				<th class="info col-sm-2">授業ID</th>
 				<th class="info col-sm-2">授業名</th>
 				<th class="info col-sm-2">別名</th>
-				<th class="info col-sm-2">時間</th>
+			<!-- 	<th class="info col-sm-2">時間</th> -->
 				<th class="info col-sm-2"></th>
 			</tr>
 			<tr th:each="lesson : ${lessonList}">
 				<td th:text="${lesson.id}"></td>
 				<td th:text="${lesson.name}"></td>
 				<td th:text="${lesson.alias}"></td>
-				<td th:text="${lesson.time}"></td>
+				<!-- <td th:text="${lesson.time}"></td> -->
 				<td><a class="btn btn-primary"
 					th:href="@{'/lessonDetail/' + ${lesson.id}}">詳細</a></td>
 			</tr>

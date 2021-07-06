@@ -8,7 +8,7 @@ import com.example.demo.login.domain.model.Course;
 
 @Mapper
 public interface CourseMapper {
-	public void insertOne(Course course);
+	public void insert(Course course);
 	public List<Course> selectMany();
 	public Course selectOne(String id);
 	public void updateOne(String id);

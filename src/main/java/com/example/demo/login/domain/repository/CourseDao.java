@@ -14,7 +14,7 @@ public class CourseDao {
 	private CourseMapper mapper;
 
 	public void insertOne(Course course) {
-		mapper.insertOne(course);
+		mapper.insert(course);
 	}
 
 	public List<Course> selectMany(){

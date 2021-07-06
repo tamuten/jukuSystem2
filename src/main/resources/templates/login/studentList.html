@@ -35,9 +35,9 @@
 					<td th:text="${student.parentsName}"></td>
 					<td th:text="${student.phoneNumber}"></td>
 					<td th:text="${student.mailAddress}"></td>
-					<td th:text="${course.address}"></td>
-					<td th:text="${course.course}"></td>
-					<td th:text="${#dates.format(course.registeredDatetime, 'yyyy年MM月')}"></td>
+					<td th:text="${student.address}"></td>
+					<td th:text="${student.course}"></td>
+					<td th:text="${#dates.format(student.registeredDatetime, 'yyyy年MM月')}"></td>
 					<td><a class="btn btn-primary"
 						th:href="@{'/studentDetail/' + ${student.id}}">詳細</a></td>
 				</tr>
