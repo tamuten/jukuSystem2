@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.login.domain.model.Student;
+import com.example.demo.login.domain.model.dto.StudentListDto;
 import com.example.demo.login.domain.repository.mybatis.StudentMapper;
 
 @Repository
@@ -17,7 +18,7 @@ public class StudentDao {
 		mapper.insert(student);
 	}
 
-	public List<Student> findAll(){
+	public List<StudentListDto> findAll() {
 		return mapper.findAll();
 	}
 

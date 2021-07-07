@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.login.Sequence;
 import com.example.demo.login.domain.model.Student;
+import com.example.demo.login.domain.model.dto.StudentListDto;
 import com.example.demo.login.domain.repository.SequenceDao;
 import com.example.demo.login.domain.repository.StudentDao;
 
@@ -26,7 +27,7 @@ public class StudentService {
 		studentDao.insertOne(student);
 	}
 
-	public List<Student> findAll() {
+	public List<StudentListDto> findAll() {
 		return studentDao.findAll();
 	}
 

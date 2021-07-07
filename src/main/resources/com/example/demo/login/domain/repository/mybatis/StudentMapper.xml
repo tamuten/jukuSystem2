@@ -18,6 +18,18 @@
 		<result column="registered_datetime" property="registeredDatetime" />
 		<result column="update_datetime" property="updateDatetime" />
 	</resultMap>
+	<resultMap type="com.example.demo.login.domain.model.dto.StudentListDto" id="studentList">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="grade" property="grade" />
+		<result column="school" property="school" />
+		<result column="patents_name" property="parentsName" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="mail_address" property="mailAddress" />
+		<result column="address" property="address" />
+		<result column="course" property="course" />
+		<result column="registered_datetime" property="registeredDatetime" />
+	</resultMap>
 
 	<insert id="insert"
 		parameterType="com.example.demo.login.domain.model.Student">
@@ -51,13 +63,28 @@
 		,null
 		)
 	</insert>
-	<select id="findAll" resultMap="student">
-		SELECT
-		*
-		FROM
-		student
-		ORDER BY
-		id ASC
+	<select id="findAll" resultMap="studentList">
+select
+    student.id,
+    student.name,
+    grade.name as grade,
+    student.school,
+    student.parents_name,
+    student.phone_number,
+    student.mail_address,
+    student.address,
+    course.alias as course,
+    student.registered_datetime
+from
+    student
+    inner join
+        grade
+    on  student.grade = grade.id
+    inner join
+        course
+    on  student.course = course.id
+order by
+    student.id asc
 	</select>
 	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Student">

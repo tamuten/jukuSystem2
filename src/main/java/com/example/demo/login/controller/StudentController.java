@@ -20,6 +20,7 @@ import com.example.demo.login.controller.form.StudentForm;
 import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Student;
+import com.example.demo.login.domain.model.dto.StudentListDto;
 import com.example.demo.login.domain.service.ComboboxService;
 import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.StudentService;
@@ -40,7 +41,7 @@ public class StudentController {
 		model.addAttribute("contents", "login/studentList :: studentList_contents");
 
 		// 生徒一覧の取得
-		List<Student> studentList = studentService.findAll();
+		List<StudentListDto> studentList = studentService.findAll();
 		// モデルに登録
 		model.addAttribute("studentList", studentList);
 
