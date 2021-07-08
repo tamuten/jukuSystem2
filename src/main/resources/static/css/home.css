@@ -12,6 +12,10 @@ body {
 	background-color: #f4f5f7;
 }
 
+.submenu {
+	display: none;
+}
+
 .main {
 	padding-top: 50px;
 	padding-left: 20px;
@@ -26,10 +30,15 @@ body {
 	margin-top: 0px;
 }
 
+.page-header h1 {
+	font-size: 20px;
+	font-weight: 600;
+}
+
 .list {
 	margin-top: 20px;
 }
 
-.zeikomi{
+.zeikomi {
 	font-size: x-small;
 }

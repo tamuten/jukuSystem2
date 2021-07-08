@@ -1,7 +1,9 @@
 $(function(){
-	// 更新ボタン押下
-//	$("#updateBtn").on('click', function(){
-//		alert('クリックされました。');
-//	});
-	// 削除ボタン押下
+	// サイドメニューアコーディオン
+	$('.js-menu_item_link').each(function(){
+		$(this).on('click', function(){
+			$('+.submenu', this).slideToggle();
+			return false;
+		});
+	});
 })

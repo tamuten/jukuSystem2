@@ -37,12 +37,17 @@
 		<div class="row">
 			<div class="col-sm-2 sidebar">
 				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation"><a th:href="@{'/courseList'}"><i
-							class="fas fa-school"></i>&nbsp;コース管理</a></li>
-					<li role="presentation"><a th:href="@{'/lessonList'}"><i
-							class="fas fa-chalkboard-teacher"></i>&nbsp;授業管理</a></li>
 					<li role="presentation"><a th:href="@{'/studentList'}"><i
 							class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒管理</a></li>
+
+					<li role="presentation"><a class="js-menu_item_link"
+						href="javascript:void(0)"><i class="fas fa-vr-cardboard"></i>&nbsp;マスタ管理</a>
+						<ul class="submenu nav nav-pills nav-stacked">
+							<li role="presentation" class="submenu_item"><a
+								th:href="@{'/courseList'}">&nbsp;コース管理</a></li>
+							<li role="presentation" class="submenu_item"><a
+								th:href="@{'/lessonList'}">&nbsp;授業管理</a></li>
+						</ul></li>
 				</ul>
 			</div>
 		</div>
