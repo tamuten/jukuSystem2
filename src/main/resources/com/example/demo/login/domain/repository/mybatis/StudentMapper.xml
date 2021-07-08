@@ -23,7 +23,7 @@
 		<result column="name" property="name" />
 		<result column="grade" property="grade" />
 		<result column="school" property="school" />
-		<result column="patents_name" property="parentsName" />
+		<result column="parents_name" property="parentsName" />
 		<result column="phone_number" property="phoneNumber" />
 		<result column="mail_address" property="mailAddress" />
 		<result column="address" property="address" />
