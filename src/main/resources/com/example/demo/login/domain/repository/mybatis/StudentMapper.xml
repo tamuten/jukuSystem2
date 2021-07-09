@@ -8,11 +8,15 @@
 		id="student">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
+		<result column="kana" property="kana" />
+		<result column="gender" property="gender" />
 		<result column="grade" property="grade" />
+		<result column="birthday" property="birthday" />
 		<result column="school" property="school" />
 		<result column="parents_name" property="parentsName" />
 		<result column="phone_number" property="phoneNumber" />
 		<result column="mail_address" property="mailAddress" />
+		<result column="zipcode" property="zipcode" />
 		<result column="address" property="address" />
 		<result column="course" property="course" />
 		<result column="registered_datetime" property="registeredDatetime" />
@@ -35,28 +39,20 @@
 		parameterType="com.example.demo.login.domain.model.Student">
 		INSERT
 		INTO
-		student(
-		id
-		,name
-		,grade
-		,school
-		,parents_name
-		,phone_number
-		,mail_address
-		,address
-		,course
-		,registered_datetime
-		,update_datetime
-		)
+		student
 		VALUES
 		(
 		#{ id }
 		,#{ name }
+		,#{ kana }
+		,#{ gender }
 		,#{ grade }
+		,#{ birthday }
 		,#{ school }
 		,#{ parentsName }
 		,#{ phoneNumber }
 		,#{ mailAddress }
+		,#{ zipcode }
 		,#{ address }
 		,#{ course }
 		,current_timestamp

@@ -35,10 +35,26 @@ body {
 	font-weight: 600;
 }
 
-.list {
-	margin-top: 20px;
-}
-
 .zeikomi {
 	font-size: x-small;
+}
+
+.required {
+	color: #ff0000;
+}
+
+.form-left {
+	padding-right: 0;
+}
+
+.form-right {
+	padding-left: 0;
+}
+
+.form-middle {
+	padding: 0;
+}
+
+.btnLabel {
+	padding-left:30px;
 }

@@ -1,5 +1,6 @@
 package com.example.demo.login.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,10 +60,7 @@ public class StudentController {
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
 		model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
-		List<Grade> gradeList = comboboxService.findGrade();
-		model.addAttribute("gradeList", gradeList);
-		List<Course> courseList = courseService.selectMany();
-		model.addAttribute("courseList", courseList);
+		setCombobox(model);
 
 		return "login/homeLayout";
 	}
@@ -79,31 +77,38 @@ public class StudentController {
 	public String register(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			//			model.addAttribute("isNew", true);
-			List<Grade> gradeList = comboboxService.findGrade();
-			model.addAttribute("gradeList", gradeList);
-			List<Course> courseList = courseService.selectMany();
-			model.addAttribute("courseList", courseList);
+			setCombobox(model);
 			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
 			return "login/homeLayout";
 		}
-		Student student = new Student();
-		BeanUtils.copyProperties(form, student);
-		//		course.setId(service.getNextId());
+		Student student = convertFormToStudent(form);
+
 		student.setId(studentService.getNextId());
-		//		service.insertOne(course);
+
 		studentService.insertOne(student);
 
 		BeanUtils.copyProperties(student, form);
-		//		model.addAttribute("isNew", false);
 
+		setCombobox(model);
+		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
+		model.addAttribute("message", "登録が完了しました。");
+		return "login/homeLayout";
+	}
+
+	private Student convertFormToStudent(StudentForm form) {
+		Student student = new Student();
+		BeanUtils.copyProperties(form, student);
+		student.setName(form.getLastName() + " " + form.getFirstName());
+		student.setKana(form.getLastKana() + " " + form.getFirstKana());
+		student.setBirthday(new Date(form.getBirthday().getTime()));
+		return student;
+	}
+
+	private void setCombobox(Model model) {
 		List<Grade> gradeList = comboboxService.findGrade();
 		model.addAttribute("gradeList", gradeList);
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		model.addAttribute("message", "登録が完了しました。");
-		return "login/homeLayout";
 	}
 
 	/**
@@ -123,14 +128,21 @@ public class StudentController {
 
 		if (StringUtils.isNotEmpty(id)) {
 			Student student = studentService.selectOne(id);
-			BeanUtils.copyProperties(student, form);
+			convertStudentToForm(student, form);
 		}
 
-		List<Grade> gradeList = comboboxService.findGrade();
-		model.addAttribute("gradeList", gradeList);
-		List<Course> courseList = courseService.selectMany();
-		model.addAttribute("courseList", courseList);
+		setCombobox(model);
 		return "login/homeLayout";
+	}
+
+	private void convertStudentToForm(Student student, StudentForm form) {
+		BeanUtils.copyProperties(student, form);
+		String[] name = student.getName().split(" ");
+		form.setLastName(name[0]);
+		form.setFirstName(name[1]);
+		String[] kana = student.getKana().split(" ");
+		form.setLastKana(kana[0]);
+		form.setFirstKana(kana[1]);
 	}
 
 	/**
@@ -145,10 +157,7 @@ public class StudentController {
 	public String update(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		if (result.hasErrors()) {
-			List<Grade> gradeList = comboboxService.findGrade();
-			model.addAttribute("gradeList", gradeList);
-			List<Course> courseList = courseService.selectMany();
-			model.addAttribute("courseList", courseList);
+			setCombobox(model);
 			return "login/homeLayout";
 		}
 
@@ -158,10 +167,7 @@ public class StudentController {
 		// update
 		studentService.updateOne(student);
 
-		List<Grade> gradeList = comboboxService.findGrade();
-		model.addAttribute("gradeList", gradeList);
-		List<Course> courseList = courseService.selectMany();
-		model.addAttribute("courseList", courseList);
+		setCombobox(model);
 		model.addAttribute("message", "更新が完了しました。");
 		return "login/homeLayout";
 	}
