@@ -50,8 +50,8 @@
 		,#{ birthday }
 		,#{ school }
 		,#{ parentsName }
-		,#{ phoneNumber }
 		,#{ mailAddress }
+		,#{ phoneNumber }
 		,#{ zipcode }
 		,#{ address }
 		,#{ course }
@@ -97,11 +97,15 @@ order by
 		student
 		SET
 		name = #{ name }
+		,kana = #{ kana }
+		,gender = #{ gender }
 		,grade = #{ grade }
+		,birthday = #{ birthday }
 		,school = #{ school }
 		,parents_name = #{ parentsName }
 		,phone_number = #{ phoneNumber }
 		,mail_address = #{ mailAddress }
+		,zipcode = #{ zipcode }
 		,address = #{ address }
 		,course = #{ course }
 		,update_datetime = CURRENT_TIMESTAMP

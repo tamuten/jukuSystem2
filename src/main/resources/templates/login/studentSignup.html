@@ -17,10 +17,10 @@
 				<form method="post" th:action="@{/student/register}"
 					th:object="${studentForm}">
 					<span th:text="${message}"></span>
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered table-responsive">
 						<tr>
-							<th class="active col-sm-2">生徒ID</th>
-							<td class="col-sm-3">
+							<th class="active col-sm-2 align-middle">生徒ID</th>
+							<td class="col-sm-3 align-middle">
 								<div class="form-group">
 									<input type="text" class="form-control" th:field="*{id}"
 										readonly="readonly" />
@@ -28,8 +28,8 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active"><span class="required">*</span>&nbsp;氏名</th>
-							<td>
+							<th class="active align-middle"><span class="required">*</span>&nbsp;氏名</th>
+							<td class="align-middle">
 								<div class="row">
 									<div class="form-group col-sm-6 form-left"
 										th:classappend="${#fields.hasErrors('lastName')} ? 'has-error'">
@@ -49,8 +49,8 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active"><span class="required">*</span>&nbsp;カナ氏名</th>
-							<td>
+							<th class="active align-middle"><span class="required">*</span>&nbsp;カナ氏名</th>
+							<td class="align-middle">
 								<div class="row">
 									<div class="form-group col-sm-6 form-left"
 										th:classappend="${#fields.hasErrors('lastKana')} ? 'has-error'">

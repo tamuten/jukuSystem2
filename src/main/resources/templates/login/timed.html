@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<!-- ポイント：th:fragment -->
+	<div th:fragment="lessonList_contents">
+		<div class="page-header">
+			<h1>時限管理</h1>
+		</div>
+		<<div th:if="${success}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
+		<!-- <button class="btn btn-primary pull-right" onclick="location.href='/lessonDetail/new'">新規登録</button> -->
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th class="info col-sm-1">#</th>
+				<th class="info col-sm-1">時限</th>
+				<th class="info col-sm-3">時間</th>
+				<th class="info col-sm-2"></th>
+			</tr>
+			<tr th:each="timed : ${timedList}">
+				<td th:text="${timed.id}"></td>
+				<td th:text="${timed.name}"></td>
+				<td th:text="${lesson.startTime}"></td>
+				<td th:text="${lesson.endTime}"></td>
+				<!-- <td th:text="${lesson.time}"></td> -->
+				<!-- <td><a class="btn btn-primary"
+					th:href="@{'/lessonDetail/' + ${lesson.id}}">詳細</a></td> -->
+			</tr>
+		</table>
+	</div>
+</body>
+<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+
+	/*]]>*/
+</script>
+</html>

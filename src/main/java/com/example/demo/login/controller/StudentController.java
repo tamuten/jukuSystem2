@@ -1,6 +1,5 @@
 package com.example.demo.login.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.StudentForm;
+import com.example.demo.login.controller.util.StudentUtil;
 import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Student;
@@ -39,13 +39,12 @@ public class StudentController {
 
 	@GetMapping("/studentList")
 	public String index(Model model) {
-		model.addAttribute("contents", "login/studentList :: studentList_contents");
 
 		// 生徒一覧の取得
 		List<StudentListDto> studentList = studentService.findAll();
 		// モデルに登録
 		model.addAttribute("studentList", studentList);
-
+		model.addAttribute("contents", "login/studentList :: studentList_contents");
 		return "login/homeLayout";
 	}
 
@@ -81,7 +80,7 @@ public class StudentController {
 			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
 			return "login/homeLayout";
 		}
-		Student student = convertFormToStudent(form);
+		Student student = StudentUtil.convertFormToStudent(form);
 
 		student.setId(studentService.getNextId());
 
@@ -91,19 +90,16 @@ public class StudentController {
 
 		setCombobox(model);
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
+		model.addAttribute("success", true);
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
 	}
 
-	private Student convertFormToStudent(StudentForm form) {
-		Student student = new Student();
-		BeanUtils.copyProperties(form, student);
-		student.setName(form.getLastName() + " " + form.getFirstName());
-		student.setKana(form.getLastKana() + " " + form.getFirstKana());
-		student.setBirthday(new Date(form.getBirthday().getTime()));
-		return student;
-	}
-
+	/**
+	 * コンボボックスをセットする
+	 *
+	 * @param model
+	 */
 	private void setCombobox(Model model) {
 		List<Grade> gradeList = comboboxService.findGrade();
 		model.addAttribute("gradeList", gradeList);
@@ -121,29 +117,18 @@ public class StudentController {
 	 */
 	@GetMapping("/studentDetail/{id:.+}")
 	public String getUserDetail(@ModelAttribute StudentForm form, Model model, @PathVariable("id") String id) {
-		//		logger.debug("Course + detail");
-		//		logger.debug("courseId = " + id);
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		//		model.addAttribute("isNew", false);
 
 		if (StringUtils.isNotEmpty(id)) {
 			Student student = studentService.selectOne(id);
-			convertStudentToForm(student, form);
+			StudentUtil.convertStudentToForm(student, form);
 		}
 
 		setCombobox(model);
+		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		return "login/homeLayout";
 	}
 
-	private void convertStudentToForm(Student student, StudentForm form) {
-		BeanUtils.copyProperties(student, form);
-		String[] name = student.getName().split(" ");
-		form.setLastName(name[0]);
-		form.setFirstName(name[1]);
-		String[] kana = student.getKana().split(" ");
-		form.setLastKana(kana[0]);
-		form.setFirstKana(kana[1]);
-	}
+
 
 	/**
 	 * 生徒情報を更新
@@ -161,13 +146,13 @@ public class StudentController {
 			return "login/homeLayout";
 		}
 
-		Student student = new Student();
-		BeanUtils.copyProperties(form, student);
+		Student student = StudentUtil.convertFormToStudent(form);
 
 		// update
 		studentService.updateOne(student);
 
 		setCombobox(model);
+		model.addAttribute("success", true);
 		model.addAttribute("message", "更新が完了しました。");
 		return "login/homeLayout";
 	}
@@ -185,6 +170,7 @@ public class StudentController {
 		// delete
 		studentService.deleteOne(form.getId());
 
+		model.addAttribute("success", true);
 		model.addAttribute("message", "削除が完了しました。");
 		return "login/homeLayout";
 	}

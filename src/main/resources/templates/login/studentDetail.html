@@ -16,7 +16,10 @@
 				</div>
 				<form method="post" th:action="@{/studentDetail}"
 					th:object="${studentForm}">
-					<span th:text="${message}"></span>
+					<div th:if="${success}" class="alert alert-success">
+						<p th:text="${message}"></p>
+					</div>
+
 					<table class="table table-bordered table-hover">
 						<tr>
 							<th class="active col-sm-2">生徒ID</th>
@@ -74,14 +77,14 @@
 
 							<td><div class="form-group">
 									<label class="radio-inline btnLabel" for="gender1"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="unknown"
-										autocomplete="off" checked> 不明
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="unknown" autocomplete="off" checked> 不明
 									</label> <label class="radio-inline btnLabel" for="gender2"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="male"
-										autocomplete="off"> 男性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="male" autocomplete="off"> 男性
 									</label> <label class="radio-inline btnLabel" for="gender3"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="female"
-										autocomplete="off"> 女性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="female" autocomplete="off"> 女性
 									</label>
 								</div></td>
 						</tr>
@@ -109,8 +112,8 @@
 									th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
 									<input type="date" class="form-control" th:field="*{birthday}" />
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">
-										birthday error </span>
+										th:if="${#fields.hasErrors('birthday')}"
+										th:errors="*{birthday}"> birthday error </span>
 								</div>
 							</td>
 						</tr>
@@ -170,9 +173,8 @@
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('zipcode')} ? 'has-error'">
 									<input type="text" class="form-control"
-										placeholder="（例）3310815"
-										th:field="*{zipcode}" /> <span class="text-danger"
-										th:if="${#fields.hasErrors('zipcode')}"
+										placeholder="（例）3310815" th:field="*{zipcode}" /> <span
+										class="text-danger" th:if="${#fields.hasErrors('zipcode')}"
 										th:errors="*{zipcode}"> zipcode error </span>
 								</div>
 							</td>
@@ -182,7 +184,8 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('address')} ? 'has-error'">
-									<textarea class="form-control" th:field="*{address}" placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
+									<textarea class="form-control" th:field="*{address}"
+										placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
 									<span class="text-danger"
 										th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
 										address error </span>

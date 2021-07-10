@@ -8,10 +8,15 @@
 	<!-- ポイント：th:fragment -->
 	<div th:fragment="studentList_contents">
 		<div class="page-header">
-			<h1><i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒一覧</h1>
+			<h1>
+				<i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒一覧
+			</h1>
 		</div>
 		<button class="btn btn-primary pull-right"
 			onclick="location.href= '/student/signup'">新規登録</button>
+		<div th:if="${success}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
 		<div class="list">
 			<table class="table table-bordered table-hover table-striped">
 				<tr>
@@ -37,7 +42,8 @@
 					<td th:text="${student.mailAddress}"></td>
 					<td th:text="${student.address}"></td>
 					<td th:text="${student.course}"></td>
-					<td th:text="${#dates.format(student.registeredDatetime, 'yyyy年MM月')}"></td>
+					<td
+						th:text="${#dates.format(student.registeredDatetime, 'yyyy年MM月')}"></td>
 					<td><a class="btn btn-primary"
 						th:href="@{'/studentDetail/' + ${student.id}}">詳細</a></td>
 				</tr>
