@@ -6,31 +6,43 @@
 </head>
 <body>
 	<!-- ポイント：th:fragment -->
-	<div th:fragment="lessonList_contents">
+	<div th:fragment="timed_contents">
 		<div class="page-header">
 			<h1>時限管理</h1>
 		</div>
-		<<div th:if="${success}" class="alert alert-success">
-			<p th:text="${message}"></p>
-		</div>
-		<!-- <button class="btn btn-primary pull-right" onclick="location.href='/lessonDetail/new'">新規登録</button> -->
-		<table class="table table-bordered table-striped">
-			<tr>
-				<th class="info col-sm-1">#</th>
-				<th class="info col-sm-1">時限</th>
-				<th class="info col-sm-3">時間</th>
-				<th class="info col-sm-2"></th>
-			</tr>
-			<tr th:each="timed : ${timedList}">
-				<td th:text="${timed.id}"></td>
-				<td th:text="${timed.name}"></td>
-				<td th:text="${lesson.startTime}"></td>
-				<td th:text="${lesson.endTime}"></td>
-				<!-- <td th:text="${lesson.time}"></td> -->
-				<!-- <td><a class="btn btn-primary"
-					th:href="@{'/lessonDetail/' + ${lesson.id}}">詳細</a></td> -->
-			</tr>
-		</table>
+		<form method="post" th:action="@{/timed/update}"
+			th:object="${timedForm}">
+			<div th:if="${success}" class="alert alert-success">
+				<p th:text="${message}"></p>
+			</div>
+			<!-- <button class="btn btn-primary pull-right" onclick="location.href='/lessonDetail/new'">新規登録</button> -->
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th class="info col-sm-1">#</th>
+					<th class="info col-sm-1">時限</th>
+					<th class="info col-sm-1">開始時間</th>
+					<th class="info col-sm-1">終了時間</th>
+					<th class="info col-sm-1"></th>
+				</tr>
+				<tr th:each="timed, stat : ${timedList}">
+					<td th:text="${timed.id}"></td>
+					<td><input type="text" readonly class="form-control"
+						th:name="|timedList[${stat.index}].name|" th:value="${timed.name}" /></td>
+					<td><input type="time" class="form-control" placeholder="開始時刻"
+						th:name="|timedList[${stat.index}].startTime|"
+						th:value="${timed.startTime}" /></td>
+					<td><input type="time" class="form-control" placeholder="終了時刻"
+						th:name="|timedList[${stat.index}].endTime|"
+						th:value="${timed.endTime}" /></td>
+					<td></td>
+					<input type="hidden" th:name="|timedList[${stat.index}].id|"
+						th:value="${timed.id}" />
+				</tr>
+			</table>
+			<!-- 更新 -->
+			<button class="btn btn-primary btn-lg pull-right" type="submit"
+				name="update">更新</button>
+		</form>
 	</div>
 </body>
 <script type="text/javascript" th:inline="javascript">
