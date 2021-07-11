@@ -14,7 +14,7 @@
 		</div>
 		<button class="btn btn-primary pull-right"
 			onclick="location.href= '/student/signup'">新規登録</button>
-		<div th:if="${success}" class="alert alert-success">
+		<div th:if="${message}" class="alert alert-success">
 			<p th:text="${message}"></p>
 		</div>
 		<div class="list">

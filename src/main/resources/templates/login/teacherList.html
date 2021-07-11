@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<!-- ポイント：th:fragment -->
+	<div th:fragment="teacherList_contents">
+		<div class="page-header">
+			<h1>
+				<i class="fas fa-chalkboard-teacher"></i>&nbsp;講師一覧
+			</h1>
+		</div>
+		<button class="btn btn-primary pull-right"
+			onclick="location.href= '/teacher/signup'">新規登録</button>
+		<div th:if="${message}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
+		<div class="list">
+			<table class="table table-bordered table-hover table-striped">
+				<tr>
+					<th class="info col-sm-1">講師ID</th>
+					<th class="info col-sm-1">氏名</th>
+					<th class="info col-sm-1">学校名</th>
+					<th class="info col-sm-1">学部学科名</th>
+					<th class="info col-sm-1">学年</th>
+					<th class="info col-sm-1">生年月日</th>
+					<th class="info col-sm-1">年齢</th>
+					<th class="info col-sm-1">電話番号</th>
+					<th class="info col-sm-1">メールアドレス</th>
+					<th class="info col-sm-1">登録年月</th>
+					<th class="info col-sm-1"></th>
+				</tr>
+				<tr th:each="teacher : ${teacherList}">
+					<td th:text="${teacher.id}"></td>
+					<td th:text="${teacher.name}"></td>
+					<td th:text="${teacher.university}"></td>
+					<td th:text="${teacher.undergraduate != null ? teacher.undergraduate + ' ' + teacher.department : ''}"></td>
+					<td th:text="${teacher.grade}"></td>
+					<td th:text="${#dates.format(teacher.birthday, 'yyyy/MM/dd')}"></td>
+					<td th:text="${teacher.age}"></td>
+					<td th:text="${teacher.phoneNumber}"></td>
+					<td th:text="${teacher.mailAddress}"></td>
+					<td
+						th:text="${#dates.format(teacher.registeredDatetime, 'yyyy年MM月')}"></td>
+					<td><a class="btn btn-primary"
+						th:href="@{'/teacherDetail/' + ${teacher.id}}">詳細</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

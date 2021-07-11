@@ -11,6 +11,7 @@
 		<result column="kana" property="kana" />
 		<result column="gender" property="gender" />
 		<result column="birthday" property="birthday" />
+		<result column="age" property="age" />
 		<result column="university" property="university" />
 		<result column="undergraduate" property="undergraduate" />
 		<result column="department" property="department" />
@@ -56,7 +57,25 @@
 	</insert>
 	<select id="findAll" resultMap="teacher">
 		SELECT
-		*
+		id
+		,name
+		,kana
+		,gender
+		,birthday
+		,date_part('year', age(birthday)) as age
+		,university
+		,undergraduate
+		,department
+		,grade
+		,phone_number
+		,mail_address
+		,zipcode
+		,address
+		,note
+		,delete_flg
+		,registered_datetime
+		,update_datetime
+		,delete_datetime
 		FROM
 		teacher
 		ORDER BY

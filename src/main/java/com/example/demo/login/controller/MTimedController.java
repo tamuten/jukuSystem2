@@ -16,7 +16,7 @@ import com.example.demo.login.domain.model.Timed;
 import com.example.demo.login.domain.repository.MTimedDao;
 
 @Controller
-public class MTimedController {
+public class MTimedController extends BaseController {
 	@Autowired
 	private MTimedDao mTimedDao;
 
@@ -37,7 +37,6 @@ public class MTimedController {
 		// update
 		mTimedDao.update(form.getTimedList());
 
-		model.addAttribute("success", true);
 		model.addAttribute("message", "更新が完了しました。");
 		return index(form, model);
 	}

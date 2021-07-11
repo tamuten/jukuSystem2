@@ -27,7 +27,7 @@ import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.StudentService;
 
 @Controller
-public class StudentController {
+public class StudentController extends BaseController {
 	final static Logger logger = LoggerFactory.getLogger(CourseController.class);
 
 	@Autowired
@@ -90,7 +90,6 @@ public class StudentController {
 
 		setCombobox(model);
 		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		model.addAttribute("success", true);
 		model.addAttribute("message", "登録が完了しました。");
 		return "login/homeLayout";
 	}
@@ -128,8 +127,6 @@ public class StudentController {
 		return "login/homeLayout";
 	}
 
-
-
 	/**
 	 * 生徒情報を更新
 	 *
@@ -152,7 +149,6 @@ public class StudentController {
 		studentService.updateOne(student);
 
 		setCombobox(model);
-		model.addAttribute("success", true);
 		model.addAttribute("message", "更新が完了しました。");
 		return "login/homeLayout";
 	}
@@ -170,7 +166,6 @@ public class StudentController {
 		// delete
 		studentService.deleteOne(form.getId());
 
-		model.addAttribute("success", true);
 		model.addAttribute("message", "削除が完了しました。");
 		return "login/homeLayout";
 	}

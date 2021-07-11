@@ -9,6 +9,5 @@ import com.example.demo.login.domain.model.Timed;
 @Mapper
 public interface MTimedMapper {
 	public List<Timed> findAll();
-
 	public void updateOne(Timed timed);
 }

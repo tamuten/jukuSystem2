@@ -11,7 +11,7 @@ import com.example.demo.login.domain.model.Teacher;
 import com.example.demo.login.domain.service.TeacherService;
 
 @Controller
-public class TeacherController {
+public class TeacherController extends BaseController {
 	@Autowired
 	private TeacherService teacherService;
 

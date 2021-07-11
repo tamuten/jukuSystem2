@@ -13,6 +13,7 @@ public class Teacher {
 	private String kana;
 	private String gender;
 	private Date birthday;
+	private Integer age;
 	private String university;
 	private String undergraduate;
 	private String department;

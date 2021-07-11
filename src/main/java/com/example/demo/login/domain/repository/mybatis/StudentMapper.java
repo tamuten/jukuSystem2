@@ -10,12 +10,8 @@ import com.example.demo.login.domain.model.dto.StudentListDto;
 @Mapper
 public interface StudentMapper {
 	public void insert(Student student);
-
 	public List<StudentListDto> findAll();
-
 	public Student selectOne(String id);
-
 	public void updateOne(Student student);
-
 	public void deleteOne(String id);
 }
