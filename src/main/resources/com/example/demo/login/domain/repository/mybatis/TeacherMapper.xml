@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.TeacherMapper">
+	<resultMap type="com.example.demo.login.domain.model.Teacher"
+		id="teacher">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="kana" property="kana" />
+		<result column="gender" property="gender" />
+		<result column="birthday" property="birthday" />
+		<result column="university" property="university" />
+		<result column="undergraduate" property="undergraduate" />
+		<result column="department" property="department" />
+		<result column="grade" property="grade" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="mail_address" property="mailAddress" />
+		<result column="zipcode" property="zipcode" />
+		<result column="address" property="address" />
+		<result column="note" property="note" />
+		<result column="delete_flg" property="deleteFlg" />
+		<result column="registered_datetime"
+			property="registeredDatetime" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="delete_datetime" property="deleteDatetime" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.example.demo.login.domain.model.Teacher">
+		INSERT
+		INTO
+		student
+		VALUES
+		(
+		#{ id }
+		,#{ name }
+		,#{ kana }
+		,#{ gender }
+		,#{ birthday }
+		,#{ university }
+		,#{ undergraduate }
+		,#{ department }
+		,#{ grade }
+		,#{ phoneNumber }
+		,#{ mailAddress }
+		,#{ zipcode }
+		,#{ address }
+		,#{ note }
+		,false
+		,current_timestamp
+		,null
+		,null
+		)
+	</insert>
+	<select id="findAll" resultMap="teacher">
+		SELECT
+		*
+		FROM
+		teacher
+		ORDER BY
+		id ASC
+	</select>
+	<select id="selectOne" parameterType="string"
+		resultType="com.example.demo.login.domain.model.Teacher">
+		SELECT
+		*
+		FROM
+		teacher
+		WHERE
+		id = #{ id }
+	</select>
+	<update id="updateOne"
+		parameterType="com.example.demo.login.domain.model.Teacher">
+		UPDATE
+		teacher
+		SET
+		name = #{ name }
+		,kana = #{ kana }
+		,gender = #{ gender }
+		,birthday = #{ birthday }
+		,university = #{ university }
+		,undergraduate =#{ undergraduate }
+		,department =#{ department }
+		,grade = #{ grade }
+		,phone_number = #{ phoneNumber }
+		,mail_address = #{ mailAddress }
+		,zipcode = #{ zipcode }
+		,address = #{ address }
+		,note = #{ note }
+		,update_datetime = CURRENT_TIMESTAMP
+		WHERE
+		id =#{ id }
+	</update>
+	<delete id="deleteOne"
+		parameterType="com.example.demo.login.domain.model.Student">
+		UPDATE
+		teacher
+		SET
+		delete_flg = #{ deleteFlg }
+		,delete_datetime = CURRENT_TIMESTAMP
+		 WHERE
+		 id =#{ id }
+	</delete>
+</mapper>
