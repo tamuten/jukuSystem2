@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.TeacherSubjectMapper">
+	<resultMap
+		type="com.example.demo.login.domain.model.TeacherSubject"
+		id="teacherSubject">
+		<id column="teacher_id" property="teacherId" />
+		<id column="subject_id" property="subjectId" />
+	</resultMap>
+
+	<insert id="insertBulk" parameterType="java.util.List">
+		INSERT INTO teacher_subject
+		(teacher_id, subject_id)
+		VALUES
+		<foreach collection="tsList" item="ts" separator=",">
+			(
+			#{ts.teacherId, jdbcType=VARCHAR}, #{ts.subjectId, jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+</mapper>

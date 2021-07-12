@@ -1,4 +1,4 @@
-package com.example.demo.login.controller.util;
+package com.example.demo.login.controller.helper;
 
 import java.sql.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 import com.example.demo.login.controller.form.StudentForm;
 import com.example.demo.login.domain.model.Student;
 
-public class StudentUtil {
+public class StudentHelper {
 	/**
 	 * FormからStudentに値を渡す。
 	 *

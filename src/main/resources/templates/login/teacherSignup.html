@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>講師登録</title>
+</head>
+<body>
+	<div th:fragment="teacherSignup_contents">
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="page-header">
+					<h1>
+						<i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;講師登録
+					</h1>
+				</div>
+				<form method="post" th:action="@{/teacher/register}"
+					th:object="${teacherForm}">
+					<span th:text="${message}"></span>
+					<table class="table table-bordered table-responsive">
+						<tr>
+							<th class="active col-sm-2 align-middle">講師ID</th>
+							<td class="col-sm-3 align-middle">
+								<div class="form-group">
+									<input type="text" class="form-control" th:field="*{id}"
+										readonly="readonly" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active align-middle"><span class="required">*</span>&nbsp;氏名</th>
+							<td class="align-middle">
+								<div class="row">
+									<div class="form-group col-sm-6 form-left"
+										th:classappend="${#fields.hasErrors('lastName')} ? 'has-error'">
+										<input type="text" class="form-control" placeholder="（姓）"
+											th:field="*{lastName}" /> <span class="text-danger"
+											th:if="${#fields.hasErrors('lastName')}"
+											th:errors="*{lastName}"> lastName error </span>
+									</div>
+									<div class="form-group col-sm-6 form-right"
+										th:classappend="${#fields.hasErrors('firstName')} ? 'has-error'">
+										<input type="text" class="form-control" placeholder="（名）"
+											th:field="*{firstName}" /> <span class="text-danger"
+											th:if="${#fields.hasErrors('firstName')}"
+											th:errors="*{firstName}"> firstName error </span>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active align-middle"><span class="required">*</span>&nbsp;カナ氏名</th>
+							<td class="align-middle">
+								<div class="row">
+									<div class="form-group col-sm-6 form-left"
+										th:classappend="${#fields.hasErrors('lastKana')} ? 'has-error'">
+										<input type="text" class="form-control" placeholder="（カナ姓）"
+											th:field="*{lastKana}" /> <span class="text-danger"
+											th:if="${#fields.hasErrors('lastKana')}"
+											th:errors="*{lastKana}"> lastKana error </span>
+									</div>
+									<div class="form-group col-sm-6 form-right"
+										th:classappend="${#fields.hasErrors('firstKana')} ? 'has-error'">
+										<input type="text" class="form-control" placeholder="（カナ名）"
+											th:field="*{firstKana}" /> <span class="text-danger"
+											th:if="${#fields.hasErrors('firstKana')}"
+											th:errors="*{firstKana}"> firstKana error </span>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<!-- 						<tr>
+							<th class="active">性別</th>
+
+							<td><div class="form-group">
+									<label class="radio-inline btnLabel" for="gender1"> <input
+										type="radio" class="btn-check" th:field="*{gender}" value="unknown"
+										autocomplete="off" checked> 不明
+									</label> <label class="radio-inline btnLabel" for="gender2"> <input
+										type="radio" class="btn-check" th:field="*{gender}" value="male"
+										autocomplete="off"> 男性
+									</label> <label class="radio-inline btnLabel" for="gender3"> <input
+										type="radio" class="btn-check" th:field="*{gender}" value="female"
+										autocomplete="off"> 女性
+									</label>
+								</div></td>
+						</tr>
+
+						<tr>
+							<th class="active"><span class="required">*</span>&nbsp;学年</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('grade')} ? 'has-error'">
+									<select class="form-control" name="grade">
+										<option value="">---</option>
+										<option th:each="item : ${gradeList}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{grade}">pulldown</option>
+									</select>
+									<input type="text" class="form-control" th:field="*{grade}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('grade')}"
+										th:errors="*{grade}"> grade error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">生年月日</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
+									<input type="date" class="form-control" th:field="*{birthday}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">
+										birthday error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">学校名</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('school')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{school}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('school')}" th:errors="*{school}">
+										school error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">保護者名</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('parentsName')} ? 'has-error'">
+									<input type="text" class="form-control" placeholder="（名）"
+										th:field="*{parentsName}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('parentsName')}"
+										th:errors="*{parentsName}"> parentsName error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">電話番号</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('phoneNumber')} ? 'has-error'">
+									<input type="text" class="form-control"
+										placeholder="（例）07012345678" th:field="*{phoneNumber}" /> <span
+										class="text-danger"
+										th:if="${#fields.hasErrors('phoneNumber')}"
+										th:errors="*{phoneNumber}"> phoneNumber error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">メールアドレス</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('mailAddress')} ? 'has-error'">
+									<input type="text" class="form-control"
+										placeholder="（例）yamadatarou@gmail.com"
+										th:field="*{mailAddress}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('mailAddress')}"
+										th:errors="*{mailAddress}"> mailAddress error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">郵便番号</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('zipcode')} ? 'has-error'">
+									<input type="text" class="form-control"
+										placeholder="（例）3310815"
+										th:field="*{zipcode}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('zipcode')}"
+										th:errors="*{zipcode}"> zipcode error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">住所</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('address')} ? 'has-error'">
+									<textarea class="form-control" th:field="*{address}" placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+										address error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active"><span class="required">*</span>&nbsp;コース</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
+									<select class="form-control" name="course">
+										<option value="">---</option>
+										<option th:each="item : ${courseList}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
+									</select>
+									<input type="text" class="form-control" th:field="*{course}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
+										course error </span>
+								</div>
+							</td>
+						</tr> -->
+					</table>
+					<!-- 登録 -->
+					<button class="btn btn-primary btn-lg pull-right" type="submit"
+						name="register">登録</button>
+
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*]]>*/
+		</script>
+	</div>
+</body>
+
+</html>

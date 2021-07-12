@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.StudentForm;
-import com.example.demo.login.controller.util.StudentUtil;
+import com.example.demo.login.controller.helper.StudentHelper;
 import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Student;
@@ -80,7 +80,7 @@ public class StudentController extends BaseController {
 			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
 			return "login/homeLayout";
 		}
-		Student student = StudentUtil.convertFormToStudent(form);
+		Student student = StudentHelper.convertFormToStudent(form);
 
 		student.setId(studentService.getNextId());
 
@@ -119,7 +119,7 @@ public class StudentController extends BaseController {
 
 		if (StringUtils.isNotEmpty(id)) {
 			Student student = studentService.selectOne(id);
-			StudentUtil.convertStudentToForm(student, form);
+			StudentHelper.convertStudentToForm(student, form);
 		}
 
 		setCombobox(model);
@@ -143,7 +143,7 @@ public class StudentController extends BaseController {
 			return "login/homeLayout";
 		}
 
-		Student student = StudentUtil.convertFormToStudent(form);
+		Student student = StudentHelper.convertFormToStudent(form);
 
 		// update
 		studentService.updateOne(student);
