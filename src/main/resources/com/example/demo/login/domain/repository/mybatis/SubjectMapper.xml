@@ -1,1 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.MTimedMapper">
+	<resultMap type="com.example.demo.login.domain.model.Timed"
+		id="timed">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
+		<result column="use_flag" property="useFlag" />
+	</resultMap>
+
+	<select id="findAll" resultMap="timed">
+		SELECT
+		*
+		FROM
+		m_timed
+		ORDER BY
+		id ASC
+	</select>
+	<update id="updateOne" parameterType="com.example.demo.login.domain.model.Timed">
+		UPDATE
+		m_timed
+		SET
+		start_time = #{ startTime }
+		,end_time = #{ endTime }
+		WHERE
+		id =#{ id }
+	</update>
+	</mapper>
