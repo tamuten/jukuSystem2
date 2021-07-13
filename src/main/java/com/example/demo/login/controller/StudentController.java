@@ -44,8 +44,7 @@ public class StudentController extends BaseController {
 		List<StudentListDto> studentList = studentService.findAll();
 		// モデルに登録
 		model.addAttribute("studentList", studentList);
-		model.addAttribute("contents", "login/studentList :: studentList_contents");
-		return "login/homeLayout";
+		return setView(model, "login/studentList");
 	}
 
 	/**
@@ -58,10 +57,8 @@ public class StudentController extends BaseController {
 	@GetMapping("/student/signup")
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
-		model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
 		setCombobox(model);
-
-		return "login/homeLayout";
+		return setView(model, "login/studentSignup");
 	}
 
 	/**
@@ -77,21 +74,19 @@ public class StudentController extends BaseController {
 
 		if (result.hasErrors()) {
 			setCombobox(model);
-			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
-			return "login/homeLayout";
+//			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
+//			return "login/homeLayout";
+			return setView(model, "login/studentSignup");
 		}
 		Student student = StudentHelper.convertFormToStudent(form);
-
 		student.setId(studentService.getNextId());
-
 		studentService.insertOne(student);
 
 		BeanUtils.copyProperties(student, form);
 
 		setCombobox(model);
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		model.addAttribute("message", "登録が完了しました。");
-		return "login/homeLayout";
+		return setView(model, "login/studentDetail");
 	}
 
 	/**

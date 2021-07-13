@@ -204,7 +204,12 @@
 						</tr>
 						<tr>
 							<th class="active">担当可能教科</th>
-							<td></td>
+							<td><div class="checkbox-inline"
+									th:each="subject : ${subjectList}">
+									<label> <input type="checkbox" name="fchecks"
+										th:value="${subject.id}" th:text="${subject.name}" />checkbox
+									</label>
+								</div></td>
 						</tr>
 						<tr>
 							<th class="active">備考</th>
