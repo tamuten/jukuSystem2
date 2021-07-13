@@ -69,19 +69,19 @@
 								</div>
 							</td>
 						</tr>
-						 <tr>
+						<tr>
 							<th class="active">性別</th>
 
 							<td><div class="form-group">
 									<label class="radio-inline btnLabel" for="gender1"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="unknown"
-										autocomplete="off" checked> 不明
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="unknown" autocomplete="off" checked> 不明
 									</label> <label class="radio-inline btnLabel" for="gender2"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="male"
-										autocomplete="off"> 男性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="male" autocomplete="off"> 男性
 									</label> <label class="radio-inline btnLabel" for="gender3"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="female"
-										autocomplete="off"> 女性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="female" autocomplete="off"> 女性
 									</label>
 								</div></td>
 						</tr>
@@ -93,8 +93,8 @@
 									th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
 									<input type="date" class="form-control" th:field="*{birthday}" />
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">
-										birthday error </span>
+										th:if="${#fields.hasErrors('birthday')}"
+										th:errors="*{birthday}"> birthday error </span>
 								</div>
 							</td>
 						</tr>
@@ -103,10 +103,10 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('university')} ? 'has-error'">
-									<input type="text" class="form-control" placeholder="（例）慶應義塾大学" th:field="*{university}" />
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('university')}" th:errors="*{university}">
-										university error </span>
+									<input type="text" class="form-control" placeholder="（例）慶應義塾大学"
+										th:field="*{university}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('university')}"
+										th:errors="*{university}"> university error </span>
 								</div>
 							</td>
 						</tr>
@@ -135,7 +135,10 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active"><!-- <span class="required">*</span> --><!-- &nbsp; -->学年</th>
+							<th class="active">
+								<!-- <span class="required">*</span> -->
+								<!-- &nbsp; -->学年
+							</th>
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('grade')} ? 'has-error'">
@@ -182,9 +185,8 @@
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('zipcode')} ? 'has-error'">
 									<input type="text" class="form-control"
-										placeholder="（例）3310815"
-										th:field="*{zipcode}" /> <span class="text-danger"
-										th:if="${#fields.hasErrors('zipcode')}"
+										placeholder="（例）3310815" th:field="*{zipcode}" /> <span
+										class="text-danger" th:if="${#fields.hasErrors('zipcode')}"
 										th:errors="*{zipcode}"> zipcode error </span>
 								</div>
 							</td>
@@ -194,7 +196,8 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('address')} ? 'has-error'">
-									<textarea class="form-control" th:field="*{address}" placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
+									<textarea class="form-control" th:field="*{address}"
+										placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
 									<span class="text-danger"
 										th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
 										address error </span>
@@ -205,8 +208,8 @@
 							<th class="active">担当可能教科</th>
 							<td><div class="checkbox-inline"
 									th:each="subject : ${subjectList}">
-									<label> <input type="checkbox" name="fchecks"
-										th:value="${subject.id}" th:text="${subject.name}" />
+									<label> <input type="checkbox" th:value="${subject.id}"
+										th:text="${subject.name}" th:field="*{subjectsCanTeach}" />
 									</label>
 								</div></td>
 						</tr>
@@ -215,9 +218,8 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('note')} ? 'has-error'">
-									<textarea class="form-control"
-										th:field="*{note}" ></textarea> <span class="text-danger"
-										th:if="${#fields.hasErrors('note')}"
+									<textarea class="form-control" th:field="*{note}"></textarea>
+									<span class="text-danger" th:if="${#fields.hasErrors('note')}"
 										th:errors="*{note}"> note error </span>
 								</div>
 							</td>

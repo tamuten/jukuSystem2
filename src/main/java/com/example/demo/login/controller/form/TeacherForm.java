@@ -2,9 +2,6 @@ package com.example.demo.login.controller.form;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
-
-import com.example.demo.login.domain.model.Subject;
 
 import lombok.Data;
 
@@ -34,5 +31,6 @@ public class TeacherForm {
 	private Timestamp updateDatetime;
 	private Timestamp deleteDatetime;
 	// 指導可能教科
-	private List<Subject> subjectsCanTeach;
+	//	private List<Subject> subjectsCanTeach;
+	private String[] subjectsCanTeach;
 }

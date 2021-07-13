@@ -145,7 +145,8 @@
 										<option value="">---</option>
 										<option th:each="item : ${gradeList}" th:value="${item.id}"
 											th:text="${item.name}" th:selected="${item.id} == *{grade}">pulldown</option>
-									</select> <input type="text" class="form-control" th:field="*{grade}" />
+									</select>
+									<!-- <input type="text" class="form-control" th:field="*{grade}" /> -->
 									<span class="text-danger" th:if="${#fields.hasErrors('grade')}"
 										th:errors="*{grade}"> grade error </span>
 								</div>
@@ -206,8 +207,8 @@
 							<th class="active">担当可能教科</th>
 							<td><div class="checkbox-inline"
 									th:each="subject : ${subjectList}">
-									<label> <input type="checkbox" name="fchecks"
-										th:value="${subject.id}" th:text="${subject.name}" />
+									<label> <input type="checkbox" th:value="${subject.id}"
+										th:text="${subject.name}" th:field="*{subjectsCanTeach}" />
 									</label>
 								</div></td>
 						</tr>

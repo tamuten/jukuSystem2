@@ -2,6 +2,7 @@ package com.example.demo.login.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.controller.form.TeacherForm;
@@ -77,6 +79,18 @@ public class TeacherController extends BaseController {
 
 		setCombobox(model);
 		model.addAttribute("message", "登録が完了しました。");
+		return setView(model, "login/teacherDetail");
+	}
+
+	@GetMapping("/teacherDetail/{id:.+}")
+	public String getUserDetail(@ModelAttribute TeacherForm form, Model model, @PathVariable("id") String id) {
+
+		if (StringUtils.isNotEmpty(id)) {
+			//			Student student = teacherService.selectOne(id);
+			//			StudentHelper.convertStudentToForm(student, form);
+		}
+
+		setCombobox(model);
 		return setView(model, "login/teacherDetail");
 	}
 
