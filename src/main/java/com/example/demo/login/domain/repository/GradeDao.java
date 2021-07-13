@@ -16,4 +16,8 @@ public class GradeDao {
 	public List<Grade> findAll() {
 		return mapper.findAll();
 	}
+
+	public List<Grade> findUnivGrade(){
+		return mapper.findUnivGrade();
+	}
 }

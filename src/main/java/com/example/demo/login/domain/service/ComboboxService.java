@@ -16,4 +16,8 @@ public class ComboboxService {
 	public List<Grade> findGrade() {
 		return gradeDao.findAll();
 	}
+
+	public List<Grade> findUnivGrade(){
+		return gradeDao.findUnivGrade();
+	}
 }

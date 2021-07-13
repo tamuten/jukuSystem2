@@ -17,4 +17,14 @@
 		ORDER BY
 		id ASC
 	</select>
+	<select id="findUnivGrade" resultMap="grade">
+		SELECT
+		*
+		FROM
+		grade
+		WHERE
+		id BETWEEN 17 AND 24
+		ORDER BY
+		id ASC
+	</select>
 </mapper>

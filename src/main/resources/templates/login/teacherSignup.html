@@ -69,7 +69,7 @@
 								</div>
 							</td>
 						</tr>
-						<!-- 						<tr>
+						 <tr>
 							<th class="active">性別</th>
 
 							<td><div class="form-group">
@@ -87,22 +87,6 @@
 						</tr>
 
 						<tr>
-							<th class="active"><span class="required">*</span>&nbsp;学年</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('grade')} ? 'has-error'">
-									<select class="form-control" name="grade">
-										<option value="">---</option>
-										<option th:each="item : ${gradeList}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{grade}">pulldown</option>
-									</select>
-									<input type="text" class="form-control" th:field="*{grade}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('grade')}"
-										th:errors="*{grade}"> grade error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
 							<th class="active">生年月日</th>
 							<td>
 								<div class="form-group"
@@ -115,26 +99,54 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active">学校名</th>
+							<th class="active">大学</th>
 							<td>
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('school')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{school}" />
+									th:classappend="${#fields.hasErrors('university')} ? 'has-error'">
+									<input type="text" class="form-control" placeholder="（例）慶應義塾大学" th:field="*{university}" />
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('school')}" th:errors="*{school}">
-										school error </span>
+										th:if="${#fields.hasErrors('university')}" th:errors="*{university}">
+										university error </span>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th class="active">保護者名</th>
+							<th class="active">学部</th>
 							<td>
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('parentsName')} ? 'has-error'">
-									<input type="text" class="form-control" placeholder="（名）"
-										th:field="*{parentsName}" /> <span class="text-danger"
-										th:if="${#fields.hasErrors('parentsName')}"
-										th:errors="*{parentsName}"> parentsName error </span>
+									th:classappend="${#fields.hasErrors('undergraduate')} ? 'has-error'">
+									<input type="text" class="form-control" placeholder="（例）経済学部"
+										th:field="*{undergraduate}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('undergraduate')}"
+										th:errors="*{undergraduate}"> undergraduate error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">学科</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('department')} ? 'has-error'">
+									<input type="text" class="form-control" placeholder="（例）経済学科"
+										th:field="*{department}" /> <span class="text-danger"
+										th:if="${#fields.hasErrors('department')}"
+										th:errors="*{department}"> department error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active"><span class="required">*</span>&nbsp;学年</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('grade')} ? 'has-error'">
+									<select class="form-control" name="grade">
+										<option value="">---</option>
+										<option th:each="item : ${gradeList}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{grade}">pulldown</option>
+									</select>
+									<input type="text" class="form-control" th:field="*{grade}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('grade')}"
+										th:errors="*{grade}"> grade error </span>
 								</div>
 							</td>
 						</tr>
@@ -190,22 +202,17 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active"><span class="required">*</span>&nbsp;コース</th>
+							<th class="active">備考</th>
 							<td>
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
-									<select class="form-control" name="course">
-										<option value="">---</option>
-										<option th:each="item : ${courseList}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
-									</select>
-									<input type="text" class="form-control" th:field="*{course}" />
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
-										course error </span>
+									th:classappend="${#fields.hasErrors('note')} ? 'has-error'">
+									<textarea class="form-control"
+										th:field="*{note}" ></textarea> <span class="text-danger"
+										th:if="${#fields.hasErrors('note')}"
+										th:errors="*{note}"> note error </span>
 								</div>
 							</td>
-						</tr> -->
+						</tr>
 					</table>
 					<!-- 登録 -->
 					<button class="btn btn-primary btn-lg pull-right" type="submit"
