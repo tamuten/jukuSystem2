@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.login.Sequence;
-import com.example.demo.login.domain.model.Subject;
 import com.example.demo.login.domain.model.Teacher;
 import com.example.demo.login.domain.model.TeacherSubject;
 import com.example.demo.login.domain.repository.SequenceDao;
@@ -21,7 +20,7 @@ public class TeacherService {
 	@Autowired
 	private TeacherDao teacherDao;
 	@Autowired
-	private TeacherSubjectDao tsDao;
+	private TeacherSubjectDao teacherSubjectDao;
 	@Autowired
 	private SequenceDao sequenceDao;
 
@@ -37,18 +36,27 @@ public class TeacherService {
 	public void insert(Teacher teacher) {
 		String teacherId = teacher.getId();
 		//		List<Subject> subjectList = teacher.getSubjectsCanTeach();
-//		List<Subject> teacherSubject = teacher.get
+		String[] teacherSubject = teacher.getSubjectsCanTeach();
 
 		teacherDao.insert(teacher);
-		//		tsDao.insert(generateTeacherSubject(teacherId, subjectList));
+		teacherSubjectDao.insertBulk(generateTeacherSubject(teacherId, teacherSubject));
 	}
 
-	private List<TeacherSubject> generateTeacherSubject(String teacherId, List<Subject> subjectList) {
+	private List<TeacherSubject> generateTeacherSubject(String teacherId, String[] subjectList) {
 		List<TeacherSubject> teacherSubject = new ArrayList<>();
-		for (Subject subject : subjectList) {
-			TeacherSubject ts = new TeacherSubject(teacherId, subject.getId());
+		for (String subjectId : subjectList) {
+			TeacherSubject ts = new TeacherSubject(teacherId, subjectId);
 			teacherSubject.add(ts);
 		}
 		return teacherSubject;
+	}
+
+	public Teacher selectOne(String id) {
+		Teacher teacher = teacherDao.selectOne(id);
+		List<TeacherSubject> teacherSubject = teacherSubjectDao.findOnesSubject(id);
+		String[] subjectList = teacherSubject.stream().map(ts -> ts.getSubjectId()).toArray(String[] :: new);
+		teacher.setSubjectsCanTeach(subjectList);
+
+		return teacher;
 	}
 }

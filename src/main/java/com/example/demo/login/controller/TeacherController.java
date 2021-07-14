@@ -86,8 +86,8 @@ public class TeacherController extends BaseController {
 	public String getUserDetail(@ModelAttribute TeacherForm form, Model model, @PathVariable("id") String id) {
 
 		if (StringUtils.isNotEmpty(id)) {
-			//			Student student = teacherService.selectOne(id);
-			//			StudentHelper.convertStudentToForm(student, form);
+			Teacher teacher = teacherService.selectOne(id);
+			TeacherHelper.convertTeacherToForm(teacher, form);
 		}
 
 		setCombobox(model);

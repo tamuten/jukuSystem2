@@ -21,4 +21,13 @@
 			)
 		</foreach>
 	</insert>
+	<select id="findOnesSubject" parameterType="string"
+		resultType="com.example.demo.login.domain.model.TeacherSubject">
+	SELECT
+	*
+	FROM
+	teacher_subject
+	WHERE
+	teacher_id = #{ id }
+	</select>
 </mapper>

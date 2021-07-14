@@ -13,7 +13,11 @@ public class TeacherSubjectDao {
 	@Autowired
 	private TeacherSubjectMapper mapper;
 
-	public void insert(List<TeacherSubject> teacherSubject) {
+	public void insertBulk(List<TeacherSubject> teacherSubject) {
 		mapper.insertBulk(teacherSubject);
+	}
+
+	public List<TeacherSubject> findOnesSubject(String id) {
+		return mapper.findOnesSubject(id);
 	}
 }

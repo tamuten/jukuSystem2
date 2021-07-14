@@ -1,7 +1,7 @@
 package com.example.demo.login.controller.form;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +18,7 @@ public class TeacherForm {
 	private String firstKana;
 	// 性別：初期値を不明に設定
 	private String gender = "unknown";
+	// Strkng⇨dateに変換：patternにどのような形式で値が渡されるか指定している
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private Integer age;

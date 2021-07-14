@@ -20,4 +20,8 @@ public class TeacherDao {
 	public void insert(Teacher teacher) {
 		teacherMapper.insert(teacher);
 	}
+
+	public Teacher selectOne(String id) {
+		return teacherMapper.selectOne(id);
+	}
 }
