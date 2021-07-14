@@ -37,6 +37,7 @@ public class TeacherService {
 	public void insert(Teacher teacher) {
 		String teacherId = teacher.getId();
 		//		List<Subject> subjectList = teacher.getSubjectsCanTeach();
+//		List<Subject> teacherSubject = teacher.get
 
 		teacherDao.insert(teacher);
 		//		tsDao.insert(generateTeacherSubject(teacherId, subjectList));

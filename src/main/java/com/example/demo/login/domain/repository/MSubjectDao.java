@@ -9,7 +9,7 @@ import com.example.demo.login.domain.model.Subject;
 import com.example.demo.login.domain.repository.mybatis.SubjectMapper;
 
 @Repository
-public class SubjectDao {
+public class MSubjectDao {
 	@Autowired
 	private SubjectMapper mapper;
 

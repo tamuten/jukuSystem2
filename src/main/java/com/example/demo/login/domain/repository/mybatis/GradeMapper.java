@@ -8,6 +8,6 @@ import com.example.demo.login.domain.model.Grade;
 
 @Mapper
 public interface GradeMapper {
-	public List<Grade> findAll();
+	public List<Grade> findStudentGrade();
 	public List<Grade> findUnivGrade();
 }

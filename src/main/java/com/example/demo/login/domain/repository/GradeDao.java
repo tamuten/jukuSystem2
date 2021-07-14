@@ -13,8 +13,8 @@ public class GradeDao {
 	@Autowired
 	private GradeMapper mapper;
 
-	public List<Grade> findAll() {
-		return mapper.findAll();
+	public List<Grade> findStudentGrade() {
+		return mapper.findStudentGrade();
 	}
 
 	public List<Grade> findUnivGrade(){

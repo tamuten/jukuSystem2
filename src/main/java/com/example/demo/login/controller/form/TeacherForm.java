@@ -3,6 +3,8 @@ package com.example.demo.login.controller.form;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -14,7 +16,9 @@ public class TeacherForm {
 	private String kana;
 	private String lastKana;
 	private String firstKana;
-	private String gender;
+	// 性別：初期値を不明に設定
+	private String gender = "unknown";
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private Integer age;
 	private String university;

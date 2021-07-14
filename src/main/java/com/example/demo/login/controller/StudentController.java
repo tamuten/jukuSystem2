@@ -74,8 +74,6 @@ public class StudentController extends BaseController {
 
 		if (result.hasErrors()) {
 			setCombobox(model);
-//			model.addAttribute("contents", "login/studentSignup :: studentSignup_contents");
-//			return "login/homeLayout";
 			return setView(model, "login/studentSignup");
 		}
 		Student student = StudentHelper.convertFormToStudent(form);
@@ -95,7 +93,7 @@ public class StudentController extends BaseController {
 	 * @param model
 	 */
 	private void setCombobox(Model model) {
-		List<Grade> gradeList = comboboxService.findGrade();
+		List<Grade> gradeList = comboboxService.findStudentGrade();
 		model.addAttribute("gradeList", gradeList);
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
