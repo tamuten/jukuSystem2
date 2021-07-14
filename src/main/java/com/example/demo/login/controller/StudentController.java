@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.StudentForm;
 import com.example.demo.login.controller.helper.StudentHelper;
 import com.example.demo.login.domain.model.Course;
@@ -83,7 +84,7 @@ public class StudentController extends BaseController {
 		BeanUtils.copyProperties(student, form);
 
 		setCombobox(model);
-		model.addAttribute("message", "登録が完了しました。");
+		setMessage(model, Message.SIGNUP);
 		return setView(model, "login/studentDetail");
 	}
 
@@ -116,8 +117,7 @@ public class StudentController extends BaseController {
 		}
 
 		setCombobox(model);
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
-		return "login/homeLayout";
+		return setView(model, "login/studentDetail");
 	}
 
 	/**
@@ -130,10 +130,9 @@ public class StudentController extends BaseController {
 	 */
 	@PostMapping(value = "/studentDetail", params = "update")
 	public String update(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
-		model.addAttribute("contents", "login/studentDetail :: studentDetail_contents");
 		if (result.hasErrors()) {
 			setCombobox(model);
-			return "login/homeLayout";
+			return setView(model, "login/studentDetail");
 		}
 
 		Student student = StudentHelper.convertFormToStudent(form);
@@ -142,8 +141,8 @@ public class StudentController extends BaseController {
 		studentService.updateOne(student);
 
 		setCombobox(model);
-		model.addAttribute("message", "更新が完了しました。");
-		return "login/homeLayout";
+		setMessage(model, Message.UPDATE);
+		return setView(model, "login/studentDetail");
 	}
 
 	/**
@@ -155,11 +154,10 @@ public class StudentController extends BaseController {
 	 */
 	@PostMapping(value = "/student", params = "delete")
 	public String delete(@ModelAttribute StudentForm form, Model model) {
-		model.addAttribute("contents", "login/studentList :: studentList_contents");
 		// delete
 		studentService.deleteOne(form.getId());
 
-		model.addAttribute("message", "削除が完了しました。");
-		return "login/homeLayout";
+		setMessage(model, Message.DELETE);
+		return setView(model, "login/studentList");
 	}
 }

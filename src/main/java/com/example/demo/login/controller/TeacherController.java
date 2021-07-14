@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.TeacherForm;
 import com.example.demo.login.controller.helper.TeacherHelper;
 import com.example.demo.login.domain.model.Grade;
@@ -70,18 +71,25 @@ public class TeacherController extends BaseController {
 	public String register(@ModelAttribute @Validated TeacherForm form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			setCombobox(model);
-			model.addAttribute("contents", "login/teacherSignup :: teacherSignup_contents");
-			return "login/homeLayout";
+			return setView(model, "login/teacherSignup");
 		}
 		Teacher teacher = TeacherHelper.convertFormToTeacher(form);
 		teacher.setId(teacherService.getNextId());
 		teacherService.insert(teacher);
 
 		setCombobox(model);
-		model.addAttribute("message", "登録が完了しました。");
+		setMessage(model, Message.SIGNUP);
 		return setView(model, "login/teacherDetail");
 	}
 
+	/**
+	 * 講師詳細画面を表示
+	 *
+	 * @param form
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/teacherDetail/{id:.+}")
 	public String getUserDetail(@ModelAttribute TeacherForm form, Model model, @PathVariable("id") String id) {
 
