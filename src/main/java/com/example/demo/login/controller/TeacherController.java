@@ -91,7 +91,7 @@ public class TeacherController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/teacherDetail/{id:.+}")
-	public String getUserDetail(@ModelAttribute TeacherForm form, Model model, @PathVariable("id") String id) {
+	public String detail(@ModelAttribute TeacherForm form, Model model, @PathVariable("id") String id) {
 
 		if (StringUtils.isNotEmpty(id)) {
 			Teacher teacher = teacherService.selectOne(id);
@@ -102,9 +102,17 @@ public class TeacherController extends BaseController {
 		return setView(model, "login/teacherDetail");
 	}
 
-	@PostMapping(value="/teacherDetail", params = "update")
+	/**
+	 * 講師情報更新処理
+	 *
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(value = "/teacherDetail", params = "update")
 	public String update(@ModelAttribute @Validated TeacherForm form, BindingResult result, Model model) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			setCombobox(model);
 			return setView(model, "login/teacherDetail");
 		}
@@ -113,10 +121,9 @@ public class TeacherController extends BaseController {
 		teacherService.updateOne(teacher);
 
 		setCombobox(model);
-		setMessage(model, Message.SIGNUP);
+		setMessage(model, Message.UPDATE);
 		return setView(model, "login/teacherDetail");
 	}
-
 
 	/**
 	 * コンボボックスをセットする

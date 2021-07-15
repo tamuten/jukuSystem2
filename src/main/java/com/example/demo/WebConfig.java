@@ -12,8 +12,9 @@ public class WebConfig {
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource bean = new ReloadableResourceBundleMessageSource();
-		bean.setBasename("classpath:messages");
+		bean.setBasenames("classpath:messages", "classpath:ValidationMessages");
 		bean.setDefaultEncoding("UTF-8");
+		bean.setFallbackToSystemLocale(false);
 		return bean;
 	}
 
