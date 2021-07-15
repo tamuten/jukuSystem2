@@ -59,4 +59,11 @@ public class TeacherService {
 
 		return teacher;
 	}
+
+	public void updateOne(Teacher teacher) {
+		teacherDao.updateOne(teacher);
+		teacherSubjectDao.updateOnesSubject(teacher);
+	}
+
+
 }

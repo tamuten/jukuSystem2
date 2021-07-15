@@ -1,10 +1,12 @@
 package com.example.demo.login.domain.repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.login.domain.model.Teacher;
 import com.example.demo.login.domain.model.TeacherSubject;
 import com.example.demo.login.domain.repository.mybatis.TeacherSubjectMapper;
 
@@ -19,5 +21,10 @@ public class TeacherSubjectDao {
 
 	public List<TeacherSubject> findOnesSubject(String id) {
 		return mapper.findOnesSubject(id);
+	}
+
+	public void updateOnesSubject(Teacher teacher) {
+		List<String> subjectList = Arrays.asList(teacher.getSubjectsCanTeach());
+		mapper.updateOnesSubject(subjectList, teacher.getId());
 	}
 }

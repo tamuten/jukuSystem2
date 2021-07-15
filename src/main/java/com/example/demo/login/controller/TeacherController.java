@@ -102,6 +102,22 @@ public class TeacherController extends BaseController {
 		return setView(model, "login/teacherDetail");
 	}
 
+	@PostMapping(value="/teacherDetail", params = "update")
+	public String update(@ModelAttribute @Validated TeacherForm form, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			setCombobox(model);
+			return setView(model, "login/teacherDetail");
+		}
+
+		Teacher teacher = TeacherHelper.convertFormToTeacher(form);
+		teacherService.updateOne(teacher);
+
+		setCombobox(model);
+		setMessage(model, Message.SIGNUP);
+		return setView(model, "login/teacherDetail");
+	}
+
+
 	/**
 	 * コンボボックスをセットする
 	 *

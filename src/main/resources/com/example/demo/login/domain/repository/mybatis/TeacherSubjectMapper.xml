@@ -31,18 +31,22 @@
 	teacher_id = #{ id }
 	</select>
 	<update id="updateOnesSubject">
-	INSERT INTO
+ 	INSERT INTO
 	teacher_subject
 	VALUES
 		<foreach collection="tsList" item="ts" separator=",">
 			(
-			#{ts.teacherId, jdbcType=VARCHAR}, #{ts.subjectId, jdbcType=VARCHAR}
+			#{teacherId, jdbcType=VARCHAR}, #{ts, jdbcType=VARCHAR}
 			)
 		</foreach>
-	ON CONFLICT (teacher_id, subject_id) DO NOTHING
+	ON CONFLICT (teacher_id, subject_id) DO NOTHING;
 	DELETE FROM
-	teacher_subject
+	teacher_subject ts
 	WHERE
-
+		teacher_id = #{ teacherId }
+		AND subject_id NOT IN
+		<foreach item="ts" open="(" close=")" collection="tsList" separator=",">
+                    #{ ts }
+        </foreach>
 	</update>
 </mapper>
