@@ -30,4 +30,19 @@
 	WHERE
 	teacher_id = #{ id }
 	</select>
+	<update id="updateOnesSubject">
+	INSERT INTO
+	teacher_subject
+	VALUES
+		<foreach collection="tsList" item="ts" separator=",">
+			(
+			#{ts.teacherId, jdbcType=VARCHAR}, #{ts.subjectId, jdbcType=VARCHAR}
+			)
+		</foreach>
+	ON CONFLICT (teacher_id, subject_id) DO NOTHING
+	DELETE FROM
+	teacher_subject
+	WHERE
+
+	</update>
 </mapper>
