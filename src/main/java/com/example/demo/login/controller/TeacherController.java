@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.TeacherForm;
 import com.example.demo.login.controller.helper.TeacherHelper;
+import com.example.demo.login.controller.validator.TeacherFormValidator;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Subject;
 import com.example.demo.login.domain.model.Teacher;
@@ -28,6 +31,13 @@ public class TeacherController extends BaseController {
 	private TeacherService teacherService;
 	@Autowired
 	private ComboboxService comboboxService;
+	@Autowired
+	private TeacherFormValidator teacherFormValidator;
+
+	@InitBinder("teacherForm")
+	public void validatorBinder(WebDataBinder binder) {
+		binder.addValidators(teacherFormValidator);
+	}
 
 	/**
 	 * 講師一覧を表示
