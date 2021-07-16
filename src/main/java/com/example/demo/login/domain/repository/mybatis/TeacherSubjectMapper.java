@@ -12,6 +12,5 @@ public interface TeacherSubjectMapper {
 	public void insertBulk(@Param("tsList") List<TeacherSubject> teacherSubjectList);
 	public List<TeacherSubject> findOnesSubject(String teacherId);
 	public void updateOnesSubject(@Param("tsList") List<String> subjectList, @Param("teacherId") String teacherId);
-	public void deleteOnesSubject(List<TeacherSubject> teacherSubjects);
 	public void deleteOnesAll(String teacherId);
 }

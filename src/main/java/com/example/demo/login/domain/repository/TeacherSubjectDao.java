@@ -27,4 +27,8 @@ public class TeacherSubjectDao {
 		List<String> subjectList = Arrays.asList(teacher.getSubjectsCanTeach());
 		mapper.updateOnesSubject(subjectList, teacher.getId());
 	}
+
+	public void deleteOne(String teacherId) {
+		mapper.deleteOnesAll(teacherId);
+	}
 }

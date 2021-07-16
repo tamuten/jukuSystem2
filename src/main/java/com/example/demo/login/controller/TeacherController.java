@@ -96,6 +96,8 @@ public class TeacherController extends BaseController {
 		if (StringUtils.isNotEmpty(id)) {
 			Teacher teacher = teacherService.selectOne(id);
 			TeacherHelper.convertTeacherToForm(teacher, form);
+		} else {
+
 		}
 
 		setCombobox(model);
@@ -123,6 +125,21 @@ public class TeacherController extends BaseController {
 		setCombobox(model);
 		setMessage(model, Message.UPDATE);
 		return setView(model, "login/teacherDetail");
+	}
+
+	/**
+	 * 講師削除処理
+	 *
+	 * @param form
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(value = "/teacherDetail", params = "delete")
+	public String delete(@ModelAttribute TeacherForm form, Model model) {
+		teacherService.deleteOne(form.getId());
+
+		setMessage(model, Message.DELETE);
+		return index(model);
 	}
 
 	/**

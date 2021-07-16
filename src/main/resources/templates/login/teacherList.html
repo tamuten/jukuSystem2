@@ -36,7 +36,7 @@
 					<td th:text="${teacher.id}"></td>
 					<td th:text="${teacher.name}"></td>
 					<td th:text="${teacher.university}"></td>
-					<td th:text="${teacher.undergraduate != null ? teacher.undergraduate + ' ' + teacher.department : ''}"></td>
+					<td th:text="${teacher.undergraduate != null ? teacher.undergraduate + ' ' + (teacher.department != null ? teacher.department : '') : ''}"></td>
 					<td th:text="${teacher.grade}"></td>
 					<td th:text="${#dates.format(teacher.birthday, 'yyyy/MM/dd')}"></td>
 					<td th:text="${teacher.age}"></td>

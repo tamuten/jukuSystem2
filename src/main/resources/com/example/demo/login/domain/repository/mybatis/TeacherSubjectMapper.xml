@@ -49,4 +49,10 @@
                     #{ ts }
         </foreach>
 	</update>
+	<delete id="deleteOnesAll" parameterType="string">
+	DELETE FROM
+	teacher_subject
+	WHERE
+	teacher_id = #{ teacherId }
+	</delete>
 </mapper>

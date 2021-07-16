@@ -28,4 +28,8 @@ public class TeacherDao {
 	public void updateOne(Teacher teacher) {
 		teacherMapper.updateOne(teacher);
 	}
+
+	public void deleteOne(String id) {
+		teacherMapper.deleteOne(id);
+	}
 }

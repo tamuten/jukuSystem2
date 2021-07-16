@@ -78,6 +78,8 @@
 		,delete_datetime
 		FROM
 		teacher
+		WHERE
+		delete_flg = false
 		ORDER BY
 		id ASC
 	</select>
@@ -89,6 +91,7 @@
 		teacher
 		WHERE
 		id = #{ id }
+		AND delete_flg = false
 	</select>
 	<update id="updateOne"
 		parameterType="com.example.demo.login.domain.model.Teacher">
@@ -113,11 +116,11 @@
 		id =#{ id }
 	</update>
 	<delete id="deleteOne"
-		parameterType="com.example.demo.login.domain.model.Student">
+		parameterType="string">
 		UPDATE
 		teacher
 		SET
-		delete_flg = #{ deleteFlg }
+		delete_flg = TRUE
 		,delete_datetime = CURRENT_TIMESTAMP
 		 WHERE
 		 id =#{ id }
