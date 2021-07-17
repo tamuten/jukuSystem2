@@ -11,13 +11,18 @@ public class TeacherFormValidator extends AbstractValidator<TeacherForm> {
 
 	@Override
 	protected void doValidate(TeacherForm form, Errors errors) {
-		if(StringUtils.isEmpty(form.getUniversity())) {
-			if(StringUtils.isNotEmpty(form.getUndergraduate())) {
+		if (StringUtils.isEmpty(form.getUniversity())) {
+			if (StringUtils.isNotEmpty(form.getUndergraduate()) && StringUtils.isNotEmpty(form.getDepartment())) {
 				errors.rejectValue("university", "teacherForm.emptyUniversity");
+			} else if (StringUtils.isNotEmpty(form.getUndergraduate())) {
+				errors.rejectValue("university", "teacherForm.emptyUniversity");
+			} else if (StringUtils.isNotEmpty(form.getDepartment())) {
+				errors.rejectValue("university", "teacherForm.emptyUniversity");
+				errors.rejectValue("undergraduate", "teacherForm.emptyUndergraduate");
 			}
-
-			if(StringUtils.isNotEmpty(form.getDepartment())) {
-
+		} else {
+			if (StringUtils.isEmpty(form.getUndergraduate()) && StringUtils.isNotEmpty(form.getDepartment())) {
+				errors.rejectValue("undergraduate", "teacherForm.emptyUndergraduate");
 			}
 		}
 

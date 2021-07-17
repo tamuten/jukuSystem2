@@ -24,9 +24,11 @@ public class TeacherForm {
 	private String firstName;
 	@NotBlank
 	@Size(max = 30)
+	@Pattern(regexp = "^[\\u30a0-\\u30ff]+$")
 	private String lastKana;
 	@NotBlank
 	@Size(max = 30)
+	@Pattern(regexp = "^[\\u30a0-\\u30ff]+$")
 	private String firstKana;
 	// 性別：初期値を不明に設定
 	private String gender = "unknown";
