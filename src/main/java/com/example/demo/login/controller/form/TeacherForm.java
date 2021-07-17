@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -58,5 +59,6 @@ public class TeacherForm {
 	private Timestamp updateDatetime;
 	private Timestamp deleteDatetime;
 	// 指導可能教科
+	@NotEmpty
 	private String[] subjectsCanTeach;
 }
