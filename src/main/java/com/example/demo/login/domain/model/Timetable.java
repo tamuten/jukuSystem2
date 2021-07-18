@@ -4,7 +4,12 @@ import lombok.Data;
 
 @Data
 public class Timetable {
-	private String day;
 	private Integer timedId;
-	private Boolean isOpen;
+	private boolean monday;
+	private boolean tuesday;
+	private boolean wednesday;
+	private boolean thursday;
+	private boolean friday;
+	private boolean saturday;
+	private boolean sunday;
 }

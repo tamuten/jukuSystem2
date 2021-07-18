@@ -13,7 +13,11 @@ public class MTimetableDao {
 	@Autowired
 	private MTimetableMapper mapper;
 
-	public List<Timetable> findAll(){
+	public List<Timetable> findAll() {
 		return mapper.findAll();
+	}
+
+	public void update(List<Timetable> timetable) {
+		mapper.update(timetable);
 	}
 }

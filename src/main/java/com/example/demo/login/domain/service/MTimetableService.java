@@ -13,10 +13,11 @@ public class MTimetableService {
 	@Autowired
 	private MTimetableDao mTimetableDao;
 
-	public List<Timetable> findAll(){
-
-
-
+	public List<Timetable> findAll() {
 		return mTimetableDao.findAll();
+	}
+
+	public void update(List<Timetable> timetable) {
+		mTimetableDao.update(timetable);
 	}
 }

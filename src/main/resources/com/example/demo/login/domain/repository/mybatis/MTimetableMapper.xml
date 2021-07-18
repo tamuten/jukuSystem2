@@ -6,24 +6,29 @@
 	namespace="com.example.demo.login.domain.repository.mybatis.MTimetableMapper">
 	<resultMap type="com.example.demo.login.domain.model.Timetable"
 		id="timetable">
-		<id column="day" property="day" />
 		<id column="timed_id" property="timedId" />
-		<result column="opening_flg" property="isOpen" />
+		<result column="monday" property="monday" />
+		<result column="tuesday" property="tuesday" />
+		<result column="wednesday" property="wednesday" />
+		<result column="thursday" property="thursday" />
+		<result column="friday" property="friday" />
+		<result column="saturday" property="saturday" />
+		<result column="sunday" property="sunday" />
 	</resultMap>
 
-	<select id="findAll" resultMap="timed">
+	<select id="findAll" resultMap="timetable">
 		SELECT
 		*
 		FROM
 		m_timetable
 		ORDER BY
-		id ASC
+		timed_id ASC
 	</select>
 	<update id="update" parameterType="com.example.demo.login.domain.model.Timetable">
 		UPDATE
 		m_timetable
 		SET
-		opening_flg = #{ openingFlg }
+		monday = #{ monday }
 		WHERE
 		day = #{ day }
 		AND timed_id =#{ timedId }

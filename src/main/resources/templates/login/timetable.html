@@ -7,64 +7,55 @@
 <body>
 	<!-- ポイント：th:fragment -->
 	<div th:fragment="timetable_contents">
-		<div class="page-header">
-			<h1>時間割管理</h1>
-		</div>
-		<form method="post" th:action="@{/timetable/update}"
-			th:object="${timetableForm}">
-			<div th:if="${message}" class="alert alert-success">
-				<p th:text="${message}"></p>
+		<div class="col-sm-5">
+			<div class="page-header">
+				<h1>時間割管理</h1>
 			</div>
-			<table class="table table-bordered table-striped">
-				<th:block th:if="${stat.count==1}"
-					th:each="entry, stat : ${timetable}">
+			<form method="post" th:action="@{/timetable/update}"
+				th:object="${timetableForm}">
+				<div th:if="${message}" class="alert alert-success">
+					<p th:text="${message}"></p>
+				</div>
+				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th></th>
-							<th:block th:each="timed: ${entry.value}">
-								<td th:text="${timed.day}"></td>
-							</th:block>
+							<td>月</td>
+							<td>火</td>
+							<td>水</td>
+							<td>木</td>
+							<td>金</td>
+							<td>土</td>
+							<td>日</td>
 						</tr>
 					</thead>
-				</th:block>
-				<th:block th:each="entry : ${timetable}">
 					<tbody>
-						<tr>
-							<th th:text="${entry.key} + '限'"></th>
-							<th:block th:each="timed : ${entry.value}">
-								<!-- <td th:text="${timed.timedId}"></td> -->
-								<td><input type="checkbox" th:checked="${timed.isOpen}" /></td>
-							</th:block>
-						</tr>
-					</tbody>
-				</th:block>
-
-				<!-- <thead>
-					<tr>
-						<th></th>
-						<th:block th:each="entry, stat : ${timetable}">
-							<td th:text="${entry.key}"></td>
+						<th:block th:each="timed, stat : ${timetable}">
+							<tr>
+								<th th:text="${timed.timedId} + '限'"></th>
+								<td><input type="checkbox" th:checked="${timed.monday}"
+									th:name="|timetable[${stat.index}].monday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.tuesday}"
+									th:name="|timetable[${stat.index}].tuesday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.wednesday}"
+									th:name="|timetable[${stat.index}].wednesday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.thursday}"
+									th:name="|timetable[${stat.index}].thursday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.friday}"
+									th:name="|timetable[${stat.index}].friday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.saturday}"
+									th:name="|timetable[${stat.index}].saturday|" /></td>
+								<td><input type="checkbox" th:checked="${timed.sunday}"
+									th:name="|timetable[${stat.index}].sunday|" /></td>
+							</tr>
 						</th:block>
-					</tr>
-				</thead>
-
-				<th:block th:each="entry, stat : ${timetable}">
-					<th:block th:each="timed, st : ${entry.value}">
-						<tr>
-							<th th:if="${st.count==1}" th:text="${timed.timedId}"></th>
-
-							<td th:text="${timed.timedId}"></td>
-							<td th:text="${timed.isOpen}"></td>
-
-						</tr>
-						</tbody>
-					</th:block>
-				</th:block> -->
-			</table>
-			<!-- 更新 -->
-			<button class="btn btn-primary btn-lg pull-right" type="submit"
-				name="update">更新</button>
-		</form>
+					</tbody>
+				</table>
+				<!-- 更新 -->
+				<button class="btn btn-primary btn-lg pull-right" type="submit"
+					name="update">更新</button>
+			</form>
+		</div>
 	</div>
 </body>
 <script type="text/javascript" th:inline="javascript">
