@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.MTimetableMapper">
+	<resultMap type="com.example.demo.login.domain.model.Timetable"
+		id="timetable">
+		<id column="day" property="day" />
+		<id column="timed_id" property="timedId" />
+		<result column="opening_flg" property="isOpen" />
+	</resultMap>
+
+	<select id="findAll" resultMap="timed">
+		SELECT
+		*
+		FROM
+		m_timetable
+		ORDER BY
+		id ASC
+	</select>
+	<update id="update" parameterType="com.example.demo.login.domain.model.Timetable">
+		UPDATE
+		m_timetable
+		SET
+		opening_flg = #{ openingFlg }
+		WHERE
+		day = #{ day }
+		AND timed_id =#{ timedId }
+	</update>
+	</mapper>

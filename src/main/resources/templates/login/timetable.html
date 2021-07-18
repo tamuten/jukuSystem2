@@ -2,128 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta charset="UTF-8">
-<title>時間割</title>
+<meta charset="UTF-8"></meta>
 </head>
 <body>
+	<!-- ポイント：th:fragment -->
 	<div th:fragment="timetable_contents">
-		<div class="row">
-			<div class="col-sm-5">
-				<div class="page-header">
-					<h1>時間割</h1>
-				</div>
-				<form method="post" th:action="@{/timetable/update}"
-					th:object="${timetableForm}">
-					<span th:text="${message}"></span>
-					<table class="table table-bordered table-hover">
-						<tr>
-							<th class="active">１限</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{name}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('name')}"
-										th:errors="*{name}"> name error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">別名</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('alias')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{alias}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('alias')}"
-										th:errors="*{alias}"> alias error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">月額学費（税込）</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('fee')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{fee}" /> <span
-										class="text-danger" th:if="${#fields.hasErrors('fee')}"
-										th:errors="*{fee}"> fee error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">授業１</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('lesson1')} ? 'has-error'">
-									<select class="form-control">
-										<option value="">---</option>
-										<option th:each="item : ${lesson}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{lesson1}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{lesson1}" /> -->
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('lesson1')}" th:errors="*{lesson1}">
-										lesson1 error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">授業２</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('lesson2')} ? 'has-error'">
-									<select class="form-control">
-										<option value="">---</option>
-										<option th:each="item : ${lesson}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{lesson2}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{lesson2}" /> -->
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('lesson2')}" th:errors="*{lesson2}">
-										lesson2 error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">授業３</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('lesson3')} ? 'has-error'">
-									<select class="form-control">
-										<option value="">---</option>
-										<option th:each="item : ${lesson}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{lesson3}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{lesson3}" /> -->
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('lesson3')}" th:errors="*{lesson3}">
-										lesson3 error </span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th class="active">授業４</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('lesson4')} ? 'has-error'">
-									<select class="form-control">
-										<option value="">---</option>
-										<option th:each="item : ${lesson}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{lesson4}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{lesson4}" /> -->
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('lesson4')}" th:errors="*{lesson4}">
-										lesson4 error </span>
-								</div>
-							</td>
-						</tr>
-					</table>
-					<!-- 更新 -->
-					<button class="btn btn-primary btn-lg pull-right" type="submit"
-						name="update">更新</button>
-				</form>
-			</div>
+		<div class="page-header">
+			<h1>時間割管理</h1>
 		</div>
+		<form method="post" th:action="@{/timetable/update}"
+			th:object="${timetableForm}">
+			<div th:if="${message}" class="alert alert-success">
+				<p th:text="${message}"></p>
+			</div>
+			<table class="table table-bordered table-striped">
+				<th:block th:if="${stat.count==1}"
+					th:each="entry, stat : ${timetable}">
+					<thead>
+						<tr>
+							<th></th>
+							<th:block th:each="timed: ${entry.value}">
+								<td th:text="${timed.day}"></td>
+							</th:block>
+						</tr>
+					</thead>
+				</th:block>
+				<th:block th:each="entry : ${timetable}">
+					<tbody>
+						<tr>
+							<th th:text="${entry.key} + '限'"></th>
+							<th:block th:each="timed : ${entry.value}">
+								<!-- <td th:text="${timed.timedId}"></td> -->
+								<td><input type="checkbox" th:checked="${timed.isOpen}" /></td>
+							</th:block>
+						</tr>
+					</tbody>
+				</th:block>
+
+				<!-- <thead>
+					<tr>
+						<th></th>
+						<th:block th:each="entry, stat : ${timetable}">
+							<td th:text="${entry.key}"></td>
+						</th:block>
+					</tr>
+				</thead>
+
+				<th:block th:each="entry, stat : ${timetable}">
+					<th:block th:each="timed, st : ${entry.value}">
+						<tr>
+							<th th:if="${st.count==1}" th:text="${timed.timedId}"></th>
+
+							<td th:text="${timed.timedId}"></td>
+							<td th:text="${timed.isOpen}"></td>
+
+						</tr>
+						</tbody>
+					</th:block>
+				</th:block> -->
+			</table>
+			<!-- 更新 -->
+			<button class="btn btn-primary btn-lg pull-right" type="submit"
+				name="update">更新</button>
+		</form>
 	</div>
 </body>
+<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+
+	/*]]>*/
+</script>
 </html>
