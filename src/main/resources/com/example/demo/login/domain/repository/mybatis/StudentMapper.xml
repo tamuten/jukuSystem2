@@ -69,7 +69,7 @@ select
     student.phone_number,
     student.mail_address,
     student.address,
-    course.alias as course,
+    course.name as course,
     student.registered_datetime
 from
     student

@@ -8,14 +8,16 @@
 <body>
 	<div th:fragment="studentSignup_contents">
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-12">
 				<div class="page-header">
 					<h1>
 						<i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒情報登録
 					</h1>
 				</div>
-				<form method="post" th:action="@{/student/register}"
-					th:object="${studentForm}">
+			</div>
+			<form method="post" th:action="@{/student/register}"
+				th:object="${studentForm}">
+				<div class="col-sm-5">
 					<span th:text="${message}"></span>
 					<table class="table table-bordered table-responsive">
 						<tr>
@@ -74,14 +76,14 @@
 
 							<td><div class="form-group">
 									<label class="radio-inline btnLabel" for="gender1"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="unknown"
-										autocomplete="off" checked> 不明
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="unknown" autocomplete="off" checked> 不明
 									</label> <label class="radio-inline btnLabel" for="gender2"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="male"
-										autocomplete="off"> 男性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="male" autocomplete="off"> 男性
 									</label> <label class="radio-inline btnLabel" for="gender3"> <input
-										type="radio" class="btn-check" th:field="*{gender}" value="female"
-										autocomplete="off"> 女性
+										type="radio" class="btn-check" th:field="*{gender}"
+										value="female" autocomplete="off"> 女性
 									</label>
 								</div></td>
 						</tr>
@@ -109,8 +111,8 @@
 									th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
 									<input type="date" class="form-control" th:field="*{birthday}" />
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">
-										birthday error </span>
+										th:if="${#fields.hasErrors('birthday')}"
+										th:errors="*{birthday}"> birthday error </span>
 								</div>
 							</td>
 						</tr>
@@ -170,9 +172,8 @@
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('zipcode')} ? 'has-error'">
 									<input type="text" class="form-control"
-										placeholder="（例）3310815"
-										th:field="*{zipcode}" /> <span class="text-danger"
-										th:if="${#fields.hasErrors('zipcode')}"
+										placeholder="（例）3310815" th:field="*{zipcode}" /> <span
+										class="text-danger" th:if="${#fields.hasErrors('zipcode')}"
 										th:errors="*{zipcode}"> zipcode error </span>
 								</div>
 							</td>
@@ -182,57 +183,82 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('address')} ? 'has-error'">
-									<textarea class="form-control" th:field="*{address}" placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
+									<textarea class="form-control" th:field="*{address}"
+										placeholder="（例）東京都千代田区霞が関 2-1-6 霞が関ビル607"></textarea>
 									<span class="text-danger"
 										th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
 										address error </span>
 								</div>
 							</td>
 						</tr>
+
+					</table>
+
+
+
+
+				</div>
+				<div class="col-sm-5">
+					<table class="table table-bordered table-responsive">
 						<tr>
-							<th class="active"><span class="required">*</span>&nbsp;コース</th>
-							<td>
+							<th class="active col-sm-2"><span class="required">*</span>&nbsp;コース</th>
+							<td class="col-sm-3">
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
 									<select class="form-control" name="course">
 										<option value="">---</option>
 										<option th:each="item : ${courseList}" th:value="${item.id}"
 											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{course}" /> -->
-									<span class="text-danger"
+									</select> <span class="text-danger"
 										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
 										course error </span>
 								</div>
 							</td>
 						</tr>
+						<!-- <tr>
+						<th class="active col-sm-2 align-middle">週あたり授業回数</th>
+						<td class="col-sm-3 align-middle">
+							<div class="form-group">
+								<input type="text" class="form-control" readonly="readonly" />
+							</div>
+						</td>
+					</tr> -->
+						<tr>
+							<th class="active align-middle">授業</th>
+							<td class=" align-middle">
+								<div class="form-group">
+									<input type="text" class="form-control" readonly="readonly" />
+								</div>
+							</td>
+						</tr>
 					</table>
-					<!-- 登録 -->
-					<button class="btn btn-primary btn-lg pull-right" type="submit"
-						name="register">登録</button>
+						<button class="btn btn-primary btn-lg pull-right" type="submit"
+					name="register">登録</button>
+				</div>
+				<!-- 登録 -->
 
-				</form>
-			</div>
+			</form>
 		</div>
-		<script type="text/javascript" th:inline="javascript">
-			/*<![CDATA[*/
-			$(function() {
-				$("#updateBtn").on('click', function() {
-					if (confirm('更新してよろしいですか？')) {
-						$('form').attr('action', '/lesson/update');
-						$('form').submit();
-					}
-				});
+	</div>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		$(function() {
+			$("#updateBtn").on('click', function() {
+				if (confirm('更新してよろしいですか？')) {
+					$('form').attr('action', '/lesson/update');
+					$('form').submit();
+				}
+			});
 
-				$('#deleteBtn').on('click', function() {
-					if (confirm('削除してよろしいですか？')) {
-						$('form').attr('action', '/lesson/delete');
-						$('form').submit();
-					}
-				});
-			})
-			/*]]>*/
-		</script>
+			$('#deleteBtn').on('click', function() {
+				if (confirm('削除してよろしいですか？')) {
+					$('form').attr('action', '/lesson/delete');
+					$('form').submit();
+				}
+			});
+		})
+		/*]]>*/
+	</script>
 	</div>
 </body>
 

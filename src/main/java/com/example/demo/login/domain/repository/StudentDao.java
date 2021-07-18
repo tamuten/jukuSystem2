@@ -20,6 +20,7 @@ public class StudentDao {
 
 	public List<StudentListDto> findAll() {
 		return mapper.findAll();
+
 	}
 
 	public Student selectOne(String id) {
