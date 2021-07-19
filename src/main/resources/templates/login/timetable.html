@@ -33,7 +33,9 @@
 						<th:block th:each="timed, stat : ${timetable}">
 							<tr>
 								<th th:text="${timed.timedId} + '限'"></th>
-								<td><input type="checkbox" th:checked="${timed.monday}"
+								<td><input type="hidden" th:value="${timed.timedId}"
+									th:name="|timetable[${stat.index}].timedId|" /><input
+									type="checkbox" th:checked="${timed.monday}"
 									th:name="|timetable[${stat.index}].monday|" /></td>
 								<td><input type="checkbox" th:checked="${timed.tuesday}"
 									th:name="|timetable[${stat.index}].tuesday|" /></td>

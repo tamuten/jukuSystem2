@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.TimetableForm;
 import com.example.demo.login.domain.model.Timetable;
 import com.example.demo.login.domain.service.MTimetableService;
@@ -51,6 +52,7 @@ public class MTimetableController extends BaseController {
 		}
 		service.update(form.getTimetable());
 
+		setMessage(model, Message.UPDATE);
 		return index(model);
 	}
 

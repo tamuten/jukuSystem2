@@ -25,6 +25,9 @@ import com.example.demo.login.domain.model.Teacher;
 import com.example.demo.login.domain.service.ComboboxService;
 import com.example.demo.login.domain.service.TeacherService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class TeacherController extends BaseController {
 	@Autowired
@@ -85,6 +88,7 @@ public class TeacherController extends BaseController {
 		}
 		Teacher teacher = TeacherHelper.convertFormToTeacher(form);
 		teacher.setId(teacherService.getNextId());
+		log.debug("teacher = [" + teacher + "]");
 		teacherService.insert(teacher);
 
 		setCombobox(model);

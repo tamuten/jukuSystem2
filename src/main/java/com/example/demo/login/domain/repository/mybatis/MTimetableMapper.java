@@ -9,5 +9,5 @@ import com.example.demo.login.domain.model.Timetable;
 @Mapper
 public interface MTimetableMapper {
 	public List<Timetable> findAll();
-	public void update(List<Timetable> timetable);
+	public void updateOne(Timetable timetable);
 }

@@ -17,7 +17,7 @@ public class MTimetableDao {
 		return mapper.findAll();
 	}
 
-	public void update(List<Timetable> timetable) {
-		mapper.update(timetable);
+	public void update(Timetable timetable) {
+		mapper.updateOne(timetable);
 	}
 }
