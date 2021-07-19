@@ -37,8 +37,16 @@ class TeacherServiceTest {
 		service.insert(teacher);
 
 		Teacher actual = service.selectOne("99999999");
+		List<String> actualList = actual.getSubjects();
 
 		assertEquals(teacher.getName(), actual.getName());
+		assertEquals(teacher.getId(), actual.getId());
+		assertEquals(teacher.getKana(), actual.getKana());
+		assertEquals(actualList, subjects);
+
 	}
+
+	// update
+	// delete
 
 }

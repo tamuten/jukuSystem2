@@ -143,7 +143,7 @@
 		,ts.subject_id
 		FROM
 		teacher t
-		INNER JOIN
+		LEFT OUTER JOIN
 			teacher_subject ts
 			ON t.id = ts.teacher_id
 		WHERE
