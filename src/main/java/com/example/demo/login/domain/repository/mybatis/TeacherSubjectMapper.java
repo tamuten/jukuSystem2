@@ -9,7 +9,7 @@ import com.example.demo.login.domain.model.TeacherSubject;
 
 @Mapper
 public interface TeacherSubjectMapper {
-	public void insertBulk(@Param("tsList") List<TeacherSubject> teacherSubjectList);
+	public void insertBulk(@Param("tsList") List<String> teacherSubjectList, @Param("teacherId") String teacherId);
 	public List<TeacherSubject> findOnesSubject(String teacherId);
 	public void updateOnesSubject(@Param("tsList") List<String> subjectList, @Param("teacherId") String teacherId);
 	public void deleteOnesAll(String teacherId);

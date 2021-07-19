@@ -35,10 +35,10 @@ public class TeacherService {
 
 	public void insert(Teacher teacher) {
 		String teacherId = teacher.getId();
-		String[] teacherSubject = teacher.getSubjectsCanTeach();
+//		String[] teacherSubject = teacher.getSubjectsCanTeach();
 
 		teacherDao.insert(teacher);
-		teacherSubjectDao.insertBulk(generateTeacherSubject(teacherId, teacherSubject));
+		teacherSubjectDao.insertBulk(teacher.getSubjects(), teacher.getId());
 	}
 
 	private List<TeacherSubject> generateTeacherSubject(String teacherId, String[] subjectList) {
@@ -51,12 +51,7 @@ public class TeacherService {
 	}
 
 	public Teacher selectOne(String id) {
-		Teacher teacher = teacherDao.selectOne(id);
-		List<TeacherSubject> teacherSubject = teacherSubjectDao.findOnesSubject(id);
-		String[] subjectList = teacherSubject.stream().map(ts -> ts.getSubjectId()).toArray(String[]::new);
-		teacher.setSubjectsCanTeach(subjectList);
-
-		return teacher;
+		return teacherDao.selectOne(id);
 	}
 
 	public void updateOne(Teacher teacher) {

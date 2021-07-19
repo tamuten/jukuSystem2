@@ -3,6 +3,7 @@ package com.example.demo.login.controller;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +91,8 @@ public class TeacherController extends BaseController {
 		teacher.setId(teacherService.getNextId());
 		log.debug("teacher = [" + teacher + "]");
 		teacherService.insert(teacher);
+
+		BeanUtils.copyProperties(teacher, form);
 
 		setCombobox(model);
 		setMessage(model, Message.SIGNUP);

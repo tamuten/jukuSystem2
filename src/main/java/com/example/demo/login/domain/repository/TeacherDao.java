@@ -22,7 +22,8 @@ public class TeacherDao {
 	}
 
 	public Teacher selectOne(String id) {
-		return teacherMapper.selectOne(id);
+//		return teacherMapper.selectOne(id);
+		return teacherMapper.select(id);
 	}
 
 	public void updateOne(Teacher teacher) {

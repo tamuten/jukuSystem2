@@ -28,6 +28,33 @@
 		<result column="delete_datetime" property="deleteDatetime" />
 	</resultMap>
 
+		<resultMap type="com.example.demo.login.domain.model.Teacher"
+		id="teacherResult">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="kana" property="kana" />
+		<result column="gender" property="gender" />
+		<result column="birthday" property="birthday" />
+		<result column="age" property="age" />
+		<result column="university" property="university" />
+		<result column="undergraduate" property="undergraduate" />
+		<result column="department" property="department" />
+		<result column="grade" property="grade" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="mail_address" property="mailAddress" />
+		<result column="zipcode" property="zipcode" />
+		<result column="address" property="address" />
+		<result column="note" property="note" />
+		<result column="delete_flg" property="deleteFlg" />
+		<result column="registered_datetime"
+			property="registeredDatetime" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="delete_datetime" property="deleteDatetime" />
+		<collection property="subjects" javaType="ArrayList" ofType="string">
+			<result column="subject_id" />
+		</collection>
+	</resultMap>
+
 	<insert id="insert"
 		parameterType="com.example.demo.login.domain.model.Teacher">
 		INSERT
@@ -92,6 +119,36 @@
 		WHERE
 		id = #{ id }
 		AND delete_flg = false
+	</select>
+	<select id="select" parameterType="string" resultMap="teacherResult">
+		SELECT
+		t.id
+		,t.name
+		,t.kana
+		,t.gender
+		,t.birthday
+		,t.university
+		,t.undergraduate
+		,t.department
+		,t.grade
+		,t.phone_number
+		,t.mail_address
+		,t.zipcode
+		,t.address
+		,t.note
+		,t.delete_flg
+		,t.registered_datetime
+		,t.update_datetime
+		,t.delete_datetime
+		,ts.subject_id
+		FROM
+		teacher t
+		INNER JOIN
+			teacher_subject ts
+			ON t.id = ts.teacher_id
+		WHERE
+		t.id = #{ id }
+		AND t.delete_flg = false
 	</select>
 	<update id="updateOne"
 		parameterType="com.example.demo.login.domain.model.Teacher">

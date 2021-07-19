@@ -1,6 +1,5 @@
 package com.example.demo.login.domain.repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,8 @@ public class TeacherSubjectDao {
 	@Autowired
 	private TeacherSubjectMapper mapper;
 
-	public void insertBulk(List<TeacherSubject> teacherSubject) {
-		mapper.insertBulk(teacherSubject);
+	public void insertBulk(List<String> teacherSubject, String teacherId) {
+		mapper.insertBulk(teacherSubject, teacherId);
 	}
 
 	public List<TeacherSubject> findOnesSubject(String id) {
@@ -24,8 +23,8 @@ public class TeacherSubjectDao {
 	}
 
 	public void updateOnesSubject(Teacher teacher) {
-		List<String> subjectList = Arrays.asList(teacher.getSubjectsCanTeach());
-		mapper.updateOnesSubject(subjectList, teacher.getId());
+//		List<String> subjectList = Arrays.asList(teacher.getSubjectsCanTeach());
+		mapper.updateOnesSubject(teacher.getSubjects(), teacher.getId());
 	}
 
 	public void deleteOne(String teacherId) {

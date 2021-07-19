@@ -11,13 +11,13 @@
 		<id column="subject_id" property="subjectId" />
 	</resultMap>
 
-	<insert id="insertBulk" parameterType="java.util.List">
+	<insert id="insertBulk">
 		INSERT INTO teacher_subject
 		(teacher_id, subject_id)
 		VALUES
 		<foreach collection="tsList" item="ts" separator=",">
 			(
-			#{ts.teacherId, jdbcType=VARCHAR}, #{ts.subjectId, jdbcType=VARCHAR}
+			#{teacherId, jdbcType=VARCHAR}, #{ts, jdbcType=VARCHAR}
 			)
 		</foreach>
 	</insert>

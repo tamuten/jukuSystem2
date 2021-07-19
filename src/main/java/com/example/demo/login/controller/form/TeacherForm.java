@@ -2,6 +2,7 @@ package com.example.demo.login.controller.form;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -62,5 +63,6 @@ public class TeacherForm {
 	private Timestamp deleteDatetime;
 	// 指導可能教科
 	@NotEmpty
-	private String[] subjectsCanTeach;
+//	private String[] subjectsCanTeach;
+	private List<String> subjects;
 }

@@ -208,7 +208,7 @@
 							<td><div class="checkbox-inline"
 									th:each="subject : ${subjectList}">
 									<label> <input type="checkbox" th:value="${subject.id}"
-										th:text="${subject.name}" th:field="*{subjectsCanTeach}" />
+										th:text="${subject.name}" th:field="*{subjects}" />
 									</label>
 								</div></td>
 						</tr>

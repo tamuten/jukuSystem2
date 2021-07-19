@@ -208,17 +208,17 @@
 
 							<td>
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('subjectsCanTeach')} ? 'has-error'">
+									th:classappend="${#fields.hasErrors('subjects')} ? 'has-error'">
 									<div class="checkbox-inline" th:each="subject : ${subjectList}">
 										<label> <input type="checkbox"
 											th:value="${subject.id}" th:text="${subject.name}"
-											th:field="*{subjectsCanTeach}" />
+											th:field="*{subjects}" />
 										</label>
 									</div>
 									<br>
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('subjectsCanTeach')}" th:errors="*{subjectsCanTeach}">
-										subjectsCanTeach error </span>
+										th:if="${#fields.hasErrors('subjects')}" th:errors="*{subjects}">
+										subjects error </span>
 								</div>
 							</td>
 						</tr>
