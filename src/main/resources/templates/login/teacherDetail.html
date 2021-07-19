@@ -204,13 +204,21 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active">担当可能教科</th>
-							<td><div class="checkbox-inline"
-									th:each="subject : ${subjectList}">
-									<label> <input type="checkbox" th:value="${subject.id}"
-										th:text="${subject.name}" th:field="*{subjects}" />
-									</label>
-								</div></td>
+							<th class="active"><span class="required">*</span>&nbsp;担当可能教科</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('subjects')} ? 'has-error'">
+									<div class="checkbox-inline" th:each="subject : ${subjectList}">
+										<label> <input type="checkbox"
+											th:value="${subject.id}" th:text="${subject.name}"
+											th:field="*{subjects}" />
+										</label>
+									</div>
+									<br> <span class="text-danger"
+										th:if="${#fields.hasErrors('subjects')}"
+										th:errors="*{subjects}"> subjects error </span>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th class="active">備考</th>

@@ -23,7 +23,6 @@ public class TeacherSubjectDao {
 	}
 
 	public void updateOnesSubject(Teacher teacher) {
-//		List<String> subjectList = Arrays.asList(teacher.getSubjectsCanTeach());
 		mapper.updateOnesSubject(teacher.getSubjects(), teacher.getId());
 	}
 

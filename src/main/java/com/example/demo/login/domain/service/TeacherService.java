@@ -1,6 +1,5 @@
 package com.example.demo.login.domain.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.login.Sequence;
 import com.example.demo.login.domain.model.Teacher;
-import com.example.demo.login.domain.model.TeacherSubject;
 import com.example.demo.login.domain.repository.SequenceDao;
 import com.example.demo.login.domain.repository.TeacherDao;
 import com.example.demo.login.domain.repository.TeacherSubjectDao;
@@ -34,20 +32,8 @@ public class TeacherService {
 	}
 
 	public void insert(Teacher teacher) {
-		String teacherId = teacher.getId();
-//		String[] teacherSubject = teacher.getSubjectsCanTeach();
-
 		teacherDao.insert(teacher);
 		teacherSubjectDao.insertBulk(teacher.getSubjects(), teacher.getId());
-	}
-
-	private List<TeacherSubject> generateTeacherSubject(String teacherId, String[] subjectList) {
-		List<TeacherSubject> teacherSubject = new ArrayList<>();
-		for (String subjectId : subjectList) {
-			TeacherSubject ts = new TeacherSubject(teacherId, subjectId);
-			teacherSubject.add(ts);
-		}
-		return teacherSubject;
 	}
 
 	public Teacher selectOne(String id) {
