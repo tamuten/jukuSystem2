@@ -15,12 +15,14 @@
 	<insert id="insertBulk">
 		INSERT INTO student_class
 		VALUES
-		<foreach collection="scList" item="sc" open="(" separator="," close=")">
+		<foreach collection="scList" item="sc" separator=",">
+		(
 			#{studentId, jdbcType=VARCHAR}
 			,#{sc.subjectId, jdbcType=VARCHAR}
 			,#{sc.dayId, jdbcType=INTEGER}
 			,#{sc.timedId, jdbcType=INTEGER}
 			,#{sc.teacherId, jdbcType=VARCHAR}
+		)
 		</foreach>
 	</insert>
 

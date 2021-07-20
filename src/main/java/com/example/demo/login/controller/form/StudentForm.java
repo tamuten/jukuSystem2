@@ -1,6 +1,7 @@
 package com.example.demo.login.controller.form;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.CollectionUtils;
 
 import com.example.demo.login.domain.model.StudentClass;
 
@@ -61,6 +63,13 @@ public class StudentForm {
 	private List<StudentClass> classes;
 
 	public void addClassesList() {
+		if (CollectionUtils.isEmpty(classes)) classes = new ArrayList<>();
 		classes.add(new StudentClass());
+	}
+
+	public void removeClassesList(int index) {
+		if (classes.size() > 1) {
+			classes.remove(index);
+		}
 	}
 }

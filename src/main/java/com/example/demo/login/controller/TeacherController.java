@@ -3,7 +3,6 @@ package com.example.demo.login.controller;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,11 +91,8 @@ public class TeacherController extends BaseController {
 		log.debug("teacher = [" + teacher + "]");
 		teacherService.insert(teacher);
 
-		BeanUtils.copyProperties(teacher, form);
-
-		setCombobox(model);
 		setMessage(model, Message.SIGNUP);
-		return setView(model, "login/teacherDetail");
+		return detail(form, model, teacher.getId());
 	}
 
 	/**
@@ -104,7 +100,7 @@ public class TeacherController extends BaseController {
 	 *
 	 * @param form
 	 * @param model
-	 * @param id
+	 * @param id 講師ID
 	 * @return
 	 */
 	@GetMapping("/teacherDetail/{id:.+}")
@@ -114,7 +110,7 @@ public class TeacherController extends BaseController {
 			Teacher teacher = teacherService.selectOne(id);
 			TeacherHelper.convertTeacherToForm(teacher, form);
 		} else {
-
+			// TODO IDが見つからなかった時の処理
 		}
 
 		setCombobox(model);

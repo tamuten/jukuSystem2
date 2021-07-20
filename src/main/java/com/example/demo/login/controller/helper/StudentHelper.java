@@ -39,5 +39,6 @@ public class StudentHelper {
 		String[] kana = student.getKana().split(" ");
 		form.setLastKana(kana[0]);
 		form.setFirstKana(kana[1]);
+
 	}
 }

@@ -14,13 +14,14 @@
 						<i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒情報詳細
 					</h1>
 				</div>
+				<div th:if="${message}" class="alert alert-success">
+					<p th:text="${message}"></p>
+				</div>
 			</div>
 			<form method="post" th:action="@{/studentDetail}"
 				th:object="${studentForm}">
 				<div class="col-sm-5">
-					<div th:if="${message}" class="alert alert-success">
-						<p th:text="${message}"></p>
-					</div>
+
 
 					<table class="table table-bordered table-hover">
 						<tr>
@@ -251,6 +252,7 @@
 								<td>曜日</td>
 								<td>時限</td>
 								<td>担当講師</td>
+								<td></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -258,46 +260,57 @@
 								<tr>
 									<th class="active align-middle" th:text="${stat.count}"></th>
 									<td class=" align-middle"><select
-										class="form-control input-sm" th:name="|classes[${stat.index}].subjectId|">
+										class="form-control input-sm"
+										th:name="|classes[${stat.index}].subjectId|">
 											<option value="">---</option>
 											<option th:each="item : ${subjectList}" th:value="${item.id}"
 												th:text="${item.name}"
 												th:selected="${item.id} == *{classes[__${stat.index}__].subjectId}"></option>
 									</select></td>
 									<td class="align-middle"><select
-										class="form-control input-sm" th:name="|classes[${stat.index}].dayId|"><option
+										class="form-control input-sm"
+										th:name="|classes[${stat.index}].dayId|"><option
 												value="">---</option>
-											<option value="1" th:selected="*{classes[__${stat.index}__].dayId} == 1">月</option>
-											<option value="2" th:selected="*{classes[__${stat.index}__].dayId} == 2">火</option>
-											<option value="3" th:selected="*{classes[__${stat.index}__].dayId} == 3">水</option>
-											<option value="4" th:selected="*{classes[__${stat.index}__].dayId} == 4">木</option>
-											<option value="5" th:selected="*{classes[__${stat.index}__].dayId} == 5">金</option>
-											<option value="6" th:selected="*{classes[__${stat.index}__].dayId} == 6">土</option>
-											<option value="7" th:selected="*{classes[__${stat.index}__].dayId} == 7">日</option>
+											<option value="1"
+												th:selected="*{classes[__${stat.index}__].dayId} == 1">月</option>
+											<option value="2"
+												th:selected="*{classes[__${stat.index}__].dayId} == 2">火</option>
+											<option value="3"
+												th:selected="*{classes[__${stat.index}__].dayId} == 3">水</option>
+											<option value="4"
+												th:selected="*{classes[__${stat.index}__].dayId} == 4">木</option>
+											<option value="5"
+												th:selected="*{classes[__${stat.index}__].dayId} == 5">金</option>
+											<option value="6"
+												th:selected="*{classes[__${stat.index}__].dayId} == 6">土</option>
+											<option value="7"
+												th:selected="*{classes[__${stat.index}__].dayId} == 7">日</option>
 									</select></td>
 									<td class=" align-middle"><select
-										class="form-control input-sm" th:name="|classes[${stat.index}].timedId|">
+										class="form-control input-sm"
+										th:name="|classes[${stat.index}].timedId|">
 											<option value="">---</option>
 											<option th:each="item : ${timedList}" th:value="${item.id}"
 												th:text="${item.name}"
 												th:selected="${item.id} == *{classes[__${stat.index}__].timedId}"></option>
 									</select></td>
 									<td class=" align-middle"><select
-										class="form-control input-sm" th:name="|classes[${stat.index}].teacherId|">
+										class="form-control input-sm"
+										th:name="|classes[${stat.index}].teacherId|">
 											<option value="">---</option>
 											<option th:each="item : ${teacherList}" th:value="${item.id}"
 												th:text="${item.name}"
 												th:selected="${item.id} == *{classes[__${stat.index}__].teacherId}"></option>
 									</select></td>
-									<td><button type="submit" class="btn btn-sm" name="remove" th:value="${stat.index}"></button>行削除</td>
+									<td><button type="submit" class="btn btn-sm" name="remove"
+											th:value="${stat.index}">行削除</button></td>
 								</tr>
 							</th:block>
 						</tbody>
 					</table>
 					<button class="btn btn-sm" type="submit" name="add">行追加</button>
 
-					<br>
-					<br>
+					<br> <br>
 					<!-- 更新 -->
 					<button class="btn btn-primary btn-lg pull-right" type="submit"
 						name="update">更新</button>

@@ -2,13 +2,15 @@ package com.example.demo.login.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,12 @@ public class StudentController extends BaseController {
 	@Autowired
 	private TeacherService teacherService;
 
+	/**
+	 * 生徒一覧を取得する
+	 *
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/studentList")
 	public String index(Model model) {
 
@@ -64,6 +72,7 @@ public class StudentController extends BaseController {
 	@GetMapping("/student/signup")
 	public String signup(@ModelAttribute StudentForm form, Model model) {
 		//		logger.debug("Course + signup");
+		if (CollectionUtils.isEmpty(form.getClasses())) form.addClassesList();
 		setCombobox(model);
 		return setView(model, "login/studentSignup");
 	}
@@ -80,6 +89,7 @@ public class StudentController extends BaseController {
 	public String register(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
+			if (CollectionUtils.isEmpty(form.getClasses())) form.addClassesList();
 			setCombobox(model);
 			return setView(model, "login/studentSignup");
 		}
@@ -87,11 +97,8 @@ public class StudentController extends BaseController {
 		student.setId(studentService.getNextId());
 		studentService.insertOne(student);
 
-		BeanUtils.copyProperties(student, form);
-
-		setCombobox(model);
 		setMessage(model, Message.SIGNUP);
-		return setView(model, "login/studentDetail");
+		return detail(form, model, student.getId());
 	}
 
 	/**
@@ -121,13 +128,14 @@ public class StudentController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/studentDetail/{id:.+}")
-	public String getUserDetail(@ModelAttribute StudentForm form, Model model, @PathVariable("id") String id) {
+	public String detail(@ModelAttribute StudentForm form, Model model, @PathVariable("id") String id) {
 
 		if (StringUtils.isNotEmpty(id)) {
 			Student student = studentService.selectOne(id);
 			StudentHelper.convertStudentToForm(student, form);
 		}
 
+		if (CollectionUtils.isEmpty(form.getClasses())) form.addClassesList();
 		setCombobox(model);
 		return setView(model, "login/studentDetail");
 	}
@@ -143,18 +151,16 @@ public class StudentController extends BaseController {
 	@PostMapping(value = "/studentDetail", params = "update")
 	public String update(@ModelAttribute @Validated StudentForm form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			if (CollectionUtils.isEmpty(form.getClasses())) form.addClassesList();
 			setCombobox(model);
 			return setView(model, "login/studentDetail");
 		}
 
 		Student student = StudentHelper.convertFormToStudent(form);
-
-		// update
 		studentService.updateOne(student);
 
-		setCombobox(model);
 		setMessage(model, Message.UPDATE);
-		return setView(model, "login/studentDetail");
+		return detail(form, model, student.getId());
 	}
 
 	/**
@@ -170,24 +176,36 @@ public class StudentController extends BaseController {
 		studentService.deleteOne(form.getId());
 
 		setMessage(model, Message.DELETE);
-		return setView(model, "login/studentList");
+		return index(model);
 	}
 
-	@PostMapping(value = "/studentDetail", params = "add")
-	public String addList(@ModelAttribute StudentForm form, Model model) {
+	@PostMapping(value = { "/studentDetail", "/student/register" }, params = "add")
+	public String addList(@ModelAttribute StudentForm form, Model model, HttpServletRequest request) {
 		form.addClassesList();
 
 		setCombobox(model);
-		return setView(model, "login/studentDetail");
+		String requestUri = request.getRequestURI();
+		if (requestUri.equals("/student/register")) {
+			return setView(model, "login/studentSignup");
+		} else {
+			return setView(model, "login/studentDetail");
+		}
+
 	}
 
-	@PostMapping(value = "/studentDetail", params = "remove")
-	public String removeList(@ModelAttribute StudentForm form, Model model) {
+	@PostMapping(value = { "/studentDetail", "/student/register" }, params = "remove")
+	public String removeList(@ModelAttribute StudentForm form, Model model, HttpServletRequest request) {
 		// 行削除の処理
-
+		int index = Integer.valueOf(request.getParameter("remove"));
+		form.removeClassesList(index);
 
 		setCombobox(model);
-		return setView(model, "login/studentDetail");
+		String requestUri = request.getRequestURI();
+		if (requestUri.equals("/student/register")) {
+			return setView(model, "login/studentSignup");
+		} else {
+			return setView(model, "login/studentDetail");
+		}
 	}
 
 }
