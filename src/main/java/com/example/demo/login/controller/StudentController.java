@@ -164,7 +164,7 @@ public class StudentController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping(value = "/student", params = "delete")
+	@PostMapping(value = "/studentDetail", params = "delete")
 	public String delete(@ModelAttribute StudentForm form, Model model) {
 		// delete
 		studentService.deleteOne(form.getId());
@@ -172,4 +172,22 @@ public class StudentController extends BaseController {
 		setMessage(model, Message.DELETE);
 		return setView(model, "login/studentList");
 	}
+
+	@PostMapping(value = "/studentDetail", params = "add")
+	public String addList(@ModelAttribute StudentForm form, Model model) {
+		form.addClassesList();
+
+		setCombobox(model);
+		return setView(model, "login/studentDetail");
+	}
+
+	@PostMapping(value = "/studentDetail", params = "remove")
+	public String removeList(@ModelAttribute StudentForm form, Model model) {
+		// 行削除の処理
+
+
+		setCombobox(model);
+		return setView(model, "login/studentDetail");
+	}
+
 }

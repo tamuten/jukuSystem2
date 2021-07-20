@@ -59,4 +59,8 @@ public class StudentForm {
 	private Boolean deleteFlg;
 
 	private List<StudentClass> classes;
+
+	public void addClassesList() {
+		classes.add(new StudentClass());
+	}
 }
