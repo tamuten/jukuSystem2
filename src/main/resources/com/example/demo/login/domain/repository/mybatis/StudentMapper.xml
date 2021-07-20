@@ -21,6 +21,13 @@
 		<result column="course" property="course" />
 		<result column="registered_datetime" property="registeredDatetime" />
 		<result column="update_datetime" property="updateDatetime" />
+		<collection property="classes" javaType="ArrayList" ofType="com.example.demo.login.domain.model.StudentClass">
+			<id column="student_id" property="studentId" />
+			<result column="subject_id" property="subjectId" />
+			<result column="day_id" property="dayId" />
+			<result column="timed_id" property="timedId" />
+			<result column="teacher_id" property="teacherId" />
+		</collection>
 	</resultMap>
 	<resultMap type="com.example.demo.login.domain.model.dto.StudentListDto" id="studentList">
 		<id column="id" property="id" />
@@ -83,11 +90,31 @@ order by
     student.id asc
 	</select>
 	<select id="selectOne" parameterType="string"
-		resultType="com.example.demo.login.domain.model.Student">
+		resultMap="student">
 		SELECT
-		*
+		s.id
+		,s.name
+		,s.kana
+		,s.gender
+		,s.grade
+		,s.birthday
+		,s.school
+		,s.parents_name
+		,s.mail_address
+		,s.phone_number
+		,s.zipcode
+		,s.address
+		,s.course
+		,s.registered_datetime
+		,s.update_datetime
+		,sc.subject_id
+		,sc.day_id
+		,sc.timed_id
+		,sc.teacher_id
 		FROM
-		student
+		student s
+			LEFT OUTER JOIN student_class sc
+				ON s.id = sc.student_id
 		WHERE
 		id = #{ id }
 	</select>

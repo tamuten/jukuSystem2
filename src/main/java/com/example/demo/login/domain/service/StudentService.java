@@ -9,12 +9,15 @@ import com.example.demo.login.Sequence;
 import com.example.demo.login.domain.model.Student;
 import com.example.demo.login.domain.model.dto.StudentListDto;
 import com.example.demo.login.domain.repository.SequenceDao;
+import com.example.demo.login.domain.repository.StudentClassDao;
 import com.example.demo.login.domain.repository.StudentDao;
 
 @Service
 public class StudentService {
 	@Autowired
 	private StudentDao studentDao;
+	@Autowired
+	private StudentClassDao studentClassDao;
 	@Autowired
 	private SequenceDao sequenceDao;
 
@@ -25,6 +28,7 @@ public class StudentService {
 
 	public void insertOne(Student student) {
 		studentDao.insertOne(student);
+		studentClassDao.insertBulk(student.getClasses(), student.getId());
 	}
 
 	public List<StudentListDto> findAll() {

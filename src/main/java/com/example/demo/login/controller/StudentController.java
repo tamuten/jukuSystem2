@@ -22,10 +22,14 @@ import com.example.demo.login.controller.helper.StudentHelper;
 import com.example.demo.login.domain.model.Course;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Student;
+import com.example.demo.login.domain.model.Subject;
+import com.example.demo.login.domain.model.Teacher;
+import com.example.demo.login.domain.model.Timed;
 import com.example.demo.login.domain.model.dto.StudentListDto;
 import com.example.demo.login.domain.service.ComboboxService;
 import com.example.demo.login.domain.service.CourseService;
 import com.example.demo.login.domain.service.StudentService;
+import com.example.demo.login.domain.service.TeacherService;
 
 @Controller
 public class StudentController extends BaseController {
@@ -37,6 +41,8 @@ public class StudentController extends BaseController {
 	private StudentService studentService;
 	@Autowired
 	private ComboboxService comboboxService;
+	@Autowired
+	private TeacherService teacherService;
 
 	@GetMapping("/studentList")
 	public String index(Model model) {
@@ -98,6 +104,12 @@ public class StudentController extends BaseController {
 		model.addAttribute("gradeList", gradeList);
 		List<Course> courseList = courseService.selectMany();
 		model.addAttribute("courseList", courseList);
+		List<Subject> subjectList = comboboxService.findAllSubject();
+		model.addAttribute("subjectList", subjectList);
+		List<Timed> timedList = comboboxService.findAllTimed();
+		model.addAttribute("timedList", timedList);
+		List<Teacher> teacherList = teacherService.findAll();
+		model.addAttribute("teacherList", teacherList);
 	}
 
 	/**

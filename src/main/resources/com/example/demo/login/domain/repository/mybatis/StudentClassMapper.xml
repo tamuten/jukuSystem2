@@ -1,1 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.StudentClassMapper">
+	<resultMap
+		type="com.example.demo.login.domain.model.StudentClass"
+		id="teacherSubject">
+		<id column="student_id" property="studentId" />
+		<id column="subject_id" property="subjectId" />
+
+	</resultMap>
+
+	<insert id="insertBulk">
+		INSERT INTO student_class
+		VALUES
+		<foreach collection="scList" item="sc" open="(" separator="," close=")">
+			#{studentId, jdbcType=VARCHAR}
+			,#{sc.subjectId, jdbcType=VARCHAR}
+			,#{sc.dayId, jdbcType=INTEGER}
+			,#{sc.timedId, jdbcType=INTEGER}
+			,#{sc.teacherId, jdbcType=VARCHAR}
+		</foreach>
+	</insert>
+
+</mapper>

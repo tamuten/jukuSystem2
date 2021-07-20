@@ -15,7 +15,7 @@
 		<result column="university" property="university" />
 		<result column="undergraduate" property="undergraduate" />
 		<result column="department" property="department" />
-		<result column="grade" property="grade" />
+
 		<result column="phone_number" property="phoneNumber" />
 		<result column="mail_address" property="mailAddress" />
 		<result column="zipcode" property="zipcode" />
@@ -26,6 +26,8 @@
 			property="registeredDatetime" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="delete_datetime" property="deleteDatetime" />
+		<result column="gradeName" property="gradeName" />
+
 	</resultMap>
 
 		<resultMap type="com.example.demo.login.domain.model.Teacher"
@@ -84,31 +86,33 @@
 	</insert>
 	<select id="findAll" resultMap="teacher">
 		SELECT
-		id
-		,name
-		,kana
-		,gender
-		,birthday
-		,date_part('year', age(birthday)) as age
-		,university
-		,undergraduate
-		,department
-		,grade
-		,phone_number
-		,mail_address
-		,zipcode
-		,address
-		,note
-		,delete_flg
-		,registered_datetime
-		,update_datetime
-		,delete_datetime
+		t.id
+		,t.name
+		,t.kana
+		,t.gender
+		,t.birthday
+		,date_part('year', age(t.birthday)) as age
+		,t.university
+		,t.undergraduate
+		,t.department
+		,g.name as gradeName
+		,t.phone_number
+		,t.mail_address
+		,t.zipcode
+		,t.address
+		,t.note
+		,t.delete_flg
+		,t.registered_datetime
+		,t.update_datetime
+		,t.delete_datetime
 		FROM
-		teacher
+		teacher t
+			LEFT OUTER JOIN grade g
+				ON t.grade = g.id
 		WHERE
-		delete_flg = false
+		t.delete_flg = false
 		ORDER BY
-		id ASC
+		t.id ASC
 	</select>
 	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Teacher">

@@ -216,7 +216,8 @@
 							</td>
 						</tr>
 					</table>
-					<!-- <tr>
+				</div>
+				<!-- <tr>
 						<th class="active col-sm-2 align-middle">週あたり授業回数</th>
 						<td class="col-sm-3 align-middle">
 							<div class="form-group">
@@ -224,10 +225,12 @@
 							</div>
 						</td>
 					</tr> -->
-					<table class="table table-bordered table-responsive">
+				<div class="col-sm-7">
+					<table class="table table-bordered table-responsive table-sm">
+						<caption align="top">授業</caption>
 						<thead>
 							<tr>
-								<th>授業</th>
+								<th></th>
 								<td>科目</td>
 								<td>曜日</td>
 								<td>時限</td>
@@ -237,29 +240,35 @@
 						<tbody>
 							<tr>
 								<th class="active align-middle">#</th>
-								<td class=" align-middle">
-									<!-- <div class="form-group"> -->
-										<select>
-											<option>---</option>
-											<option>科目</option>
-										</select>
-									<!-- </div> -->
-								</td>
-								<td class=" align-middle">
-									<!-- <div class="form-group"> -->
-										<input type="text" class="form-control"  />
-									<!-- </div> -->
-								</td>
-								<td class=" align-middle">
-									<!-- <div class="form-group"> -->
-										<input type="text" class="form-control" />
-									<!-- </div> -->
-								</td>
-								<td class=" align-middle">
-									<!-- <div class="form-group"> -->
-										<input type="text" class="form-control" />
-									<!-- </div> -->
-								</td>
+								<td class=" align-middle"><select
+									class="form-control input-sm" th:name="|classes[0].subjectId|">
+										<option value="">---</option>
+										<option th:each="item : ${subjectList}" th:value="${item.id}"
+											th:text="${item.name}"></option>
+								</select></td>
+								<td class=" align-middle"><select
+									class="form-control input-sm" th:name="|classes[0].dayId|"><option
+											value="">---</option>
+										<option value="1">月</option>
+										<option value="2">火</option>
+										<option value="3">水</option>
+										<option value="4">木</option>
+										<option value="5">金</option>
+										<option value="6">土</option>
+										<option value="7">日</option>
+								</select></td>
+								<td class=" align-middle"><select
+									class="form-control input-sm" th:name="|classes[0].timedId|">
+										<option value="">---</option>
+										<option th:each="item : ${timedList}" th:value="${item.id}"
+											th:text="${item.name}"></option>
+								</select></td>
+								<td class=" align-middle"><select
+									class="form-control input-sm" th:name="|classes[0].teacherId|">
+										<option value="">---</option>
+										<option th:each="item : ${teacherList}" th:value="${item.id}"
+											th:text="${item.name}"></option>
+								</select></td>
 							</tr>
 						</tbody>
 					</table>
@@ -290,7 +299,7 @@
 		})
 		/*]]>*/
 	</script>
-	</div>
+
 </body>
 
 </html>

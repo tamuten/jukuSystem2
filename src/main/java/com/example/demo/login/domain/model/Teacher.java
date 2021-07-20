@@ -18,6 +18,7 @@ public class Teacher {
 	private String undergraduate;
 	private String department;
 	private Integer grade;
+	private String gradeName;
 	private String phoneNumber;
 	private String mailAddress;
 	private String zipcode;

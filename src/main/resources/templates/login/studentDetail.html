@@ -8,14 +8,16 @@
 <body>
 	<div th:fragment="studentDetail_contents">
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-12">
 				<div class="page-header">
 					<h1>
 						<i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒情報詳細
 					</h1>
 				</div>
-				<form method="post" th:action="@{/studentDetail}"
-					th:object="${studentForm}">
+			</div>
+			<form method="post" th:action="@{/studentDetail}"
+				th:object="${studentForm}">
+				<div class="col-sm-5">
 					<div th:if="${message}" class="alert alert-success">
 						<p th:text="${message}"></p>
 					</div>
@@ -192,7 +194,7 @@
 								</div>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th class="active"><span class="required">*</span>&nbsp;コース</th>
 							<td>
 								<div class="form-group"
@@ -202,28 +204,107 @@
 										<option th:each="item : ${courseList}" th:value="${item.id}"
 											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
 									</select>
-									<!-- <input type="text" class="form-control" th:field="*{course}" /> -->
+									<input type="text" class="form-control" th:field="*{course}" />
 									<span class="text-danger"
+										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
+										course error </span>
+								</div>
+							</td>
+						</tr> -->
+					</table>
+				</div>
+				<div class="col-sm-5">
+					<table class="table table-bordered table-responsive">
+						<tr>
+							<th class="active col-sm-2"><span class="required">*</span>&nbsp;コース</th>
+							<td class="col-sm-3">
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
+									<select class="form-control" name="course">
+										<option value="">---</option>
+										<option th:each="item : ${courseList}" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
+									</select> <span class="text-danger"
 										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
 										course error </span>
 								</div>
 							</td>
 						</tr>
 					</table>
+				</div>
+				<!-- <tr>
+						<th class="active col-sm-2 align-middle">週あたり授業回数</th>
+						<td class="col-sm-3 align-middle">
+							<div class="form-group">
+								<input type="text" class="form-control" readonly="readonly" />
+							</div>
+						</td>
+					</tr> -->
+				<div class="col-sm-7">
+					<table class="table table-bordered table-responsive table-sm">
+						<caption align="top">授業</caption>
+						<thead>
+							<tr>
+								<th></th>
+								<td>科目</td>
+								<td>曜日</td>
+								<td>時限</td>
+								<td>担当講師</td>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="cla, stat : *{classes}">
+								<tr>
+									<th class="active align-middle">#</th>
+									<td class=" align-middle"><select
+										class="form-control input-sm" th:name="|classes[0].subjectId|">
+											<option value="">---</option>
+											<option th:each="item : ${subjectList}" th:value="${item.id}"
+												th:text="${item.name}"></option>
+									</select></td>
+									<td class=" align-middle"><select
+										class="form-control input-sm" th:name="|classes[0].dayId|"><option
+												value="">---</option>
+											<option value="1">月</option>
+											<option value="2">火</option>
+											<option value="3">水</option>
+											<option value="4">木</option>
+											<option value="5">金</option>
+											<option value="6">土</option>
+											<option value="7">日</option>
+									</select></td>
+									<td class=" align-middle"><select
+										class="form-control input-sm" th:name="|classes[0].timedId|">
+											<option value="">---</option>
+											<option th:each="item : ${timedList}" th:value="${item.id}"
+												th:text="${item.name}"></option>
+									</select></td>
+									<td class=" align-middle"><select
+										class="form-control input-sm" th:name="|classes[0].teacherId|">
+											<option value="">---</option>
+											<option th:each="item : ${teacherList}" th:value="${item.id}"
+												th:text="${item.name}"
+												th:selected="${item.id} == *{classes[__${stat.index}__].teacherId}"></option>
+									</select></td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
 					<!-- 更新 -->
 					<button class="btn btn-primary btn-lg pull-right" type="submit"
 						name="update">更新</button>
 					<!-- 削除 -->
 					<button class="btn btn-danger btn-lg" type="submit" name="delete">削除</button>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
-		<script type="text/javascript" th:inline="javascript">
-			/*<![CDATA[*/
-
-			/*]]>*/
-		</script>
 	</div>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+
+		/*]]>*/
+	</script>
+
 </body>
 
 </html>

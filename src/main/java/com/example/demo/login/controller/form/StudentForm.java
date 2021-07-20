@@ -2,6 +2,7 @@ package com.example.demo.login.controller.form;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.demo.login.domain.model.StudentClass;
 
 import lombok.Data;
 
@@ -52,4 +55,8 @@ public class StudentForm {
 	private String course;
 	private Timestamp registeredDatetime;
 	private Timestamp updateDatetime;
+	private Timestamp deleteDatetime;
+	private Boolean deleteFlg;
+
+	private List<StudentClass> classes;
 }

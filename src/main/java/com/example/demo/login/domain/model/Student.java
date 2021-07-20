@@ -2,6 +2,7 @@ package com.example.demo.login.domain.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -22,4 +23,9 @@ public class Student {
 	private String course;
 	private Timestamp registeredDatetime;
 	private Timestamp updateDatetime;
+	private Timestamp deleteDatetime;
+	private Boolean deleteFlg;
+
+	private List<StudentClass> classes;
+
 }

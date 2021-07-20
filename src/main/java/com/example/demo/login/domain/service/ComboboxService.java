@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Subject;
+import com.example.demo.login.domain.model.Timed;
 import com.example.demo.login.domain.repository.GradeDao;
 import com.example.demo.login.domain.repository.MSubjectDao;
+import com.example.demo.login.domain.repository.MTimedDao;
 
 @Service
 public class ComboboxService {
@@ -16,6 +18,8 @@ public class ComboboxService {
 	private GradeDao gradeDao;
 	@Autowired
 	private MSubjectDao mSubjectDao;
+	@Autowired
+	private MTimedDao mTimedDao;
 
 	public List<Grade> findStudentGrade() {
 		return gradeDao.findStudentGrade();
@@ -27,5 +31,9 @@ public class ComboboxService {
 
 	public List<Subject> findAllSubject(){
 		return mSubjectDao.findAll();
+	}
+
+	public List<Timed> findAllTimed(){
+		return mTimedDao.findAll();
 	}
 }
