@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>社員詳細</title>
+</head>
+<body>
+	<div th:fragment="employeeDetail_contents">
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="page-header">
+					<h1>社員詳細</h1>
+				</div>
+				<form method="post" th:action="@{/employeeDetail}"
+					th:object="${employeeForm}">
+					<div th:if="${message}" class="alert alert-success">
+						<p th:text="${message}"></p>
+					</div>
+					<table class="table table-bordered table-hover">
+						<tr>
+							<th class="active col-sm-2">社員ID</th>
+							<td class="col-sm-3">
+								<div class="form-group">
+									<input type="text" class="form-control" th:field="*{id}"
+										readonly="readonly" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">氏名</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{name}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('name')}"
+										th:errors="*{name}"> name error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">生年月日</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
+									<input type="date" class="form-control" th:field="*{birthday}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('birthday')}"
+										th:errors="*{birthday}"> birthday error </span>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<!-- 登録 -->
+					<!-- <button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
+						type="submit" name="register">登録</button> -->
+					<!-- 更新 -->
+					<button class="btn btn-primary btn-lg pull-right" id="updateBtn"
+						type="button" name="update">更新</button>
+					<!-- 削除 -->
+					<button class="btn btn-danger btn-lg" id="deleteBtn" type="button"
+						name="delete">削除</button>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			$(function() {
+
+			})
+			/*]]>*/
+		</script>
+	</div>
+</body>
+
+</html>
