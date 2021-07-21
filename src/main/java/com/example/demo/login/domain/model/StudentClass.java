@@ -9,4 +9,10 @@ public class StudentClass {
 	private Integer dayId;
 	private Integer timedId;
 	private String teacherId;
+
+//	public StudentClass(String studentId) {
+//		super();
+//		this.studentId = studentId;
+//	}
+
 }

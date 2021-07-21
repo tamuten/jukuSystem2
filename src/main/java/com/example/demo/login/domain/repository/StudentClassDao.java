@@ -16,4 +16,8 @@ public class StudentClassDao {
 	public void insertBulk(List<StudentClass> classes, String studentId) {
 		mapper.insertBulk(classes, studentId);
 	}
+
+	public void updateOnesClass(List<StudentClass> classes, String studentId) {
+		mapper.updateOnesClass(classes, studentId);
+	}
 }

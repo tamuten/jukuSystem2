@@ -179,6 +179,14 @@ public class StudentController extends BaseController {
 		return index(model);
 	}
 
+	/**
+	 * 生徒授業 行追加処理
+	 *
+	 * @param form
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@PostMapping(value = { "/studentDetail", "/student/register" }, params = "add")
 	public String addList(@ModelAttribute StudentForm form, Model model, HttpServletRequest request) {
 		form.addClassesList();
@@ -193,6 +201,14 @@ public class StudentController extends BaseController {
 
 	}
 
+	/**
+	 * 生徒授業 行削除処理
+	 *
+	 * @param form
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@PostMapping(value = { "/studentDetail", "/student/register" }, params = "remove")
 	public String removeList(@ModelAttribute StudentForm form, Model model, HttpServletRequest request) {
 		// 行削除の処理

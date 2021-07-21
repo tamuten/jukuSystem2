@@ -10,4 +10,5 @@ import com.example.demo.login.domain.model.StudentClass;
 @Mapper
 public interface StudentClassMapper {
 	public void insertBulk(@Param("scList") List<StudentClass> classes, @Param("studentId") String studentId);
+	public void updateOnesClass(@Param("scList") List<StudentClass> classes, @Param("studentId") String studentId);
 }

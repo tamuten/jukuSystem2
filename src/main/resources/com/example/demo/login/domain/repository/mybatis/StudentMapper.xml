@@ -107,6 +107,7 @@ order by
 		,s.course
 		,s.registered_datetime
 		,s.update_datetime
+		,sc.student_id
 		,sc.subject_id
 		,sc.day_id
 		,sc.timed_id

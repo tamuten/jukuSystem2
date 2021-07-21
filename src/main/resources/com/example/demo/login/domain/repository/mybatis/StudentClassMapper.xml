@@ -25,5 +25,28 @@
 		)
 		</foreach>
 	</insert>
+	<update id="updateOnesClass">
+	 	INSERT INTO
+	student_class
+	VALUES
+		<foreach collection="scList" item="sc" separator=",">
+			(
+			#{studentId, jdbcType=VARCHAR}
+			,#{sc.subjectId, jdbcType=VARCHAR}
+			,#{sc.dayId, jdbcType=INTEGER}
+			,#{sc.timedId, jdbcType=INTEGER}
+			,#{sc.teacherId, jdbcType=VARCHAR}
+			)
+		</foreach>
+	ON CONFLICT (student_id, subject_id) DO NOTHING;
+	DELETE FROM
+	student_class
+	WHERE
+		student_id = #{ studentId }
+		AND subject_id NOT IN
+		<foreach item="sc" open="(" close=")" collection="scList" separator=",">
+                    #{ sc.subjectId, jdbcType=VARCHAR }
+        </foreach>
+	</update>
 
 </mapper>

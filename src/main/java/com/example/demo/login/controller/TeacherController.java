@@ -135,9 +135,8 @@ public class TeacherController extends BaseController {
 		Teacher teacher = TeacherHelper.convertFormToTeacher(form);
 		teacherService.updateOne(teacher);
 
-		setCombobox(model);
 		setMessage(model, Message.UPDATE);
-		return setView(model, "login/teacherDetail");
+		return detail(form, model, teacher.getId());
 	}
 
 	/**

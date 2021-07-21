@@ -21,8 +21,6 @@
 			<form method="post" th:action="@{/studentDetail}"
 				th:object="${studentForm}">
 				<div class="col-sm-5">
-
-
 					<table class="table table-bordered table-hover">
 						<tr>
 							<th class="active col-sm-2">生徒ID</th>
@@ -77,7 +75,6 @@
 						</tr>
 						<tr>
 							<th class="active">性別</th>
-
 							<td><div class="form-group">
 									<label class="radio-inline btnLabel" for="gender1"> <input
 										type="radio" class="btn-check" th:field="*{gender}"
@@ -91,7 +88,6 @@
 									</label>
 								</div></td>
 						</tr>
-
 						<tr>
 							<th class="active"><span class="required">*</span>&nbsp;学年</th>
 							<td>
@@ -101,10 +97,9 @@
 										<option value="">---</option>
 										<option th:each="item : ${gradeList}" th:value="${item.id}"
 											th:text="${item.name}" th:selected="${item.id} == *{grade}">pulldown</option>
-									</select>
-									<!-- <input type="text" class="form-control" th:field="*{grade}" /> -->
-									<span class="text-danger" th:if="${#fields.hasErrors('grade')}"
-										th:errors="*{grade}"> grade error </span>
+									</select> <span class="text-danger"
+										th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}">
+										grade error </span>
 								</div>
 							</td>
 						</tr>
@@ -242,7 +237,6 @@
 						</td>
 					</tr> -->
 				<div class="col-sm-5">
-
 					<table class="table table-bordered table-responsive table-sm">
 						<caption align="top">授業</caption>
 						<thead>
@@ -259,7 +253,8 @@
 							<th:block th:each="cla, stat : *{classes}">
 								<tr>
 									<th class="active align-middle" th:text="${stat.count}"></th>
-									<td class=" align-middle"><select
+									<td class=" align-middle"><input type="hidden"
+										th:field="*{classes[__${stat.index}__].studentId}" /> <select
 										class="form-control input-sm"
 										th:name="|classes[${stat.index}].subjectId|">
 											<option value="">---</option>
