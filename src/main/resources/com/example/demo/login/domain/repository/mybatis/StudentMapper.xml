@@ -21,8 +21,8 @@
 		<result column="course" property="course" />
 		<result column="registered_datetime" property="registeredDatetime" />
 		<result column="update_datetime" property="updateDatetime" />
-		<collection property="classes" javaType="ArrayList" ofType="com.example.demo.login.domain.model.StudentClass">
-			<id column="student_id" property="studentId" />
+		<collection property="classes" ofType="com.example.demo.login.domain.model.StudentClass">
+			<result column="student_id" property="studentId" />
 			<result column="subject_id" property="subjectId" />
 			<result column="day_id" property="dayId" />
 			<result column="timed_id" property="timedId" />
@@ -117,7 +117,7 @@ order by
 			LEFT OUTER JOIN student_class sc
 				ON s.id = sc.student_id
 		WHERE
-		id = #{ id }
+		s.id = #{ id }
 	</select>
 	<update id="updateOne"
 		parameterType="com.example.demo.login.domain.model.Student">
