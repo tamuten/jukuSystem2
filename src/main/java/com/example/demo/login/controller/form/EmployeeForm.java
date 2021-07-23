@@ -13,4 +13,5 @@ public class EmployeeForm {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private String role;
+	private String password;
 }

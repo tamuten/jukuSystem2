@@ -10,4 +10,5 @@ public class Employee {
 	private String name;
 	private Date birthday;
 	private String role;
+	private String password;
 }

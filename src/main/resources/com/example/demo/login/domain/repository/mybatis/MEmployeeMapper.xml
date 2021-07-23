@@ -10,6 +10,7 @@
 		<result column="name" property="name" />
 		<result column="birthday" property="birthday" />
 		<result column="role" property="role" />
+		<result column="password" property="password" />
 	</resultMap>
 
 
@@ -19,6 +20,7 @@
 		id
 		,name
 		,birthday
+		,password
 		FROM
 		m_employee
 		WHERE
