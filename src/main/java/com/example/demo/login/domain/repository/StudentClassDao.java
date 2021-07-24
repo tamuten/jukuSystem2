@@ -13,6 +13,10 @@ public class StudentClassDao {
 	@Autowired
 	private StudentClassMapper mapper;
 
+	public List<StudentClass> findAll(){
+		return mapper.findAll();
+	}
+
 	public void insertBulk(List<StudentClass> classes, String studentId) {
 		mapper.insertBulk(classes, studentId);
 	}

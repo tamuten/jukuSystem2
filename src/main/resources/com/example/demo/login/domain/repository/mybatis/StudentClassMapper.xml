@@ -11,6 +11,12 @@
 		<id column="subject_id" property="subjectId" />
 
 	</resultMap>
+	<select id="findAll" resultType="com.example.demo.login.domain.model.StudentClass">
+		SELECT
+			*
+		FROM
+		student_class
+	</select>
 
 	<insert id="insertBulk">
 		INSERT INTO student_class
