@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.ClassScheduleMapper">
+
+
+
+	<insert id="insert" parameterType="com.example.demo.login.domain.model.ClassSchedule">
+		<selectKey keyProperty="id" order="BEFORE" resultType="string">
+		SELECT lpad(cast(nextval('classschedule_id_seq') as character varying), 8,'0')
+	</selectKey>
+		INSERT INTO class_schedule
+		VALUES
+			(
+				#{ id }
+				,#{ yearMonth }
+				,#{ dayId }
+				,#{ date }
+				,false
+			)
+	</insert>
+
+</mapper>

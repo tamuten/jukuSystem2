@@ -11,30 +11,24 @@
 		<id column="subject_id" property="subjectId" />
 
 	</resultMap>
-	<select id="findAll" resultType="com.example.demo.login.domain.model.StudentClass">
+	<select id="findAll"
+		resultType="com.example.demo.login.domain.model.StudentClass">
 		SELECT
-			*
+		*
 		FROM
 		student_class
 	</select>
 
 	<insert id="insertBulk">
 		INSERT INTO student_class
-		VALUES
-		<foreach collection="scList" item="sc" separator=",">
 		(
-			#{studentId, jdbcType=VARCHAR}
-			,#{sc.subjectId, jdbcType=VARCHAR}
-			,#{sc.dayId, jdbcType=INTEGER}
-			,#{sc.timedId, jdbcType=INTEGER}
-			,#{sc.teacherId, jdbcType=VARCHAR}
+		student_id
+		,subject_id
+		,day_id
+		,timed_id
+		,teacher_id
 		)
-		</foreach>
-	</insert>
-	<update id="updateOnesClass">
-	 	INSERT INTO
-	student_class
-	VALUES
+		VALUES
 		<foreach collection="scList" item="sc" separator=",">
 			(
 			#{studentId, jdbcType=VARCHAR}
@@ -44,15 +38,37 @@
 			,#{sc.teacherId, jdbcType=VARCHAR}
 			)
 		</foreach>
-	ON CONFLICT (student_id, subject_id) DO NOTHING;
-	DELETE FROM
-	student_class
-	WHERE
+	</insert>
+	<update id="updateOnesClass">
+		INSERT INTO
+		student_class
+		(
+		student_id
+		,subject_id
+		,day_id
+		,timed_id
+		,teacher_id
+		)
+		VALUES
+		<foreach collection="scList" item="sc" separator=",">
+			(
+			#{studentId, jdbcType=VARCHAR}
+			,#{sc.subjectId, jdbcType=VARCHAR}
+			,#{sc.dayId, jdbcType=INTEGER}
+			,#{sc.timedId, jdbcType=INTEGER}
+			,#{sc.teacherId, jdbcType=VARCHAR}
+			)
+		</foreach>
+		ON CONFLICT (student_id, subject_id) DO NOTHING;
+		DELETE FROM
+		student_class
+		WHERE
 		student_id = #{ studentId }
 		AND subject_id NOT IN
-		<foreach item="sc" open="(" close=")" collection="scList" separator=",">
-                    #{ sc.subjectId, jdbcType=VARCHAR }
-        </foreach>
+		<foreach item="sc" open="(" close=")" collection="scList"
+			separator=",">
+			#{ sc.subjectId, jdbcType=VARCHAR }
+		</foreach>
 	</update>
 
 </mapper>
