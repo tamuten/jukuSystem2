@@ -12,7 +12,21 @@
 		<result column="role" property="role" />
 		<result column="password" property="password" />
 	</resultMap>
-
+	<insert id="insert" parameterType="com.example.demo.login.domain.model.Employee">
+	<selectKey keyProperty="id" order="BEFORE" resultType="string">
+		SELECT lpad(cast(nextval('memployee_id_seq') as character varying), 8,'0')
+	</selectKey>
+		INSERT INTO
+		m_employee
+		VALUES
+		(
+			#{ id }
+			,#{ name }
+			,#{ birthday }
+			,#{ role }
+			,#{ password }
+		)
+	</insert>
 
 	<select id="selectOne" parameterType="string"
 		resultType="com.example.demo.login.domain.model.Employee">

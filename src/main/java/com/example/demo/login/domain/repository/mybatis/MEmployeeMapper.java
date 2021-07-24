@@ -6,5 +6,6 @@ import com.example.demo.login.domain.model.Employee;
 
 @Mapper
 public interface MEmployeeMapper {
+	public void insert(Employee employee);
 	public Employee selectOne(String id);
 }

@@ -3,16 +3,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>社員詳細</title>
+<title>社員登録</title>
 </head>
 <body>
-	<div th:fragment="employeeDetail_contents">
+	<div th:fragment="employeeSignup_contents">
 		<div class="row">
 			<div class="col-sm-5">
 				<div class="page-header">
-					<h1>社員詳細</h1>
+					<h1>社員登録</h1>
 				</div>
-				<form method="post" th:action="@{/employeeDetail}"
+				<form method="post" th:action="@{/employee/register}"
 					th:object="${employeeForm}">
 					<div th:if="${message}" class="alert alert-success">
 						<p th:text="${message}"></p>
@@ -63,14 +63,14 @@
 						</tr>
 					</table>
 					<!-- 登録 -->
-					<!-- <button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
-						type="submit" name="register">登録</button> -->
+					<button class="btn btn-primary btn-lg pull-right"
+						type="submit" name="register">登録</button>
 					<!-- 更新 -->
-					<button class="btn btn-primary btn-lg pull-right" id="updateBtn"
+					<!-- <button class="btn btn-primary btn-lg pull-right" id="updateBtn"
 						type="button" name="update">更新</button>
-					<!-- 削除 -->
+					削除
 					<button class="btn btn-danger btn-lg" id="deleteBtn" type="button"
-						name="delete">削除</button>
+						name="delete">削除</button> -->
 				</form>
 			</div>
 		</div>

@@ -11,6 +11,10 @@ public class MEmployeeDao {
 	@Autowired
 	private MEmployeeMapper mapper;
 
+	public void insert(Employee employee) {
+		mapper.insert(employee);
+	}
+
 	public Employee selectOne(String id) {
 		return mapper.selectOne(id);
 	}
