@@ -14,4 +14,8 @@ public class ClassScheduleDao {
 	public void insert(ClassSchedule classSchedule) {
 		mapper.insert(classSchedule);
 	}
+
+	public Integer countRow(String yearMonth) {
+		return mapper.countRow(yearMonth);
+	}
 }

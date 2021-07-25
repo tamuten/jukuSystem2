@@ -3,28 +3,37 @@ package com.example.demo.login.domain.service;
 import java.sql.Date;
 import java.time.YearMonth;
 import java.util.Calendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.login.domain.model.ClassSchedule;
-import com.example.demo.login.domain.model.StudentClass;
+import com.example.demo.login.domain.repository.ClassDetailDao;
 import com.example.demo.login.domain.repository.ClassScheduleDao;
-import com.example.demo.login.domain.repository.StudentClassDao;
+import com.example.demo.login.exception.AlreadyClassScheduleRegisteredException;
 
 @Service
 public class ClassScheduleService {
 	@Autowired
-	private StudentClassDao studentClassDao;
-	@Autowired
 	private ClassScheduleDao classScheduleDao;
+	@Autowired
+	private ClassDetailDao classDetailDao;
 
 	public void createClassSchedule(YearMonth yearMonth) {
-		int lengthOfMonth = yearMonth.lengthOfMonth();
-		Calendar cal = Calendar.getInstance();
+		// 月のスケジュールが存在するか調べる
+		// あれば以下の処理は行わない
+		if (classScheduleDao.countRow(yearMonth.toString()) > 0) {
+			throw new AlreadyClassScheduleRegisteredException("当該月分は既に実行済みです");
+		}
 
-		for (int i = 1; i <= lengthOfMonth; i++) {
+		insertClassSchedule(yearMonth);
+		classDetailDao.insert();
+
+	}
+
+	private void insertClassSchedule(YearMonth yearMonth) {
+		Calendar cal = Calendar.getInstance();
+		for (int i = 1; i <= yearMonth.lengthOfMonth(); i++) {
 			cal.set(yearMonth.getYear(), yearMonth.getMonthValue() - 1, i);
 
 			ClassSchedule classSchedule = new ClassSchedule();
@@ -33,9 +42,5 @@ public class ClassScheduleService {
 			classSchedule.setDate(new Date(cal.getTime().getTime()));
 			classScheduleDao.insert(classSchedule);
 		}
-		// 生徒授業リストを取得
-		List<StudentClass> studentClassList = studentClassDao.findAll();
-
-		// 授業リストごとに授業スケジュールを登録
 	}
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.ClassDetailMapper">
+	<resultMap
+		type="com.example.demo.login.domain.model.dto.ClassDetailDto"
+		id="classDetail">
+		<id column="id" property="id" />
+		<result column="date" property="date" />
+		<result column="timed_id" property="timedId" />
+		<association property="studentGrade">
+			<result column="name" />
+		</association>
+		<association property="studentName">
+			<result column="name" />
+		</association>
+		<association property="subjectName">
+			<result column="name" />
+		</association>
+		<association property="teacherName">
+			<result column="name" />
+		</association>
+	</resultMap>
+
+
+	<select id="findClass" resultMap="classDetail"
+		parameterType="java.sql.Date">
+SELECT
+    cd.id,
+    cd.date,
+    cd.timed_id,
+    g.name,
+    s.name,
+    ms.name,
+    t.name
+FROM
+    class_detail cd
+    LEFT OUTER JOIN
+        student_class sc
+    ON  cd.student_class_id = sc.id
+    LEFT OUTER JOIN
+        student s
+    ON  sc.student_id = s.id
+    LEFT OUTER JOIN
+        grade g
+    ON  s.grade = g.id
+    LEFT OUTER JOIN
+        m_subject ms
+    ON  cd.subject_id = ms.id
+    LEFT OUTER JOIN
+        teacher t
+    ON  cd.teacher_id = t.id
+WHERE
+    cd.date = #{ date }
+	</select>
+
+
+	<insert id="insert">
+		INSERT INTO class_detail
+		(
+		date
+		,subject_id
+		,timed_id
+		,teacher_id
+		,student_class_id
+		,delete_flg
+		)
+		SELECT
+		cs.date
+		,sc.subject_id
+		,sc.timed_id
+		,sc.teacher_id
+		,sc.id
+		,false
+		FROM
+		student_class sc
+		INNER JOIN
+		class_schedule cs
+		ON sc.day_id = cs.day_id
+	</insert>
+
+</mapper>

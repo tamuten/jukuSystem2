@@ -20,6 +20,14 @@
 				,#{ date }
 				,false
 			)
+		ON CONFLICT(date) DO NOTHING
 	</insert>
+	<select id="countRow" parameterType="string" resultType="integer">
+		SELECT count(*)
+		FROM
+		class_schedule
+		WHERE
+		yearmonth = #{ yearMonth }
+	</select>
 
 </mapper>

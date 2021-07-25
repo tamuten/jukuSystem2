@@ -16,11 +16,16 @@
 				<div th:if="${message}" class="alert alert-success">
 					<p th:text="${message}"></p>
 				</div>
+				<div th:if="${error}" class="alert alert-danger">
+					<p th:text="${error}"></p>
+				</div>
 				<div class="form-inline">
 					<input type="month" th:field="*{month}" />
 					<!-- 更新 -->
 					<button class="btn btn-primary btn-lg pull-right" type="submit"
-						name="update">スケジュール作成</button>
+						name="create">スケジュール作成</button>
+					<button class="btn btn-primary btn-lg pull-right" type="submit"
+						name="delete">スケジュール削除</button>
 				</div>
 
 			</form>
