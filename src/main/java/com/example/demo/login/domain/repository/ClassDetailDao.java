@@ -21,4 +21,8 @@ public class ClassDetailDao {
 	public List<ClassDetailDto> findClass(Date date) {
 		return mapper.findClass(date);
 	}
+
+	public void delete(Date beginOfMonth, Date endOfMonth) {
+		mapper.delete(beginOfMonth, endOfMonth);
+	}
 }

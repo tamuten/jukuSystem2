@@ -11,6 +11,7 @@ import com.example.demo.login.domain.model.ClassSchedule;
 import com.example.demo.login.domain.repository.ClassDetailDao;
 import com.example.demo.login.domain.repository.ClassScheduleDao;
 import com.example.demo.login.exception.AlreadyClassScheduleRegisteredException;
+import com.example.demo.login.exception.ClassScheduleNotRegisteredYetException;
 
 @Service
 public class ClassScheduleService {
@@ -45,8 +46,12 @@ public class ClassScheduleService {
 	}
 
 	public void deleteClassSchedule(YearMonth yearMonth) {
+		if (classScheduleDao.countRow(yearMonth.toString()) <= 0) {
+			throw new ClassScheduleNotRegisteredYetException("当該月分はまだ作成されていません");
+		}
 		classScheduleDao.delete(yearMonth.toString());
-//		Date beginOfMonth = yearMonth.get
-
+		Date beginOfMonth = Date.valueOf(yearMonth.toString() + "-01");
+		Date endOfMonth = Date.valueOf(yearMonth.toString() + yearMonth.lengthOfMonth());
+		classDetailDao.delete(beginOfMonth, endOfMonth);
 	}
 }

@@ -21,7 +21,7 @@ public class ScheduleController extends BaseController {
 		return setView(model, "login/createSchedule");
 	}
 
-	@PostMapping("/schedule/create")
+	@PostMapping(value = "/schedule", params = "create")
 	public String create(ScheduleForm form, Model model) {
 		try {
 			classScheduleService.createClassSchedule(form.getMonth());
@@ -30,6 +30,13 @@ public class ScheduleController extends BaseController {
 			return index(form, model);
 		}
 		setMessage(model, Message.SIGNUP);
-		return setView(model, "login/createSchedule");
+		return index(form, model);
+	}
+
+	@PostMapping(value = "/schedule" , params = "delete")
+	public String delete(ScheduleForm form, Model model) {
+		classScheduleService.deleteClassSchedule(form.getMonth());
+		setMessage(model, Message.DELETE);
+		return index(form, model);
 	}
 }

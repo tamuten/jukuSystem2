@@ -11,7 +11,7 @@
 			<div class="page-header">
 				<h1>スケジュール作成</h1>
 			</div>
-			<form method="post" th:action="@{/schedule/create}"
+			<form method="post" th:action="@{/schedule}"
 				th:object="${scheduleForm}">
 				<div th:if="${message}" class="alert alert-success">
 					<p th:text="${message}"></p>
