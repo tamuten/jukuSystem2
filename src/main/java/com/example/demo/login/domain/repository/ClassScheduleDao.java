@@ -18,4 +18,8 @@ public class ClassScheduleDao {
 	public Integer countRow(String yearMonth) {
 		return mapper.countRow(yearMonth);
 	}
+
+	public void delete(String yearMonth) {
+		mapper.delete(yearMonth);
+	}
 }

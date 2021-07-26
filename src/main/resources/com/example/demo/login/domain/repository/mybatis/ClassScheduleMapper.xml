@@ -29,5 +29,10 @@
 		WHERE
 		yearmonth = #{ yearMonth }
 	</select>
+	<delete id="delete" parameterType="string">
+		DELETE
+		FROM class_schedule
+		WHERE yearmonth = #{ yearMonth }
+	</delete>
 
 </mapper>

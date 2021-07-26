@@ -27,7 +27,7 @@ public class ClassScheduleService {
 		}
 
 		insertClassSchedule(yearMonth);
-		classDetailDao.insert();
+		classDetailDao.insert(yearMonth.toString());
 
 	}
 
@@ -42,5 +42,11 @@ public class ClassScheduleService {
 			classSchedule.setDate(new Date(cal.getTime().getTime()));
 			classScheduleDao.insert(classSchedule);
 		}
+	}
+
+	public void deleteClassSchedule(YearMonth yearMonth) {
+		classScheduleDao.delete(yearMonth.toString());
+//		Date beginOfMonth = yearMonth.get
+
 	}
 }

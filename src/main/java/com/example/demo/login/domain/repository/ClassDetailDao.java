@@ -14,8 +14,8 @@ public class ClassDetailDao {
 	@Autowired
 	private ClassDetailMapper mapper;
 
-	public void insert() {
-		mapper.insert();
+	public void insert(String yearMonth) {
+		mapper.insert(yearMonth);
 	}
 
 	public List<ClassDetailDto> findClass(Date date) {

@@ -8,4 +8,5 @@ import com.example.demo.login.domain.model.ClassSchedule;
 public interface ClassScheduleMapper {
 	public void insert(ClassSchedule classSchedule);
 	public Integer countRow(String yearMonth);
+	public void delete(String yearMonth);
 }

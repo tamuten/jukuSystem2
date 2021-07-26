@@ -57,7 +57,7 @@ WHERE
 	</select>
 
 
-	<insert id="insert">
+	<insert id="insert" parameterType="string">
 		INSERT INTO class_detail
 		(
 		date
@@ -79,6 +79,15 @@ WHERE
 		INNER JOIN
 		class_schedule cs
 		ON sc.day_id = cs.day_id
+		WHERE
+		cs.yearmonth = #{ yearMonth }
 	</insert>
+
+	<delete id="delete">
+	DELETE
+	FROM class_detail
+	WHERE date BETWEEN #{ beginOfMonth } AND #{ endOfMonth }
+
+	</delete>
 
 </mapper>
