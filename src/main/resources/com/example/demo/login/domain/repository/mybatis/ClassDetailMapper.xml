@@ -10,18 +10,10 @@
 		<id column="id" property="id" />
 		<result column="date" property="date" />
 		<result column="timed_id" property="timedId" />
-		<association property="studentGrade">
-			<result column="name" />
-		</association>
-		<association property="studentName">
-			<result column="name" />
-		</association>
-		<association property="subjectName">
-			<result column="name" />
-		</association>
-		<association property="teacherName">
-			<result column="name" />
-		</association>
+		<result column="student_grade" property="studentGrade" />
+		<result column="student_name" property="studentName" />
+		<result column="subject_name" property="subjectName" />
+		<result column="teacher_name" property="teacherName" />
 	</resultMap>
 
 
@@ -31,10 +23,10 @@ SELECT
     cd.id,
     cd.date,
     cd.timed_id,
-    g.name,
-    s.name,
-    ms.name,
-    t.name
+    g.name as student_grade,
+    s.name as student_name,
+    ms.name as subject_name,
+    t.name as teacher_name
 FROM
     class_detail cd
     LEFT OUTER JOIN
@@ -54,39 +46,42 @@ FROM
     ON  cd.teacher_id = t.id
 WHERE
     cd.date = #{ date }
+ORDER BY
+    cd.timed_id ASC,
+    g.id ASC
 	</select>
 
 
 	<insert id="insert" parameterType="string">
-		INSERT INTO class_detail
-		(
-		date
-		,subject_id
-		,timed_id
-		,teacher_id
-		,student_class_id
-		,delete_flg
-		)
-		SELECT
-		cs.date
-		,sc.subject_id
-		,sc.timed_id
-		,sc.teacher_id
-		,sc.id
-		,false
-		FROM
-		student_class sc
-		INNER JOIN
-		class_schedule cs
-		ON sc.day_id = cs.day_id
-		WHERE
-		cs.yearmonth = #{ yearMonth }
+INSERT INTO class_detail(
+    date,
+    subject_id,
+    timed_id,
+    teacher_id,
+    student_class_id,
+    delete_flg
+)
+SELECT
+    cs.date,
+    sc.subject_id,
+    sc.timed_id,
+    sc.teacher_id,
+    sc.id,
+    false
+FROM
+    student_class sc
+    INNER JOIN
+        class_schedule cs
+    ON  sc.day_id = cs.day_id
+WHERE
+    cs.yearmonth = #{ yearMonth }
 	</insert>
 
 	<delete id="delete">
-	DELETE
-	FROM class_detail
-	WHERE date BETWEEN #{ beginOfMonth } AND #{ endOfMonth }
+		DELETE
+		FROM class_detail
+		WHERE date BETWEEN #{
+		beginOfMonth } AND #{ endOfMonth }
 
 	</delete>
 

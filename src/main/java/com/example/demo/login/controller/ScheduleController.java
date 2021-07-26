@@ -10,6 +10,7 @@ import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.ScheduleForm;
 import com.example.demo.login.domain.service.ClassScheduleService;
 import com.example.demo.login.exception.AlreadyClassScheduleRegisteredException;
+import com.example.demo.login.exception.ClassScheduleNotRegisteredYetException;
 
 @Controller
 public class ScheduleController extends BaseController {
@@ -33,9 +34,14 @@ public class ScheduleController extends BaseController {
 		return index(form, model);
 	}
 
-	@PostMapping(value = "/schedule" , params = "delete")
+	@PostMapping(value = "/schedule", params = "delete")
 	public String delete(ScheduleForm form, Model model) {
-		classScheduleService.deleteClassSchedule(form.getMonth());
+		try {
+			classScheduleService.deleteClassSchedule(form.getMonth());
+		} catch (ClassScheduleNotRegisteredYetException e) {
+			model.addAttribute("error", e.getMessage());
+			return index(form, model);
+		}
 		setMessage(model, Message.DELETE);
 		return index(form, model);
 	}

@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.login.domain.model.ClassSchedule;
 import com.example.demo.login.domain.repository.ClassDetailDao;
@@ -14,6 +15,7 @@ import com.example.demo.login.exception.AlreadyClassScheduleRegisteredException;
 import com.example.demo.login.exception.ClassScheduleNotRegisteredYetException;
 
 @Service
+@Transactional
 public class ClassScheduleService {
 	@Autowired
 	private ClassScheduleDao classScheduleDao;
@@ -51,7 +53,7 @@ public class ClassScheduleService {
 		}
 		classScheduleDao.delete(yearMonth.toString());
 		Date beginOfMonth = Date.valueOf(yearMonth.toString() + "-01");
-		Date endOfMonth = Date.valueOf(yearMonth.toString() + yearMonth.lengthOfMonth());
+		Date endOfMonth = Date.valueOf(yearMonth.toString() + "-" + String.valueOf(yearMonth.lengthOfMonth()));
 		classDetailDao.delete(beginOfMonth, endOfMonth);
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.login.domain.repository.ClassDetailDao;
 
@@ -19,5 +20,10 @@ public class ClassDetailController extends BaseController {
 		Date date = new Date(System.currentTimeMillis());
 		model.addAttribute("classList", classDetailDao.findClass(date));
 		return setView(model, "login/classDetailList");
+	}
+
+	@GetMapping("/classDetail/{id.+}")
+	public String detail(Model model, @PathVariable("id") Integer id) {
+		return setView(model, "login/classDetail");
 	}
 }
