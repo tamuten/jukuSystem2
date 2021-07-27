@@ -25,6 +25,10 @@ public class CourseDao {
 		return mapper.selectOne(id);
 	}
 
+	public Integer selectClassTimes(String id) {
+		return mapper.selectClassTimes(id);
+	}
+
 	public void updateOne(String id) {
 		mapper.updateOne(id);
 	}

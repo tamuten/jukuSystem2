@@ -30,11 +30,8 @@ SELECT
 FROM
     class_detail cd
     LEFT OUTER JOIN
-        student_class sc
-    ON  cd.student_class_id = sc.id
-    LEFT OUTER JOIN
         student s
-    ON  sc.student_id = s.id
+    ON  cd.student_id = s.id
     LEFT OUTER JOIN
         grade g
     ON  s.grade = g.id
@@ -50,11 +47,29 @@ ORDER BY
     cd.timed_id ASC,
     g.id ASC
 	</select>
+	<select id="selectOne" parameterType="integer"
+	resultType="com.example.demo.login.domain.model.ClassDetail">
+		SELECT
+			cd.id
+			,cd.date
+			,cd.timed_id
+			,s.name as student
+			,cd.subject_id
+			,cd.teacher_id
+			,cd.delete_flg
+		FROM
+			class_detail cd
+				LEFT OUTER JOIN student s
+					ON cd.student_id = s.id
+		WHERE
+			id = #{ id }
+	</select>
 
 
 	<insert id="insert" parameterType="string">
 INSERT INTO class_detail(
     date,
+    student_id,
     subject_id,
     timed_id,
     teacher_id,
@@ -63,6 +78,7 @@ INSERT INTO class_detail(
 )
 SELECT
     cs.date,
+    sc.student_id,
     sc.subject_id,
     sc.timed_id,
     sc.teacher_id,

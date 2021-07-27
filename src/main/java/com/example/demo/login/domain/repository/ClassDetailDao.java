@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.login.domain.model.ClassDetail;
 import com.example.demo.login.domain.model.dto.ClassDetailDto;
 import com.example.demo.login.domain.repository.mybatis.ClassDetailMapper;
 
@@ -20,6 +21,10 @@ public class ClassDetailDao {
 
 	public List<ClassDetailDto> findClass(Date date) {
 		return mapper.findClass(date);
+	}
+
+	public ClassDetail selectOne(Integer id) {
+		return mapper.selectOne(id);
 	}
 
 	public void delete(Date beginOfMonth, Date endOfMonth) {

@@ -52,12 +52,15 @@
 		SELECT
 		id
 		,name
-		,alias
-		,fee
-		,lesson1
-		,lesson2
-		,lesson3
-		,lesson4
+		,classTimes
+		FROM
+		course
+		WHERE
+		id = #{ id }
+	</select>
+	<select id="selectClassTimes" parameterType="string">
+		SELECT
+		classTimes
 		FROM
 		course
 		WHERE
