@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>授業詳細</title>
+</head>
+<body>
+	<div th:fragment="classDetail_contents">
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="page-header">
+					<h1>授業詳細</h1>
+				</div>
+				<form method="post" th:action="@{/classDetail}"
+					th:object="${classDetailForm}">
+					<div th:if="${message}" class="alert alert-success">
+						<p th:text="${message}"></p>
+					</div>
+					<table class="table table-bordered table-hover">
+						<tr>
+							<th class="active col-sm-2">授業ID</th>
+							<td class="col-sm-3">
+								<div class="form-group">
+									<input type="text" class="form-control" th:field="*{id}"
+										readonly="readonly" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">日付</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('date')} ? 'has-error'">
+									<input type="date" class="form-control" th:field="*{date}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('date')}"
+										th:errors="*{date}"> date error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">時限</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('timedId')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{timedId}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('timedId')}"
+										th:errors="*{timedId}"> timedId error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">生徒</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('studentId')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{studentId}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('studentId')}"
+										th:errors="*{studentId}"> studentId error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">教科</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('subjectId')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{subjectId}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('subjectId')}"
+										th:errors="*{subjectId}"> subjectId error </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="active">講師</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('teacherId')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{teacherId}" />
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('teacherId')}"
+										th:errors="*{teacherId}"> teacherId error </span>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<!-- 登録 -->
+					<!-- <button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
+						type="submit" name="register">登録</button> -->
+					<!-- 更新 -->
+					<button class="btn btn-primary btn-lg pull-right" id="updateBtn"
+						type="button" name="update">更新</button>
+					<!-- 削除 -->
+					<button class="btn btn-danger btn-lg" id="deleteBtn" type="button"
+						name="delete">削除</button>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			$(function() {
+
+			})
+			/*]]>*/
+		</script>
+	</div>
+</body>
+
+</html>

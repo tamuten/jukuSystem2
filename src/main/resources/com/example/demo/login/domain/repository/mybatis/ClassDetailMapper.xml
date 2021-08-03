@@ -62,7 +62,7 @@ ORDER BY
 				LEFT OUTER JOIN student s
 					ON cd.student_id = s.id
 		WHERE
-			id = #{ id }
+			cd.id = #{ id }
 	</select>
 
 
