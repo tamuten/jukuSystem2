@@ -12,21 +12,33 @@
 <title>Login</title>
 </head>
 <body class="text-center">
-	<h1>Login</h1>
-	<form method="post" th:action="@{/login}">
-		<!-- ログインエラ〜メッセージの表示 -->
-		<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
-			th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-danger">ログインエラーメッセージ</p>
+	<div class="col-sm-4 col-sm-offset-4">
+		<h1 style="font-weight: 600;">学習管理システム</h1>
+		<h3 style="font-weight: 600;">塾管理Web</h3>
 
-		<!-- ユーザーID -->
-		<label>ユーザーID</label> <input type="text" name="username" /><br /> <br />
-		<!-- パスワード -->
-		<label>パスワード</label> <input type="password" name="password" /><br /> <br />
-		<!-- ログインボタン -->
-		<button class="btn btn-primary" type="submit">ログイン</button>
-	</form>
-	<br />
-	<!-- ユーザー登録画面へのリンク -->
-	<a th:href="@{'/signup'}">ユーザー新規登録はこちら</a>
+		<form method="post" th:action="@{/login}">
+			<!-- ログインエラ〜メッセージの表示 -->
+			<div th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+				class="alert alert-danger">
+				<p th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">ログインエラーメッセージ</p>
+			</div>
+
+
+			<!-- ユーザーID -->
+			<label for="username" class="sr-only"></label> <input
+				class="form-control" type="text" id="username" name="username"
+				placeholder="ユーザID" />
+			<!-- パスワード -->
+			<label for="password" class="sr-only"></label> <input
+				class="form-control" type="password" id="password" name="password"
+				placeholder="パスワード" /><br /> <br />
+			<!-- ログインボタン -->
+			<button class="btn btn-primary my-1" type="submit">Sign In</button>
+		</form>
+
+		<br />
+		<!-- ユーザー登録画面へのリンク -->
+		<a th:href="@{'/signup'}">ユーザー新規登録はこちら</a>
+	</div>
 </body>
 </html>

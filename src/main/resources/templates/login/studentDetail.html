@@ -20,7 +20,7 @@
 			</div>
 			<form method="post" th:action="@{/studentDetail}"
 				th:object="${studentForm}">
-				<div class="col-sm-5">
+				<div class="col-sm-6">
 					<table class="table table-bordered table-hover">
 						<tr>
 							<th class="active col-sm-2">生徒ID</th>
@@ -152,6 +152,11 @@
 								</div>
 							</td>
 						</tr>
+
+					</table>
+				</div>
+				<div class="col-sm-6">
+					<table class="table table-bordered table-responsive">
 						<tr>
 							<th class="active">メールアドレス</th>
 							<td>
@@ -190,27 +195,6 @@
 								</div>
 							</td>
 						</tr>
-						<!-- <tr>
-							<th class="active"><span class="required">*</span>&nbsp;コース</th>
-							<td>
-								<div class="form-group"
-									th:classappend="${#fields.hasErrors('course')} ? 'has-error'">
-									<select class="form-control" name="course">
-										<option value="">---</option>
-										<option th:each="item : ${courseList}" th:value="${item.id}"
-											th:text="${item.name}" th:selected="${item.id} == *{course}">pulldown</option>
-									</select>
-									<input type="text" class="form-control" th:field="*{course}" />
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('course')}" th:errors="*{course}">
-										course error </span>
-								</div>
-							</td>
-						</tr> -->
-					</table>
-				</div>
-				<div class="col-sm-5">
-					<table class="table table-bordered table-responsive">
 						<tr>
 							<th class="active col-sm-2"><span class="required">*</span>&nbsp;コース</th>
 							<td class="col-sm-3">
@@ -228,15 +212,7 @@
 						</tr>
 					</table>
 				</div>
-				<!-- <tr>
-						<th class="active col-sm-2 align-middle">週あたり授業回数</th>
-						<td class="col-sm-3 align-middle">
-							<div class="form-group">
-								<input type="text" class="form-control" readonly="readonly" />
-							</div>
-						</td>
-					</tr> -->
-				<div class="col-sm-5">
+				<div class="col-sm-6">
 					<table class="table table-bordered table-responsive table-sm">
 						<caption align="top">授業</caption>
 						<thead>

@@ -8,12 +8,18 @@
 	<!-- ポイント：th:fragment -->
 	<div th:fragment="studentList_contents">
 		<div class="page-header">
+
 			<h1>
 				<i class="fas fa-user-graduate"></i>&nbsp;&nbsp;生徒一覧
 			</h1>
+
+
 		</div>
-		<button class="btn btn-primary pull-right"
-			onclick="location.href= '/student/signup'">新規登録</button>
+
+	<!-- 	<div class="col-sm-4">
+			<button class="btn btn-primary "
+				onclick="location.href= '/student/signup'">新規登録</button>
+		</div> -->
 		<div th:if="${message}" class="alert alert-success">
 			<p th:text="${message}"></p>
 		</div>

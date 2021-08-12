@@ -10,7 +10,9 @@
 		<div class="row">
 			<div class="col-sm-5">
 				<div class="page-header">
-					<h1>授業詳細</h1>
+					<h1>
+						<i class="fas fa-chalkboard-teacher"></i>&nbsp;授業詳細
+					</h1>
 				</div>
 				<form method="post" th:action="@{/classDetail}"
 					th:object="${classDetailForm}">
@@ -43,9 +45,14 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('timedId')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{timedId}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('timedId')}"
-										th:errors="*{timedId}"> timedId error </span>
+									<!-- 	<input type="text" class="form-control" th:field="*{timedId}" /> -->
+									<select class="form-control" th:name="*{timedId}">
+										<option value="">---</option>
+										<option th:each="item : timedList" th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} == *{timedId}"></option>
+									</select> <span class="text-danger"
+										th:if="${#fields.hasErrors('timedId')}" th:errors="*{timedId}">
+										timedId error </span>
 								</div>
 							</td>
 						</tr>
@@ -55,7 +62,8 @@
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('studentId')} ? 'has-error'">
 									<input type="text" class="form-control" th:field="*{studentId}" />
-									<span class="text-danger" th:if="${#fields.hasErrors('studentId')}"
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('studentId')}"
 										th:errors="*{studentId}"> studentId error </span>
 								</div>
 							</td>
@@ -65,8 +73,13 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('subjectId')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{subjectId}" />
-									<span class="text-danger"
+									<!-- <input type="text" class="form-control" th:field="*{subjectId}" /> -->
+									<select class="form-control" th:name="*{subjectId}">
+										<option value="">---</option>
+										<option th:each="item : subjectList" th:value="${item.id}"
+											th:text="${item.name}"
+											th:selected="${item.id} == *{subjectId}"></option>
+									</select> <span class="text-danger"
 										th:if="${#fields.hasErrors('subjectId')}"
 										th:errors="*{subjectId}"> subjectId error </span>
 								</div>
@@ -77,8 +90,13 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('teacherId')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{teacherId}" />
-									<span class="text-danger"
+									<!-- <input type="text" class="form-control" th:field="*{teacherId}" /> -->
+									<select class="form-control" th:name="*{teacherId}">
+										<option value="">---</option>
+										<option th:each="item : teacherList" th:value="${item.id}"
+											th:text="${item.name}"
+											th:selected="${item.id} == *{teacherId}"></option>
+									</select> <span class="text-danger"
 										th:if="${#fields.hasErrors('teacherId')}"
 										th:errors="*{teacherId}"> teacherId error </span>
 								</div>

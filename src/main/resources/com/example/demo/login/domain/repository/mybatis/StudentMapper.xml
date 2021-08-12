@@ -64,6 +64,7 @@
 		,#{ course }
 		,current_timestamp
 		,null
+		,false
 		)
 	</insert>
 	<select id="findAll" resultMap="studentList">
