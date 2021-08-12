@@ -14,10 +14,12 @@ public class StudentFormValidator extends AbstractValidator<StudentForm> {
 
 	@Override
 	protected void doValidate(StudentForm form, Errors errors) {
-		Integer canTakeClassWeekly = courseDao.selectClassTimes(form.getCourse());
-		Integer takingClassWeekly = form.getClasses().size();
-		if(takingClassWeekly > canTakeClassWeekly) {
-			errors.rejectValue("", null);
+		Integer canTakeClassWeekly = courseDao.selectOne(form.getCourse())
+			.getClassTimes();
+		Integer takingClassWeekly = form.getClasses()
+			.size();
+		if (takingClassWeekly > canTakeClassWeekly) {
+			errors.rejectValue("error", "studentForm.overClassTimes");
 		}
 	}
 

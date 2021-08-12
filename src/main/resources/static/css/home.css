@@ -4,6 +4,10 @@ body {
 	padding-top: 50px;
 }
 
+html, body, .login_content {
+	height: 100%;
+}
+
 .sidebar {
 	position: fixed;
 	display: block;
@@ -56,7 +60,7 @@ body {
 }
 
 .btnLabel {
-	padding-left:30px;
+	padding-left: 30px;
 }
 
 /* .table th{
