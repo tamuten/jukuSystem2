@@ -7,5 +7,11 @@ $(function(){
 		});
 	});
 
-	// テスト
+	$("#allCheck").on('click', function(){
+		$('input[name="subjects"]').prop('checked', true);
+	});
+
+	$("#removeCheck").on('click', function(){
+		$('input[name="subjects"]').prop('checked', false);
+	});
 })

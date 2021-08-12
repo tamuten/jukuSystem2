@@ -8,21 +8,23 @@
 <body>
 	<div th:fragment="teacherDetail_contents">
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-12">
 				<div class="page-header">
 					<h1>
 						<i class="fas fa-chalkboard-teacher"></i>&nbsp;&nbsp;講師詳細
 					</h1>
 				</div>
-				<form method="post" th:action="@{/teacherDetail}"
-					th:object="${teacherForm}">
-					<div th:if="${message}" class="alert alert-success">
-						<p th:text="${message}"></p>
-					</div>
+				<div th:if="${message}" class="alert alert-success">
+					<p th:text="${message}"></p>
+				</div>
+			</div>
+			<form method="post" th:action="@{/teacherDetail}"
+				th:object="${teacherForm}">
+				<div class="col-sm-6">
 					<table class="table table-bordered table-responsive">
 						<tr>
 							<th class="active col-sm-2 align-middle">講師ID</th>
-							<td class="col-sm-3 align-middle">
+							<td class="col-sm-4 align-middle">
 								<div class="form-group">
 									<input type="text" class="form-control" th:field="*{id}"
 										readonly="readonly" />
@@ -137,7 +139,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="active">学年</th>
+							<th class="active">
+								<!-- <span class="required">*</span> --> <!-- &nbsp; -->学年
+							</th>
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('grade')} ? 'has-error'">
@@ -152,9 +156,13 @@
 								</div>
 							</td>
 						</tr>
+					</table>
+				</div>
+				<div class="col-sm-6">
+					<table class="table table-bordered table-responsive">
 						<tr>
-							<th class="active">電話番号</th>
-							<td>
+							<th class="active col-sm-2 align-middle">電話番号</th>
+							<td class="col-sm-4 align-middle">
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('phoneNumber')} ? 'has-error'">
 									<input type="text" class="form-control"
@@ -205,6 +213,7 @@
 						</tr>
 						<tr>
 							<th class="active"><span class="required">*</span>&nbsp;担当可能教科</th>
+
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('subjects')} ? 'has-error'">
@@ -216,7 +225,14 @@
 									</div>
 									<br> <span class="text-danger"
 										th:if="${#fields.hasErrors('subjects')}"
-										th:errors="*{subjects}"> subjects error </span>
+										th:errors="*{subjects}"> subjects error </span> <br>
+									<div class="btn-group btn-group-sm" role="group">
+										<p>
+											<input type="button" class="btn" id="allCheck" value="全てON" />
+											<input type="button" class="btn" id="removeCheck"
+												value="全てOFF" />
+										</p>
+									</div>
 								</div>
 							</td>
 						</tr>
@@ -238,8 +254,9 @@
 					<!-- 削除 -->
 					<button class="btn btn-danger btn-lg" type="submit" name="delete">削除</button>
 
-				</form>
-			</div>
+
+				</div>
+			</form>
 		</div>
 		<script type="text/javascript" th:inline="javascript">
 			/*<![CDATA[*/
@@ -248,5 +265,6 @@
 		</script>
 	</div>
 </body>
+
 
 </html>
