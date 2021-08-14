@@ -6,10 +6,10 @@
 <meta charset="UTF-8"></meta>
 
 <!-- Bootstrapの設定 -->
-<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+<link th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
 	rel="stylesheet"></link>
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 <!-- CSSの読込 -->
 <link th:href="@{/css/home.css}" rel="stylesheet"></link>
@@ -21,7 +21,9 @@
 </head>
 <body>
 	<!-- ===== ヘッダー（ナビゲーションバー） =====  -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav
+		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
+		style="height: 50px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" th:href="@{'/home'}">学習管理システム</a>
@@ -32,57 +34,74 @@
 			</form>
 		</div>
 	</nav>
-	<!-- ===== サイドバー ===== -->
+
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2 sidebar">
-				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation"><a class="js-menu_item_link"
-						href="javascript:void(0)"><i class="fas fa-user-graduate"></i>&nbsp;生徒管理</a>
-						<ul class="submenu nav nav-pills nav-stacked">
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/studentList'}">&nbsp;生徒一覧</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/student/signup'}">&nbsp;新規登録</a></li>
-						</ul></li>
-					<li role="presentation"><a class="js-menu_item_link"
-						href="javascript:void(0)"><i class="fas fa-chalkboard-teacher"></i>&nbsp;講師管理</a>
-						<ul class="submenu nav nav-pills nav-stacked">
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/teacherList'}">&nbsp;講師一覧</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/teacher/signup'}">&nbsp;新規登録</a></li>
-						</ul></li>
-					<li role="presentation"><a th:href="@{'/schedule/index'}"><i
-							class="fas fa-chalkboard-teacher"></i>&nbsp;スケジュール管理</a></li>
-					<li role="presentation"><a th:href="@{'/classDetailList'}"><i
-							class="fas fa-chalkboard-teacher"></i>&nbsp;授業管理</a></li>
+			<!-- ===== サイドバー ===== -->
+			<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+				<div class="sidebar-sticky">
+					<ul class="nav flex-column">
+						<!-- 生徒管理 -->
+						<li class="nav-item" role="presentation"><a
+							class="js-menu_item_link nav-link active"
+							href="javascript:void(0)"><i class="fas fa-user-graduate fa-lg"></i>&nbsp;生徒管理&nbsp;</a>
 
-					<li role="presentation"><a class="js-menu_item_link"
-						href="javascript:void(0)"><i class="fas fa-vr-cardboard"></i>&nbsp;マスタ管理</a>
-						<ul class="submenu nav nav-pills nav-stacked">
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/courseList'}">&nbsp;コース管理</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/lessonList'}">&nbsp;授業管理</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/timetable'}">&nbsp;時間割管理</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/timed'}">&nbsp;時限管理</a></li>
-							<li role="presentation" class="submenu_item"><a
-								th:href="@{'/employee/signup'}">&nbsp;社員管理</a></li>
-						</ul></li>
+							<ul class="submenu nav flex-column">
 
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- ===== コンテンツ ===== -->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-2 main">
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/studentList'}" class="nav-link active">&nbsp;生徒一覧&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/student/signup'}" class="nav-link active">&nbsp;新規登録&nbsp;</a></li>
+							</ul></li>
+
+						<!-- 講師管理 -->
+						<li class="nav-item" role="presentation"><a
+							class="js-menu_item_link nav-link active"
+							href="javascript:void(0)"><i
+								class="fas fa-chalkboard-teacher"></i>&nbsp;講師管理&nbsp;</a>
+							<ul class="submenu nav flex-column">
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/teacherList'}" class="nav-link active">&nbsp;講師一覧&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/teacher/signup'}" class="nav-link active">&nbsp;新規登録&nbsp;</a></li>
+							</ul></li>
+
+						<!-- スケジュール管理 -->
+						<li class="nav-item" role="presentation"><a
+							class="nav-link active" th:href="@{'/schedule/index'}"><i
+								class="fas fa-chalkboard-teacher"></i>&nbsp;スケジュール管理&nbsp;</a></li>
+
+						<!-- 授業管理 -->
+						<li class="nav-item" role="presentation"><a
+							class="nav-link active" th:href="@{'/classDetailList'}"><i
+								class="fas fa-chalkboard-teacher"></i>&nbsp;授業管理&nbsp;</a></li>
+
+						<!-- マスタ管理 -->
+						<li class="nav-item" role="presentation"><a
+							class="js-menu_item_link nav-link active"
+							href="javascript:void(0)"><i class="fas fa-vr-cardboard"></i>&nbsp;マスタ管理&nbsp;</a>
+							<ul class="submenu nav flex-column">
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/courseList'}" class="nav-link active">&nbsp;コース管理&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/lessonList'}" class="nav-link active">&nbsp;授業管理&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/timetable'}" class="nav-link active">&nbsp;時間割管理&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/timed'}" class="nav-link active">&nbsp;時限管理&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/employee/signup'}" class="nav-link active">&nbsp;社員管理&nbsp;</a></li>
+							</ul></li>
+
+					</ul>
+				</div>
+			</nav>
+			<!-- ===== コンテンツ ===== -->
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+				<!-- 	<div class="col-sm-10 col-sm-offset-2"> -->
 				<div th:include="__${contents}__"></div>
-			</div>
+				<!-- </div> -->
+			</main>
 		</div>
 	</div>
 
