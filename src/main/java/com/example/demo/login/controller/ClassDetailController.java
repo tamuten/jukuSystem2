@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.login.controller.form.ClassDetailForm;
+import com.example.demo.login.controller.form.ClassDetailListForm;
 import com.example.demo.login.domain.model.ClassDetail;
 import com.example.demo.login.domain.model.Grade;
 import com.example.demo.login.domain.model.Subject;
@@ -30,8 +31,15 @@ public class ClassDetailController extends BaseController {
 	private TeacherService teacherService;
 
 	@GetMapping("/classDetailList")
-	public String index(Model model) {
+	public String index(ClassDetailListForm form, Model model) {
 		Date date = new Date(System.currentTimeMillis());
+		model.addAttribute("classList", classDetailDao.findClass(date));
+		return setView(model, "login/classDetailList");
+	}
+
+	@GetMapping("/classDetailList/search")
+	public String search(ClassDetailListForm form, Model model) {
+		Date date = Date.valueOf(form.getDate());
 		model.addAttribute("classList", classDetailDao.findClass(date));
 		return setView(model, "login/classDetailList");
 	}

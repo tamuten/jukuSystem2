@@ -7,7 +7,8 @@
 <body>
 	<!-- ポイント：th:fragment -->
 	<div th:fragment="classDetailList_contents">
-		<div class="page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<div
+			class="page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1>
 				<i class="fas fa-chalkboard-teacher"></i>&nbsp;授業一覧
 			</h1>
@@ -16,6 +17,14 @@
 			onclick="location.href= '/teacher/signup'">新規登録</button> -->
 		<div th:if="${message}" class="alert alert-success">
 			<p th:text="${message}"></p>
+		</div>
+
+		<div class="form-group">
+			<form method="get" th:action="@{/classDetailList/search}"
+				th:object="${classDetailListForm}">
+				<input class="form-control" type="text" id="target"
+					th:field="*{date}" /><input class="btn" type="submit" value="検索" />
+			</form>
 		</div>
 		<div class="list">
 			<table class="table table-bordered table-hover table-striped">

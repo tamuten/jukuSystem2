@@ -14,4 +14,6 @@ $(function(){
 	$("#removeCheck").on('click', function(){
 		$('input[name="subjects"]').prop('checked', false);
 	});
+
+	$('#target').datepicker();
 })
