@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-body {
-	/* 	padding-top: 50px; */
-
-}
-
 html, body, .login_content {
 	height: 100%;
 }
@@ -41,17 +36,6 @@ html, body, .login_content {
 [role="main"] {
 	padding-top: 50px; /* Space for fixed navbar */
 	bottom: 0;
-}
-
-.main {
-	/* 	padding-top: 50px;
-	padding-left: 20px; */
-	/* position: fixed; */ */
-	/* 	display: block;
-	top: 0px;
-	bottom: 0;
-	overflow-y: auto; */
-
 }
 
 .page-header {

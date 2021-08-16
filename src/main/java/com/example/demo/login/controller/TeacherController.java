@@ -2,6 +2,8 @@ package com.example.demo.login.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -126,7 +128,8 @@ public class TeacherController extends BaseController {
 	 * @return
 	 */
 	@PostMapping(value = "/teacherDetail", params = "update")
-	public String update(@ModelAttribute @Validated TeacherForm form, BindingResult result, Model model) {
+	public String update(@ModelAttribute @Validated TeacherForm form, BindingResult result, Model model,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			setCombobox(model);
 			return setView(model, "login/teacherDetail");
