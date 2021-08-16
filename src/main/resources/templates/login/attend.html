@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+
+<!-- Bootstrapの設定 -->
+<link th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
+	rel="stylesheet"></link>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+
+<!-- CSSの読込 -->
+<link th:href="@{/css/login.css}" rel="stylesheet"></link>
+
+<title>登下校管理</title>
+</head>
+<body class="text-center">
+	<form method="post" th:action="@{/attend}" class="form-signin">
+		<div class="">
+			<!--  col-sm-4 col-sm-offset-4 -->
+			<h1 style="font-weight: 600;">登下校管理</h1>
+			<!-- 			<h3 style="font-weight: 600;">塾管理Web</h3> -->
+
+			<div th:if="${message}" class="alert alert-success">
+				<p th:text="${message}"></p>
+			</div>
+			<!-- エラーメッセージの表示 -->
+			<div th:if="${error}" class="alert alert-danger">
+				<p th:text="${error}"></p>
+			</div>
+
+
+			<!-- ユーザーID -->
+			<label for="username" class="sr-only"></label> <input
+				class="form-control" type="text" id="userId" name="userId"
+				placeholder="IDを入力してください" /><br /> <br />
+			<!-- ログインボタン -->
+			<button class="btn btn-lg btn-block my-1" type="submit" name="attend">登校</button>
+			<button class="btn btn-lg btn-block my-1" type="submit" name="leave">下校</button>
+
+			<br />
+			<!-- ユーザー登録画面へのリンク -->
+			<!-- 		<a th:href="@{'/signup'}">ユーザー新規登録はこちら</a> -->
+		</div>
+	</form>
+</body>
+</html>

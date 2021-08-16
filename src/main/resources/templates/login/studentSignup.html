@@ -285,12 +285,13 @@
 										</select></td>
 										<td class="align-middle text-center"><button
 												type="button" class="btn btn-sm" name="remove"
-												th:value="${stat.index}">行削除</button></td>
+												th:value="${stat.index}" onclick="removeList(this)">行削除</button></td>
 									</tr>
 								</th:block>
 							</tbody>
 						</table>
-						<button class="btn btn-sm" type="button" name="add">行追加</button>
+						<button class="btn btn-sm" type="button" name="add"
+							onclick="addList()">行追加</button>
 					</div>
 				</div>
 				<div class="d-flex justify-content-end">

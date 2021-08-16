@@ -24,8 +24,9 @@
 							<th class="active col-sm-2">授業ID</th>
 							<td class="col-sm-3">
 								<div class="form-group">
-									<input type="text" class="form-control" th:field="*{id}"
-										readonly="readonly" />
+									<input type="text" class="form-control" th:value="*{id}"
+										disabled />
+										<input type="hidden" th:field="*{id}"/>
 								</div>
 							</td>
 						</tr>
@@ -34,7 +35,7 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('date')} ? 'has-error'">
-									<input type="date" class="form-control" th:field="*{date}" />
+									<input type="text" class="form-control date" th:field="*{date}" />
 									<span class="text-danger" th:if="${#fields.hasErrors('date')}"
 										th:errors="*{date}"> date error </span>
 								</div>
@@ -48,7 +49,7 @@
 									<!-- 	<input type="text" class="form-control" th:field="*{timedId}" /> -->
 									<select class="form-control" th:name="*{timedId}">
 										<option value="">---</option>
-										<option th:each="item : timedList" th:value="${item.id}"
+										<option th:each="item : ${timedList}" th:value="${item.id}"
 											th:text="${item.name}" th:selected="${item.id} == *{timedId}"></option>
 									</select> <span class="text-danger"
 										th:if="${#fields.hasErrors('timedId')}" th:errors="*{timedId}">
@@ -60,11 +61,11 @@
 							<th class="active">生徒</th>
 							<td>
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('studentId')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{studentId}" />
+									th:classappend="${#fields.hasErrors('student')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{student}" disabled />
 									<span class="text-danger"
-										th:if="${#fields.hasErrors('studentId')}"
-										th:errors="*{studentId}"> studentId error </span>
+										th:if="${#fields.hasErrors('student')}"
+										th:errors="*{student}"> student error </span>
 								</div>
 							</td>
 						</tr>
@@ -76,7 +77,7 @@
 									<!-- <input type="text" class="form-control" th:field="*{subjectId}" /> -->
 									<select class="form-control" th:name="*{subjectId}">
 										<option value="">---</option>
-										<option th:each="item : subjectList" th:value="${item.id}"
+										<option th:each="item : ${subjectList}" th:value="${item.id}"
 											th:text="${item.name}"
 											th:selected="${item.id} == *{subjectId}"></option>
 									</select> <span class="text-danger"
@@ -93,7 +94,7 @@
 									<!-- <input type="text" class="form-control" th:field="*{teacherId}" /> -->
 									<select class="form-control" th:name="*{teacherId}">
 										<option value="">---</option>
-										<option th:each="item : teacherList" th:value="${item.id}"
+										<option th:each="item : ${teacherList}" th:value="${item.id}"
 											th:text="${item.name}"
 											th:selected="${item.id} == *{teacherId}"></option>
 									</select> <span class="text-danger"

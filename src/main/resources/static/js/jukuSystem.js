@@ -15,5 +15,10 @@ $(function(){
 		$('input[name="subjects"]').prop('checked', false);
 	});
 
-	$('#target').datepicker();
+	$('.date').datepicker();
 })
+
+function openAttendManage(){
+	window.open('/attend/index', null, 'width=600, height=400');
+}
+
