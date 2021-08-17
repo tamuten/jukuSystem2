@@ -24,12 +24,22 @@ SET
     leave_datetime = CURRENT_TIMESTAMP
 WHERE
     student_id = #{ studentId }
-AND date = #{ date }
+AND date = CURRENT_DATE
 AND attend_datetime IS NOT NULL
 AND leave_datetime IS NULL
 
 	</update>
-
+	<select id="findAlreadyAttend" resultType="integer" parameterType="com.example.demo.login.domain.model.AttendLeave">
+SELECT
+    count(*)
+FROM
+    attend_leave
+WHERE
+    student_id = #{ studentId }
+AND date = CURRENT_DATE
+AND attend_datetime IS NOT NULL
+AND leave_datetime IS NULL
+	</select>
 
 
 </mapper>

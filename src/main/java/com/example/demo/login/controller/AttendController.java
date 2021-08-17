@@ -51,9 +51,15 @@ public class AttendController extends BaseController {
 	}
 
 	@PostMapping(value = "/attend", params = "leave")
-	public String leave(Model model, HttpServletRequest request) {
-		String studentId = request.getParameter("userId");
-		System.out.println(studentId);
+	public String leave(@Validated AttendForm form, BindingResult result, Model model, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			return "login/attend";
+		}
+		System.out.println(form.getStudentId());
+		AttendLeave attendLeave = new AttendLeave();
+		BeanUtils.copyProperties(form, attendLeave);
+		attendLeaveDao.update(attendLeave);
+
 		setMessage(model, Message.LEAVE);
 		return "login/attend";
 	}

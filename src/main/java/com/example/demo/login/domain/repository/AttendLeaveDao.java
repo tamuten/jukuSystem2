@@ -18,4 +18,8 @@ public class AttendLeaveDao {
 	public void update(AttendLeave attendLeave) {
 		mapper.update(attendLeave);
 	}
+
+	public int findAlreadyAttend(AttendLeave attendLeave) {
+		return mapper.findAlreadyAttend(attendLeave);
+	}
 }

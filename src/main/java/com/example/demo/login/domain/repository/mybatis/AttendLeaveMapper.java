@@ -8,4 +8,5 @@ import com.example.demo.login.domain.model.AttendLeave;
 public interface AttendLeaveMapper {
 	public void insert(AttendLeave attendLeave);
 	public void update(AttendLeave attendLeave);
+	public int findAlreadyAttend(AttendLeave attendLeave);
 }
