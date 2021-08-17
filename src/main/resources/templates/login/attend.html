@@ -16,7 +16,8 @@
 <title>登下校管理</title>
 </head>
 <body class="text-center">
-	<form method="post" th:action="@{/attend}" class="form-signin">
+	<form method="post" th:action="@{/attend}" th:object="${attendForm}"
+		class="form-signin">
 		<div class="">
 			<!--  col-sm-4 col-sm-offset-4 -->
 			<h1 style="font-weight: 600;">登下校管理</h1>
@@ -32,9 +33,15 @@
 
 
 			<!-- ユーザーID -->
-			<label for="username" class="sr-only"></label> <input
-				class="form-control" type="text" id="userId" name="userId"
-				placeholder="IDを入力してください" /><br /> <br />
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('studentId')} ? 'has-error'">
+				<label for="username" class="sr-only"></label> <input
+					class="form-control" type="text" th:field="*{studentId}"
+					placeholder="IDを入力してください"
+					th:classappend="${#fields.hasErrors('studentId')} ? 'is-invalid'" />
+				<span class="text-danger" th:if="${#fields.hasErrors('studentId')}"
+					th:errors="*{studentId}"> studentId error </span><br /> <br />
+			</div>
 			<!-- ログインボタン -->
 			<button class="btn btn-lg btn-block my-1" type="submit" name="attend">登校</button>
 			<button class="btn btn-lg btn-block my-1" type="submit" name="leave">下校</button>

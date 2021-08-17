@@ -120,6 +120,14 @@ order by
 		WHERE
 		s.id = #{ id }
 	</select>
+	<select id="studentCount" parameterType="string" resultType="integer">
+SELECT
+    count(*)
+FROM
+    student
+WHERE
+    id = #{ id }
+	</select>
 	<update id="updateOne"
 		parameterType="com.example.demo.login.domain.model.Student">
 		UPDATE

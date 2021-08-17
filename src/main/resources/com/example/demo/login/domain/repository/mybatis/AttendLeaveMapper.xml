@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper> -->
+<mapper
+	namespace="com.example.demo.login.domain.repository.mybatis.AttendLeaveMapper">
+
+	<insert id="insert" parameterType="com.example.demo.login.domain.model.AttendLeave">
+INSERT INTO attend_leave(
+    student_id,
+    date,
+    attend_datetime
+)
+VALUES(
+    #{ studentId },
+    CURRENT_DATE,
+    CURRENT_TIMESTAMP
+)
+	</insert>
+	<update id="update" parameterType="com.example.demo.login.domain.model.AttendLeave">
+UPDATE
+    attend_leave
+SET
+    leave_datetime = CURRENT_TIMESTAMP
+WHERE
+    student_id = #{ studentId }
+AND date = #{ date }
+AND attend_datetime IS NOT NULL
+AND leave_datetime IS NULL
+
+	</update>
+
+
+
+</mapper>

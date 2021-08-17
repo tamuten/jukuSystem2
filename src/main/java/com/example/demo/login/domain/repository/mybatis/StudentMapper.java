@@ -12,6 +12,7 @@ public interface StudentMapper {
 	public void insert(Student student);
 	public List<StudentListDto> findAll();
 	public Student selectOne(String id);
+	public int studentCount(String id);
 	public void updateOne(Student student);
 	public void deleteOne(String id);
 }

@@ -27,6 +27,10 @@ public class StudentDao {
 		return mapper.selectOne(id);
 	}
 
+	public int studentCount(String id) {
+		return mapper.studentCount(id);
+	}
+
 	public void updateOne(Student student) {
 		mapper.updateOne(student);
 	}
