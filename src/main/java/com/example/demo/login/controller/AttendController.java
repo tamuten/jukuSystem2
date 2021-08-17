@@ -1,11 +1,14 @@
 package com.example.demo.login.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,6 +21,7 @@ import com.example.demo.login.controller.form.AttendForm;
 import com.example.demo.login.controller.validator.AttendFormValidator;
 import com.example.demo.login.domain.model.AttendLeave;
 import com.example.demo.login.domain.repository.AttendLeaveDao;
+import com.example.demo.login.domain.service.AttendLeaveService;
 
 @Controller
 public class AttendController extends BaseController {
@@ -25,6 +29,8 @@ public class AttendController extends BaseController {
 	private AttendLeaveDao attendLeaveDao;
 	@Autowired
 	private AttendFormValidator validator;
+	@Autowired
+	private AttendLeaveService attendLeaveService;
 
 	@InitBinder("attendForm")
 	public void validatorBinder(WebDataBinder binder) {
@@ -44,6 +50,11 @@ public class AttendController extends BaseController {
 		System.out.println(form.getStudentId());
 		AttendLeave attendLeave = new AttendLeave();
 		BeanUtils.copyProperties(form, attendLeave);
+		attendLeaveService.formCheck(attendLeave, model);
+		if (!CollectionUtils.isEmpty((List<String>) model.getAttribute("error"))) {
+			return "login/attend";
+		}
+
 		attendLeaveDao.insert(attendLeave);
 
 		setMessage(model, Message.ATTEND);

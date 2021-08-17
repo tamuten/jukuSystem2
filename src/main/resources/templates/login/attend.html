@@ -28,7 +28,9 @@
 			</div>
 			<!-- エラーメッセージの表示 -->
 			<div th:if="${error}" class="alert alert-danger">
-				<p th:text="${error}"></p>
+				<th:block th:each="e : ${error}">
+					<p th:text="${e}"></p>
+				</th:block>
 			</div>
 
 

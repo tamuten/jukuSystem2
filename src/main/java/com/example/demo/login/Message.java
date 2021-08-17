@@ -5,7 +5,8 @@ public enum Message {
 	UPDATE("update"), //
 	DELETE("delete"), //
 	ATTEND("attend"), //
-	LEAVE("leave");//
+	LEAVE("leave"), //
+	ISALREADYATTENDANCE("attendForm.AlreadyAttendance");//
 
 	private Message(String key) {
 		this.key = key;
