@@ -72,6 +72,8 @@ FROM
     ON  s.grade = g.id
 WHERE
     al.date = #{ date }
+ORDER BY
+	al.id ASC
 	</select>
 
 </mapper>

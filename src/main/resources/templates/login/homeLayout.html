@@ -50,8 +50,16 @@
 					<ul class="nav flex-column">
 						<!-- 登下校管理 -->
 						<li class="nav-item" role="presentation"><a
-							class="nav-link active" href="javascript:void(0)" onclick="openAttendManage()"><i
-								class="fas fa-school"></i>&nbsp;登下校管理&nbsp;</a></li>
+							class="js-menu_item_link nav-link active" href="javascript:void(0)"><i
+								class="fas fa-school"></i>&nbsp;登下校管理&nbsp;</a>
+							<ul class="submenu nav flex-column">
+								<li role="presentation" class="submenu_item"><a
+									href="javascript:void(0)" onclick="openAttendManage()"
+									class="nav-link active">&nbsp;登下校登録画面&nbsp;</a></li>
+								<li role="presentation" class="submenu_item"><a
+									th:href="@{'/attendList'}" class="nav-link active">&nbsp;登校者一覧&nbsp;</a></li>
+
+							</ul></li>
 
 						<!-- 生徒管理 -->
 						<li class="nav-item" role="presentation"><a

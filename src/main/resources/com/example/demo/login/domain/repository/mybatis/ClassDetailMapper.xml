@@ -14,6 +14,11 @@
 		<result column="student_name" property="studentName" />
 		<result column="subject_name" property="subjectName" />
 		<result column="teacher_name" property="teacherName" />
+		<association property="timed" javaType="com.example.demo.login.domain.model.Timed">
+			<id column="id" property="id" />
+			<result column="start_time" property="startTime" />
+			<result column="end_time" property="endTime" />
+		</association>
 	</resultMap>
 
 
@@ -23,6 +28,8 @@ SELECT
     cd.id,
     cd.date,
     cd.timed_id,
+    mt.start_time,
+    mt.end_time,
     g.name as student_grade,
     s.name as student_name,
     ms.name as subject_name,
@@ -41,6 +48,9 @@ FROM
     LEFT OUTER JOIN
         teacher t
     ON  cd.teacher_id = t.id
+    LEFT OUTER JOIN
+    	m_timed mt
+    ON  cd.timed_id = mt.id
 WHERE
     cd.date = #{ date }
 ORDER BY

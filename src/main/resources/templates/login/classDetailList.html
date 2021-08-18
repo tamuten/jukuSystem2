@@ -32,6 +32,8 @@
 					<th class="info col-sm-1">授業ID</th>
 					<th class="info col-sm-1">日付</th>
 					<th class="info col-sm-1">時限</th>
+					<th class="info col-sm-1">開始時刻</th>
+					<th class="info col-sm-1">終了時刻</th>
 					<th class="info col-sm-1">学年</th>
 					<th class="info col-sm-1">生徒</th>
 					<th class="info col-sm-1">教科</th>
@@ -42,6 +44,8 @@
 					<td th:text="${class.id}"></td>
 					<td th:text="${#dates.format(class.date, 'yyyy/MM/dd')}"></td>
 					<td th:text="${class.timedId} + '限'"></td>
+					<td th:text="${class.timed.startTime}"></td>
+					<td th:text="${class.timed.endTime}"></td>
 					<td th:text="${class.studentGrade}"></td>
 					<td th:text="${class.studentName}"></td>
 					<td th:text="${class.subjectName}"></td>

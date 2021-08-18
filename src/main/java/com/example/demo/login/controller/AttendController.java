@@ -1,5 +1,8 @@
 package com.example.demo.login.controller;
 
+import java.sql.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
@@ -17,6 +20,7 @@ import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.AttendForm;
 import com.example.demo.login.controller.validator.AttendFormValidator;
 import com.example.demo.login.domain.model.AttendLeave;
+import com.example.demo.login.domain.model.dto.AttendListDto;
 import com.example.demo.login.domain.repository.AttendLeaveDao;
 import com.example.demo.login.domain.service.AttendLeaveService;
 
@@ -52,7 +56,7 @@ public class AttendController extends BaseController {
 		AttendLeave attendLeave = new AttendLeave();
 		BeanUtils.copyProperties(form, attendLeave);
 
-		attendLeaveDao.insert(attendLeave);
+		attendLeaveService.attend(attendLeave);
 
 		setMessage(model, Message.ATTEND);
 		return "login/attend";
@@ -70,5 +74,13 @@ public class AttendController extends BaseController {
 
 		setMessage(model, Message.LEAVE);
 		return "login/attend";
+	}
+
+	@GetMapping("/attendList")
+	public String getList(Model model) {
+		Date today = new Date(System.currentTimeMillis());
+		List<AttendListDto> attendList = attendLeaveDao.findAttendance(today);
+		model.addAttribute("attendList", attendList);
+		return setView(model, "login/attendList");
 	}
 }

@@ -2,6 +2,8 @@ package com.example.demo.login.domain.model.dto;
 
 import java.sql.Date;
 
+import com.example.demo.login.domain.model.Timed;
+
 import lombok.Data;
 
 @Data
@@ -13,4 +15,5 @@ public class ClassDetailDto {
 	private String studentName;
 	private String subjectName;
 	private String teacherName;
+	private Timed timed;
 }

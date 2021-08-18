@@ -18,6 +18,8 @@ public class AttendLeaveService {
 	private AttendLeaveDao attendLeaveDao;
 	@Autowired
 	private MessageSource messageSource;
+	@Autowired
+	private MailService mailService;
 
 	public void formCheckBeforeAttend(AttendForm form) {
 		AttendLeave attendLeave = new AttendLeave();
@@ -26,6 +28,11 @@ public class AttendLeaveService {
 		if (attendLeaveDao.isAlreadyAttend(attendLeave)) {
 			form.addError(messageSource.getMessage(Message.ISALREADYATTENDANCE.getKey(), null, Locale.JAPAN));
 		}
+	}
+
+	public void attend(AttendLeave attendLeave) {
+		attendLeaveDao.insert(attendLeave);
+		mailService.sendMail();
 	}
 
 	public void leave(AttendLeave attendLeave) {

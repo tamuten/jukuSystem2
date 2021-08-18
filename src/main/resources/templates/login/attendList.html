@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<!-- ポイント：th:fragment -->
+	<div th:fragment="attendList_contents">
+		<div
+			class="page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1>
+				<i class="fas fa-school"></i>&nbsp;登校者一覧
+			</h1>
+		</div>
+		<div th:if="${message}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
+
+		<div class="form-group">
+			<form method="get" th:action="@{/attendList/search}"
+				th:object="${attendListForm}">
+	<!-- 			<input class="form-control date" type="text" id="target"
+					th:field="*{date}" /><input class="btn" type="submit" value="検索" /> -->
+			</form>
+		</div>
+		<div class="list">
+			<table class="table table-bordered table-hover table-striped">
+				<tr>
+					<th class="info col-sm-2">ID</th>
+					<th class="info col-sm-2">生徒ID</th>
+					<th class="info col-sm-2">生徒名</th>
+					<th class="info col-sm-1">学年</th>
+					<th class="info col-sm-2">登校時刻</th>
+					<th class="info col-sm-2">下校時刻</th>
+				</tr>
+				<tr th:each="item : ${attendList}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.studentId}"></td>
+					<td th:text="${item.studentName}"></td>
+					<td th:text="${item.grade}"></td>
+					<td th:text="${#dates.format(item.attendDatetime, 'HH:mm:ss')}"></td>
+					<td th:text="${#dates.format(item.leaveDatetime, 'HH:mm:ss')}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
