@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode
-public class AttendForm {
+@EqualsAndHashCode(callSuper = false)
+public class AttendForm extends BaseForm {
 	@NotBlank
 	private String studentId;
 }

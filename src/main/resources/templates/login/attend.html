@@ -27,8 +27,8 @@
 				<p th:text="${message}"></p>
 			</div>
 			<!-- エラーメッセージの表示 -->
-			<div th:if="${error}" class="alert alert-danger">
-				<th:block th:each="e : ${error}">
+			<div th:if="!*{#lists.isEmpty(errors)}" class="alert alert-danger">
+				<th:block th:each="e : *{errors}">
 					<p th:text="${e}"></p>
 				</th:block>
 			</div>

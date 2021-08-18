@@ -1,15 +1,14 @@
 package com.example.demo.login.domain.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.example.demo.login.Message;
+import com.example.demo.login.controller.form.AttendForm;
 import com.example.demo.login.domain.model.AttendLeave;
 import com.example.demo.login.domain.repository.AttendLeaveDao;
 
@@ -18,13 +17,21 @@ public class AttendLeaveService {
 	@Autowired
 	private AttendLeaveDao attendLeaveDao;
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 
-	public void formCheck(AttendLeave attendLeave, Model model) {
-		List<String> errorList = new ArrayList<>();
-		if (attendLeaveDao.findAlreadyAttend(attendLeave) > 1) {
-			errorList.add(messageSource.getMessage(Message.ISALREADYATTENDANCE.getKey(), null, Locale.JAPAN));
+	public void formCheckBeforeAttend(AttendForm form) {
+		AttendLeave attendLeave = new AttendLeave();
+		BeanUtils.copyProperties(form, attendLeave);
+		// 既に登校している
+		if (attendLeaveDao.isAlreadyAttend(attendLeave)) {
+			form.addError(messageSource.getMessage(Message.ISALREADYATTENDANCE.getKey(), null, Locale.JAPAN));
 		}
-		model.addAttribute("error", errorList);
+	}
+
+	public void leave(AttendLeave attendLeave) {
+		int updateRow = attendLeaveDao.update(attendLeave);
+		if (updateRow < 1) {
+			attendLeaveDao.insertLeave(attendLeave);
+		}
 	}
 }

@@ -1,14 +1,11 @@
 package com.example.demo.login.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -47,13 +44,13 @@ public class AttendController extends BaseController {
 		if (result.hasErrors()) {
 			return "login/attend";
 		}
+		attendLeaveService.formCheckBeforeAttend(form);
+		if (form.hasErrors()) {
+			return "login/attend";
+		}
 		System.out.println(form.getStudentId());
 		AttendLeave attendLeave = new AttendLeave();
 		BeanUtils.copyProperties(form, attendLeave);
-		attendLeaveService.formCheck(attendLeave, model);
-		if (!CollectionUtils.isEmpty((List<String>) model.getAttribute("error"))) {
-			return "login/attend";
-		}
 
 		attendLeaveDao.insert(attendLeave);
 
@@ -69,7 +66,7 @@ public class AttendController extends BaseController {
 		System.out.println(form.getStudentId());
 		AttendLeave attendLeave = new AttendLeave();
 		BeanUtils.copyProperties(form, attendLeave);
-		attendLeaveDao.update(attendLeave);
+		attendLeaveService.leave(attendLeave);
 
 		setMessage(model, Message.LEAVE);
 		return "login/attend";

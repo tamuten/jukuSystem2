@@ -17,6 +17,18 @@ VALUES(
     CURRENT_TIMESTAMP
 )
 	</insert>
+	<insert id="insertLeave" parameterType="com.example.demo.login.domain.model.AttendLeave">
+INSERT INTO attend_leave(
+    student_id,
+    date,
+    leave_datetime
+)
+VALUES(
+    #{ studentId },
+    CURRENT_DATE,
+    CURRENT_TIMESTAMP
+)
+	</insert>
 	<update id="update" parameterType="com.example.demo.login.domain.model.AttendLeave">
 UPDATE
     attend_leave
@@ -29,7 +41,8 @@ AND attend_datetime IS NOT NULL
 AND leave_datetime IS NULL
 
 	</update>
-	<select id="findAlreadyAttend" resultType="integer" parameterType="com.example.demo.login.domain.model.AttendLeave">
+	<select id="findAlreadyAttend" resultType="integer"
+	parameterType="com.example.demo.login.domain.model.AttendLeave">
 SELECT
     count(*)
 FROM
@@ -40,6 +53,25 @@ AND date = CURRENT_DATE
 AND attend_datetime IS NOT NULL
 AND leave_datetime IS NULL
 	</select>
-
+	<select id="findAttendance" parameterType="java.sql.Date"
+	resultType="com.example.demo.login.domain.model.dto.AttendListDto">
+SELECT
+    al.id,
+    s.id as student_id,
+    s.name as student_name,
+    g.name as grade,
+    al.attend_datetime,
+    al.leave_datetime
+FROM
+    attend_leave al
+    INNER JOIN
+        student s
+    ON  al.student_id = s.id
+    INNER JOIN
+        grade g
+    ON  s.grade = g.id
+WHERE
+    al.date = #{ date }
+	</select>
 
 </mapper>
