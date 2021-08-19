@@ -10,7 +10,7 @@ public class MailService {
 	@Autowired
 	private MailSender sender;
 
-	public void sendMail() {
+	public void sendMail(String to) {
 		SimpleMailMessage msg = new SimpleMailMessage();
 
 		msg.setFrom("tamuten310@gmail.com");

@@ -11,6 +11,7 @@ import com.example.demo.login.Message;
 import com.example.demo.login.controller.form.AttendForm;
 import com.example.demo.login.domain.model.AttendLeave;
 import com.example.demo.login.domain.repository.AttendLeaveDao;
+import com.example.demo.login.domain.repository.StudentDao;
 
 @Service
 public class AttendLeaveService {
@@ -20,6 +21,8 @@ public class AttendLeaveService {
 	private MessageSource messageSource;
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private StudentDao studentDao;
 
 	public void formCheckBeforeAttend(AttendForm form) {
 		AttendLeave attendLeave = new AttendLeave();
@@ -32,7 +35,9 @@ public class AttendLeaveService {
 
 	public void attend(AttendLeave attendLeave) {
 		attendLeaveDao.insert(attendLeave);
-		mailService.sendMail();
+		String mailTo = studentDao.selectOne(attendLeave.getStudentId())
+			.getMailAddress();
+		mailService.sendMail(mailTo);
 	}
 
 	public void leave(AttendLeave attendLeave) {
