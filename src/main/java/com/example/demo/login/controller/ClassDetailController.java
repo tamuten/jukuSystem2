@@ -1,6 +1,7 @@
 package com.example.demo.login.controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -32,15 +33,21 @@ public class ClassDetailController extends BaseController {
 
 	@GetMapping("/classDetailList")
 	public String index(ClassDetailListForm form, Model model) {
-		Date date = new Date(System.currentTimeMillis());
-		model.addAttribute("classList", classDetailDao.findClass(date));
+		if (form.getDate() == null) {
+			form.setDate(LocalDate.now());
+		}
+		Date searchDate = Date.valueOf(form.getDate());
+		model.addAttribute("classList", classDetailDao.findClass(searchDate));
 		return setView(model, "login/classDetailList");
 	}
 
 	@GetMapping("/classDetailList/search")
 	public String search(ClassDetailListForm form, Model model) {
-		Date date = Date.valueOf(form.getDate());
-		model.addAttribute("classList", classDetailDao.findClass(date));
+		if (form.getDate() == null) {
+			form.setDate(LocalDate.now());
+		}
+		Date searchDate = Date.valueOf(form.getDate());
+		model.addAttribute("classList", classDetailDao.findClass(searchDate));
 		return setView(model, "login/classDetailList");
 	}
 

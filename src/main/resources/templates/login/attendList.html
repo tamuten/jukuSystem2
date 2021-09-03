@@ -19,9 +19,27 @@
 
 		<div class="form-group">
 			<form method="get" th:action="@{/attendList/search}"
-				th:object="${attendListForm}">
-	<!-- 			<input class="form-control date" type="text" id="target"
-					th:field="*{date}" /><input class="btn" type="submit" value="検索" /> -->
+				th:object="${attendListForm}" class="form-inline">
+				<button type="button" class="btn btn-success" onclick="openAttendManage()">
+					<i class="far fa-window-restore"></i>&nbsp;&nbsp;登下校チェックを開く
+				</button>
+
+				<div class="form-group ml-sm-4 mr-sm-2">
+					<input class="form-control date" type="text" id="target"
+						th:field="*{searchDate}" placeholder="yyyy/MM/dd" />
+				</div>
+				<div class="form-group mr-sm-2">
+					<select class="form-control" th:name="*{searchGrade}">
+						<option value="">学年を選択</option>
+						<option th:each="item : ${gradeList}" th:value="${item.id}"
+							th:text="${item.name}" th:selected="${item.id} == *{searchGrade}">pulldown</option>
+					</select>
+				</div>
+				<div class="form-group mr-sm-2 ">
+					<input type="text" class="form-control" th:field="*{searchName}"
+						placeholder="生徒名" />
+				</div>
+				<input class="btn" type="submit" value="検索" />
 			</form>
 		</div>
 		<div class="list">
