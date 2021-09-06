@@ -14,10 +14,10 @@ public class MailService {
 		SimpleMailMessage msg = new SimpleMailMessage();
 
 		msg.setFrom("tamuten310@gmail.com");
-		msg.setTo("tamuten0310@aol.jp");
+		msg.setTo(to);
 		msg.setSubject("テストメール");//タイトルの設定
 		msg.setText("Spring Boot より本文送信"); //本文の設定
 
-		this.sender.send(msg);
+		//		this.sender.send(msg);
 	}
 }

@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode
 public class ClassDetailForm {
 	private Integer id;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -16,5 +18,6 @@ public class ClassDetailForm {
 	private String studentId;
 	private String subjectId;
 	private String teacherId;
+	private String report;
 	private Boolean deleteFlg;
 }

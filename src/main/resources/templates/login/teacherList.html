@@ -7,15 +7,26 @@
 <body>
 	<!-- ポイント：th:fragment -->
 	<div th:fragment="teacherList_contents">
-		<div class="page-header  d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<div
+			class="page-header  d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1>
 				<i class="fas fa-chalkboard-teacher"></i>&nbsp;講師一覧
 			</h1>
 		</div>
-		<!-- <button class="btn btn-primary pull-right"
-			onclick="location.href= '/teacher/signup'">新規登録</button> -->
 		<div th:if="${message}" class="alert alert-success">
 			<p th:text="${message}"></p>
+		</div>
+		<div class="form-group">
+			<form method="get" class="form-inline">
+				<button type="button" class="btn btn-success"
+					th:onclick="@{location.href='/teacher/signup'}">
+					<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;新規登録
+				</button>
+				<div class="form-group ml-sm-4 mr-sm-2">
+					<input type="text" class="form-control" placeholder="講師名" />
+				</div>
+				<input type="submit" class="btn" value="検索" />
+			</form>
 		</div>
 		<div class="list">
 			<table class="table table-bordered table-hover table-striped">
@@ -36,7 +47,8 @@
 					<td th:text="${teacher.id}"></td>
 					<td th:text="${teacher.name}"></td>
 					<td th:text="${teacher.university}"></td>
-					<td th:text="${teacher.undergraduate != null ? teacher.undergraduate + ' ' + (teacher.department != null ? teacher.department : '') : ''}"></td>
+					<td
+						th:text="${teacher.undergraduate != null ? teacher.undergraduate + ' ' + (teacher.department != null ? teacher.department : '') : ''}"></td>
 					<td th:text="${teacher.gradeName}"></td>
 					<td th:text="${#dates.format(teacher.birthday, 'yyyy/MM/dd')}"></td>
 					<td th:text="${teacher.age}"></td>

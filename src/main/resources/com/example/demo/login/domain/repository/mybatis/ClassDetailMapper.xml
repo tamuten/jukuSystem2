@@ -66,6 +66,7 @@ ORDER BY
 			,s.name as student
 			,cd.subject_id
 			,cd.teacher_id
+			,cd.report
 			,cd.delete_flg
 		FROM
 			class_detail cd

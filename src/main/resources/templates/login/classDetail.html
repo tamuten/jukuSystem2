@@ -9,7 +9,8 @@
 	<div th:fragment="classDetail_contents">
 		<div class="row">
 			<div class="col-sm-5">
-				<div class="page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<div
+					class="page-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1>
 						<i class="fas fa-chalkboard-teacher"></i>&nbsp;授業詳細
 					</h1>
@@ -25,8 +26,7 @@
 							<td class="col-sm-3">
 								<div class="form-group">
 									<input type="text" class="form-control" th:value="*{id}"
-										disabled />
-										<input type="hidden" th:field="*{id}"/>
+										disabled /> <input type="hidden" th:field="*{id}" />
 								</div>
 							</td>
 						</tr>
@@ -62,10 +62,10 @@
 							<td>
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('student')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{student}" disabled />
-									<span class="text-danger"
-										th:if="${#fields.hasErrors('student')}"
-										th:errors="*{student}"> student error </span>
+									<input type="text" class="form-control" th:field="*{student}"
+										disabled /> <span class="text-danger"
+										th:if="${#fields.hasErrors('student')}" th:errors="*{student}">
+										student error </span>
 								</div>
 							</td>
 						</tr>
@@ -103,16 +103,30 @@
 								</div>
 							</td>
 						</tr>
+						<tr>
+							<th class="active">授業報告</th>
+							<td>
+								<div class="form-group"
+									th:classappend="${#fields.hasErrors('report')} ? 'has-error'">
+									<textarea class="form-control" th:field="*{report}"></textarea>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('report')}" th:errors="*{report}">report
+										error</span>
+								</div>
+							</td>
+						</tr>
 					</table>
-					<!-- 登録 -->
-					<!-- <button th:if="${isNew}" class="btn btn-primary btn-lg pull-right"
-						type="submit" name="register">登録</button> -->
-					<!-- 更新 -->
-					<button class="btn btn-primary btn-lg pull-right" id="updateBtn"
-						type="button" name="update">更新</button>
-					<!-- 削除 -->
-					<button class="btn btn-danger btn-lg" id="deleteBtn" type="button"
-						name="delete">削除</button>
+					<div class="d-flex justify-content-between">
+						<div class="order-2">
+							<!-- 更新 -->
+							<button class="btn btn-primary btn-lg" type="submit"
+								name="update">更新</button>
+						</div>
+						<div class="order-1">
+							<!-- 削除 -->
+							<button class="btn btn-danger btn-lg" type="submit" name="delete">削除</button>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
